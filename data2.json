@@ -10,6 +10,29 @@
           "name" : "Adding to and removing from the beginning of an array",
           "url" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
         },
+        "crazy": {
+          "name": "Super Deep, Dude!",
+          "children": {
+            "doop": {
+              "name": "Doop!",
+              "Manatee1" : {
+                "description" : "Manatees Rule",
+                "logo" : "foo.jpg",
+                "name" : "Manatee name",
+                "url" : "http://google.com"
+              }
+            },
+            "deep": {
+              "name": "Deep!",
+              "Manatee2" : {
+                "description" : "Manatees Rule",
+                "logo" : "foo.jpg",
+                "name" : "Manatee name",
+                "url" : "http://google.com"
+              }
+            }
+          }
+        },
         "Manatee" : {
           "description" : "Manatees Rule",
           "logo" : "foo.jpg",
