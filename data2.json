@@ -1,0 +1,99 @@
+{
+  "name": "subjects",
+  "children" : {
+    "0" : {
+      "name" : "Learn Swift",
+      "children": {
+        "1" : {
+          "description" : "Description for the article goes here...",
+          "logo" : "angular.png",
+          "slug" : "array-beginning-stuff",
+          "name" : "Adding to and removing from the beginning of an array",
+          "url" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
+        },
+        "-JqvaU4nokgXxfq6WAHU" : {
+          "description" : "Manatees Rule",
+          "logo" : "foo.jpg",
+          "slug" : "Manatee",
+          "name" : "Manatee name",
+          "url" : "http://google.com"
+        }
+      },
+      "description" : "Learn iOS Swift with Udacity",
+      "slug" : "swift"
+    },
+    "1" : {
+      "name": "Swift",
+      "children": {
+        "1": {
+          "description" : "Description for the article goes here...",
+          "logo" : "angular.png",
+          "slug" : "slider",
+          "name" : "Using a slider to change audio speed",
+          "url" : "http://ivancodes.blogspot.com/2014/11/use-slider-to-control-audio-speed-in.html"
+        },
+        "2": {
+          "description" : "Description for the article goes here...",
+          "logo" : "angular.png",
+          "slug" : "unit-test",
+          "name" : "How to unit test Swift code",
+          "url" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
+        },
+        "3": {
+          "description" : "Description for the article goes here...",
+          "logo" : "angular.png",
+          "slug" : "animations",
+          "name" : "Adding animations in Swift",
+          "url" : "http://990adjustments.tumblr.com/post/113915168355/swift-animation-sequence"
+        },
+        "4": {
+          "description" : "Description for the article goes here...",
+          "logo" : "angular.png",
+          "slug" : "adding-a-map",
+          "name" : "How to add a map in Swift",
+          "url" : "http://bill-song.blogspot.com/"
+        }
+      },
+      "description" : "Learn about Swift",
+      "slug" : "swift"
+    },
+
+
+    "-JrYC3f4VDec-I0zqy8v" : {
+      "name": "Backbone",
+      "children" : {
+        "-JrYCGJUnQN7Q2xLsoIs" : {
+          "description" : "Read this first part of the series to get an idea of the pieces of a Backbone application. Most of them will probably be familiar already!",
+          "logo" : "foo.jpg",
+          "slug" : "concepts-in-backbone",
+          "name" : "Concepts in Backbone",
+          "url" : "http://www.codeproject.com/Articles/795965/BackBone-Tutorial-Part-Introduction-to-Backbone-Js"
+        },
+        "-JrYCSAFm2xacVpCDo4T" : {
+          "description" : "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
+          "logo" : "foo.jpg",
+          "slug" : "intro-to-writing-code-with-backbone",
+          "name" : "Introduction to Writing Code with Backbone",
+          "url" : "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751"
+        },
+        "-JrYCT5HtIOWBVHnpKWe" : {
+          "description" : "These heavily commented code examples help you go from building simple apps to more complex ones.",
+          "logo" : "foo.jpg",
+          "slug" : "hello-backbone",
+          "name" : "Hello Backbone",
+          "url" : "http://arturadib.com/hello-backbonejs/"
+        },
+        "-JrYCx64KOEYP1yuBlpZ" : {
+          "description" : "Learn how to link the URL (also called the route) of your application with the view being showed.",
+          "logo" : "foo.jpg",
+          "slug" : "routers-in-backbone",
+          "name" : "Routers in Backbone",
+          "url" : "http://backbonetutorials.com/what-is-a-router/"
+        }
+      },
+      "description" : "These blog posts will help you get up and running with Backbone.",
+      "introSrc" : "ee3VY1lfSRg",
+      "slug" : "backbone"
+    }
+  }
+}

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doop</title>
+  <style>
+  .left {
+    float: left;
+  }
+  .clear {
+    clear: both;
+  }
+  </style>
+</head>
+<body>
+
+  <p>Current:&nbsp;
+    <a href="#" data-bind="visible: (stack.length > 0), text: selectedNode().name, click: selectParentNode"></a>
+    <span data-bind="visible: (stack.length <= 0), text: selectedNode().name"></span>
+  </p>
+  <p class="left">Children:&nbsp;</p>
+  <ul class="left" data-bind="template: {name: 'childList', foreach: selectedNode().children}"></ul>
+
+  <script type="text/html" id="childList">
+    <li data-bind="click: function(){nodeViewModel.selectChildNode($data)}">
+      <a href="#" data-bind="text: name"></a>
+    </li>
+  </script>
+
+  <br /><br />
+  <ul class="clear" data-bind="template: {name: 'backBtn'}"></ul>
+
+  <script type="text/html" id="backBtn">
+    <a href="#" data-bind="visible: $data.selectedNode().back, click: function() { nodeViewModel.selectBackNode($data.selectedNode().back) }">Back</a>
+  </script>​
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+  <script src="bower_components/knockout/dist/knockout.js"></script>
+  <script src="lib/knockout.mapping-latest.js"></script>
+  <script src="routes.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>
