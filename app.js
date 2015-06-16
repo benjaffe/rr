@@ -1,22 +1,22 @@
 var rr = rr || {};
 
-(function (app) {
+(function(app) {
   // Initial data
   var vm;
   var model = {
     name: 'Loading',
     children: []
   };
+  var nodeData = new app.model.Node(model, undefined);
 
   // Our ViewModel
   app.vm = vm = {
-    nodeData: new app.model.Node(model, undefined),
-    selectedNodePath: ko.observable([]),
-    stack: [],
+    // the hierarchy of our current page and its parents
+    nodeHierarchy: ko.observable([])
   };
 
   vm.getUrl = function(node) {
-    return '#/' + app.router.getPath(node);
+    return '#/' + app.router.getUrlToNode(node);
   };
 
   vm.currentHashLink = ko.computed(function() {
@@ -24,15 +24,13 @@ var rr = rr || {};
   });
 
   vm.selectedNode = ko.computed(function() {
-    console.log(vm.selectedNodePath());
-    console.log(vm.nodeData);
-    var selectedNode = vm.selectedNodePath().reduce(function(orig, key) {
+    var selectedNode = vm.nodeHierarchy().reduce(function(orig, key) {
       if (!orig || !orig.children) {
         return undefined;
       }
       console.log(orig.children[key]);
-      return orig.children && orig.children[key] ? orig.children[key] : undefined;
-    }, vm.nodeData);
+      return orig.children && orig.children[key] ? orig.children[key] : null;
+    }, nodeData);
 
     console.log(selectedNode);
 
@@ -41,9 +39,31 @@ var rr = rr || {};
     };
   });
 
-  vm.displayChildren = ko.computed(function(){
-    return vm.selectedNode().childrenArr
-        && vm.selectedNode().childrenArr().length;
+  vm.nodeHierarchyObjects = ko.computed(function() {
+    var stuff = vm.nodeHierarchy().map(function(nodeName, index, arr) {
+      return vm.getNodeFromUrl(arr.slice(0, index + 1));
+    });
+    return stuff;
+  });
+
+  vm.getNodeFromUrl = function(urlParts) {
+    var node = urlParts.reduce(function(orig, key) {
+      if (!orig || !orig.children) {
+        return undefined;
+      }
+      console.log(orig.children[key]);
+      return orig.children && orig.children[key] ? orig.children[key] : null;
+    }, nodeData);
+
+    console.log('--');
+    console.log(urlParts);
+    console.log(node);
+    return node;
+  };
+
+  vm.displayChildren = ko.computed(function() {
+    return vm.selectedNode().childrenArr &&
+        vm.selectedNode().childrenArr().length;
   });
 
   // Load RR Data
@@ -53,7 +73,7 @@ var rr = rr || {};
     model = data;
 
     // create new Nodes from the data
-    vm.nodeData = new app.model.Node(model, false);
+    nodeData = new app.model.Node(model, false);
 
     init();
   });

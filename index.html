@@ -8,12 +8,12 @@
 </head>
 <body>
 
-  <p>Current:&nbsp;
-    <a href="#" data-bind="visible: (stack.length > 0), text: selectedNode().name"></a>
-    <span data-bind="visible: (stack.length <= 0), text: selectedNode().name"></span>
+  <p>Current:
+    <span data-bind="text: nodeHierarchy().join(' - ')"></span> -
+    <span data-bind="text: selectedNode().name"></span>
   </p>
   <div class="children" data-bind="visible: displayChildren">
-    <p>Children:&nbsp;</p>
+    <p>Children:</p>
     <ul data-bind="template: {name: 'childList', foreach: selectedNode().childrenArr}"></ul>
   </div>
 
@@ -21,6 +21,23 @@
     <h3 class="text-center">Navigating to the Article</h3>
     <p class="text-center">Please stand by...</p>
   </div>
+
+  <div data-bind="foreach: nodeHierarchyObjects()">
+    <div data-bind="template: {if: $data && $data.children, name: 'category-view'}"></div>
+    <div data-bind="template: {if: $data && !$data.children, name: 'item-view'}"></div>
+    <hr>
+  </div>
+
+  <script type="text/html" id="category-view">
+  CATEGORY
+    <div data-bind="text: '> ' + name()"></div>
+  </script>
+
+  <script type="text/html" id="item-view">
+  ITEM
+    <div data-bind="text: name"></div>
+    <div data-bind="text: $data.description"></div>
+  </script>
 
   <script type="text/html" id="childList">
     <li data-bind="">

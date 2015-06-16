@@ -9,25 +9,23 @@ var rr = rr || {};
 
   app.router.updateRoute = function() {
     var hash = sanitizeHash(location.hash);
-
     var routes = hash.split('/');
+
     if (!routes[routes.length - 1]) {
       routes.pop();
     }
-    console.log(routes);
 
-    console.log('current hash' + hash);
     router.currentRoute(hash);
-    app.vm.selectedNodePath(routes);
+    app.vm.nodeHierarchy(routes);
   };
 
-  app.router.getPath = function(node) {
+  app.router.getUrlToNode = function(node) {
     if (!node || !node.parent) {
       return null;
     } else if (!node.parent.parent) {
       return node.key;
     } else {
-      return router.getPath(node.parent) + '/' + node.key;
+      return router.getUrlToNode(node.parent) + '/' + node.key;
     }
   };
 
