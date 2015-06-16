@@ -23,7 +23,9 @@ var rr = rr || {};
 
   app.router.getPath = function(node) {
     if (!node || !node.parent) {
-      return '';
+      return null;
+    } else if (!node.parent.parent) {
+      return node.key;
     } else {
       return router.getPath(node.parent) + '/' + node.key;
     }
