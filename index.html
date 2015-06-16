@@ -19,7 +19,7 @@
     <span data-bind="visible: (stack.length <= 0), text: selectedNode().name"></span>
   </p>
   <p class="left">Children:&nbsp;</p>
-  <ul class="left" data-bind="template: {name: 'childList', foreach: selectedNode().children}"></ul>
+  <ul class="left" data-bind="template: {name: 'childList', foreach: selectedNode().childrenArr}"></ul>
 
   <script type="text/html" id="childList">
     <li data-bind="click: function(){nodeViewModel.selectChildNode($data)}">
