@@ -9,6 +9,7 @@ function updateRoute(e) {
   }
   console.log(routes);
 
+  viewModel.currentRoute(hash);
   viewModel.selectedNodePath(routes);
 }
 

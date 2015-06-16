@@ -1,34 +1,36 @@
 var Node = function(config, parent) {
-  this.parent = parent;
   var _this = this;
-
-
-  console.log(this);
-
   var mappingOptions = {
     children: {
       create: function(args) {
-        var node = new Node(args.data, _this);
-
-        return node;
+        console.log(args);
+        console.log('creating node ', args.data);
+        var children = [];
+        Object.keys(args.data).forEach(function(key) {
+          console.log(args.data[key]);
+          var child = new Node(args.data[key], _this);
+          child.key = key;
+          children.push(child);
+        });
+        console.log(children);
+        return children;
       }
     }
   };
 
   ko.mapping.fromJS(config, mappingOptions, this);
 
-  console.log(this);
-  this.foo = 'hi';
+  this.parent = parent;
   this.childrenArr = ko.computed(function() {
-    if (!this.children) {
-      return null;
+    if (!_this.children) {
+      return [];
     }
 
-    console.log(Object.keys(this.children).map(valueFromKeyIn(this.children)));
-    return Object.keys(this.children).map(valueFromKeyIn(this.children));
+    return Object.keys(_this.children).map(valueFromKeyIn(_this.children));
   });
 };
 
+// Load RR Data
 $.getJSON('https://readreflect.firebaseio.com/rrs.json', function(data) {
   // convert all the children nodes to actual arrays
   // myModel = convertChildrenToArray(data);
@@ -37,22 +39,8 @@ $.getJSON('https://readreflect.firebaseio.com/rrs.json', function(data) {
   // create new Nodes from the data
   viewModel.nodeData = new Node(myModel, false);
 
-  // Start at the beginning - TODO: respond to routes
-  // viewModel.selectedNodePath();
-  updateRoute();
+  init();
 });
-
-// converts children keys into arrays, since Firebase returns objects
-function convertChildrenToArray(item) {
-  if (!item.children) {
-    return item;
-  }
-  var valueFromKey = valueFromKeyIn(item.children);
-  item.children = Object.keys(item.children)
-      .map(valueFromKey)
-      .map(convertChildrenToArray);
-  return item;
-}
 
 // takes an array and returns a function that takes keys and
 // returns values from the original array
@@ -62,48 +50,21 @@ function valueFromKeyIn(arr) {
   };
 }
 
+// Initial data
 var myModel = {
   name: 'Loading',
   children: []
 };
 
+// Our ViewModel
 var viewModel = {
 
   nodeData: new Node(myModel.node, undefined),
 
   selectedNodePath: ko.observable([]),
+  currentRoute: ko.observable(),
 
   stack: [],
-
-  selectBackNode: function(numBack) {
-      var i;
-      if (this.stack.length >= numBack) {
-        for (i = 0; i < numBack - 1; i++) {
-          this.stack.pop();
-        }
-      } else {
-        for (i = 0; i < this.stack.length; i++) {
-          this.stack.pop();
-        }
-      }
-
-      this.selectNode(this.stack.pop());
-    },
-
-  selectParentNode: function() {
-    if (this.stack.length > 0) {
-      this.selectNode(this.stack.pop());
-    }
-  },
-
-  selectChildNode: function(node) {
-    this.stack.push(this.selectedNode());
-    this.selectNode(node);
-  },
-
-  selectNode: function(node) {
-    this.selectedNode(node);
-  }
 
 };
 
@@ -112,10 +73,10 @@ viewModel.selectedNode = ko.computed(function() {
     if (!orig.children) {
       return undefined;
     }
-    console.log(orig.childrenArr && orig.childrenArr());
-    console.log(orig.foo);
     return orig.children && orig.children[key] ? orig.children[key] : undefined;
-  }, myModel);
+  }, viewModel.nodeData);
+
+  console.log(selectedNode);
 
   return selectedNode || {
     name: 'Invalid Route'
@@ -123,7 +84,7 @@ viewModel.selectedNode = ko.computed(function() {
 });
 
 function init() {
-
+  updateRoute();
 }
 
 ko.applyBindings(viewModel);
