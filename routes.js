@@ -10,8 +10,8 @@ function updateRoute(e) {
   console.log(routes);
 
   console.log("current hash " + hash);
-  viewModel.currentRoute(hash);
-  viewModel.selectedNodePath(routes);
+  vm.currentRoute(hash);
+  vm.selectedNodePath(routes);
 }
 
 // Removes # and prefix

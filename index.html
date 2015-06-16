@@ -4,12 +4,6 @@
   <meta charset="UTF-8">
   <title>Doop</title>
   <style>
-  .left {
-    float: left;
-  }
-  .clear {
-    clear: both;
-  }
   </style>
 </head>
 <body>
@@ -18,21 +12,21 @@
     <a href="#" data-bind="visible: (stack.length > 0), text: selectedNode().name"></a>
     <span data-bind="visible: (stack.length <= 0), text: selectedNode().name"></span>
   </p>
-  <p class="left">Children:&nbsp;</p>
-  <ul class="left" data-bind="template: {name: 'childList', foreach: selectedNode().childrenArr}"></ul>
+  <div class="children" data-bind="visible: selectedNode().childrenArr().length">
+    <p>Children:&nbsp;</p>
+    <ul data-bind="template: {name: 'childList', foreach: selectedNode().childrenArr}"></ul>
+  </div>
+
+  <div class="container" data-bind="visible: selectedNode().url">
+    <h3 class="text-center">Navigating to the Article</h3>
+    <p class="text-center">Please stand by...</p>
+  </div>
 
   <script type="text/html" id="childList">
     <li data-bind="">
       <a data-bind="attr: {href: $root.getUrl($data)}, text: name"></a>
     </li>
   </script>
-
-  <br /><br />
-  <ul class="clear" data-bind="template: {name: 'backBtn'}"></ul>
-
-  <script type="text/html" id="backBtn">
-    <a href="#" data-bind="visible: $data.selectedNode().back">Back</a>
-  </script>​
 
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>

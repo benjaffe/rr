@@ -1,3 +1,4 @@
+// Model
 var Node = function(config, parent) {
   var _this = this;
   var mappingOptions = {
@@ -36,7 +37,7 @@ $.getJSON('https://readreflect.firebaseio.com/rrs.json', function(data) {
   myModel = data;
 
   // create new Nodes from the data
-  viewModel.nodeData = new Node(myModel, false);
+  vm.nodeData = new Node(myModel, false);
 
   init();
 });
@@ -56,7 +57,7 @@ var myModel = {
 };
 
 // Our ViewModel
-var viewModel = {
+var vm = {
 
   nodeData: new Node(myModel.node, undefined),
 
@@ -67,8 +68,8 @@ var viewModel = {
 
 };
 
-viewModel.getUrl = function(node) {
-  return '#' + getPath(node);
+vm.getUrl = function(node) {
+  return '#/' + getPath(node);
 };
 
 function getPath(node) {
@@ -79,20 +80,20 @@ function getPath(node) {
   }
 }
 
-viewModel.currentHashLink = ko.computed(function() {
-  return '#/' + viewModel.currentRoute();
+vm.currentHashLink = ko.computed(function() {
+  return '#/' + vm.currentRoute();
 });
 
-viewModel.selectedNode = ko.computed(function() {
-  console.log(viewModel.selectedNodePath());
-  console.log(viewModel.nodeData);
-  var selectedNode = viewModel.selectedNodePath().reduce(function(orig, key) {
+vm.selectedNode = ko.computed(function() {
+  console.log(vm.selectedNodePath());
+  console.log(vm.nodeData);
+  var selectedNode = vm.selectedNodePath().reduce(function(orig, key) {
     if (!orig || !orig.children) {
       return undefined;
     }
     console.log(orig.children[key]);
     return orig.children && orig.children[key] ? orig.children[key] : undefined;
-  }, viewModel.nodeData);
+  }, vm.nodeData);
 
   console.log(selectedNode);
 
@@ -105,4 +106,4 @@ function init() {
   updateRoute();
 }
 
-ko.applyBindings(viewModel);
+ko.applyBindings(vm);
