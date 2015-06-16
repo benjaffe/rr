@@ -12,7 +12,7 @@
     <a href="#" data-bind="visible: (stack.length > 0), text: selectedNode().name"></a>
     <span data-bind="visible: (stack.length <= 0), text: selectedNode().name"></span>
   </p>
-  <div class="children" data-bind="visible: selectedNode().childrenArr().length">
+  <div class="children" data-bind="visible: displayChildren">
     <p>Children:&nbsp;</p>
     <ul data-bind="template: {name: 'childList', foreach: selectedNode().childrenArr}"></ul>
   </div>
@@ -32,6 +32,7 @@
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/knockout/dist/knockout.js"></script>
   <script src="lib/knockout.mapping-latest.js"></script>
+  <script src="js/models/node.js"></script>
   <script src="routes.js"></script>
   <script src="app.js"></script>
 

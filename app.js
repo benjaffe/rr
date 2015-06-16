@@ -1,109 +1,70 @@
-// Model
-var Node = function(config, parent) {
-  var _this = this;
-  var mappingOptions = {
-    children: {
-      create: function(args) {
-        var children = {};
-        var child;
-        for (var key in args.data) {
-          if (args.data.hasOwnProperty(key)) {
-            child = new Node(args.data[key], _this);
-            child.key = key;
-            children[key] = (child);
-          }
-        }
-        return children;
-      }
-    }
+var rr = rr || {};
+
+(function (app) {
+  // Initial data
+  var vm;
+  var model = {
+    name: 'Loading',
+    children: []
   };
 
-  ko.mapping.fromJS(config, mappingOptions, this);
+  // Our ViewModel
+  app.vm = vm = {
+    nodeData: new app.model.Node(model, undefined),
+    selectedNodePath: ko.observable([]),
+    stack: [],
+  };
 
-  this.parent = parent;
-  this.childrenArr = ko.computed(function() {
-    if (!_this.children) {
-      return [];
-    }
+  vm.getUrl = function(node) {
+    return '#/' + app.router.getPath(node);
+  };
 
-    return Object.keys(_this.children).map(valueFromKeyIn(_this.children));
+  vm.currentHashLink = ko.computed(function() {
+    return '#/' + app.router.currentRoute();
   });
-};
 
-// Load RR Data
-$.getJSON('https://readreflect.firebaseio.com/rrs.json', function(data) {
-  // convert all the children nodes to actual arrays
-  // myModel = convertChildrenToArray(data);
-  myModel = data;
+  vm.selectedNode = ko.computed(function() {
+    console.log(vm.selectedNodePath());
+    console.log(vm.nodeData);
+    var selectedNode = vm.selectedNodePath().reduce(function(orig, key) {
+      if (!orig || !orig.children) {
+        return undefined;
+      }
+      console.log(orig.children[key]);
+      return orig.children && orig.children[key] ? orig.children[key] : undefined;
+    }, vm.nodeData);
 
-  // create new Nodes from the data
-  vm.nodeData = new Node(myModel, false);
+    console.log(selectedNode);
 
-  init();
-});
+    return selectedNode || {
+      name: 'Invalid Route'
+    };
+  });
 
-// takes an array and returns a function that takes keys and
-// returns values from the original array
-function valueFromKeyIn(arr) {
-  return function(key) {
-    return arr[key];
-  };
-}
+  vm.displayChildren = ko.computed(function(){
+    return vm.selectedNode().childrenArr
+        && vm.selectedNode().childrenArr().length;
+  });
 
-// Initial data
-var myModel = {
-  name: 'Loading',
-  children: []
-};
+  // Load RR Data
+  $.getJSON('https://readreflect.firebaseio.com/rrs.json', function(data) {
+    // convert all the children nodes to actual arrays
+    // model = convertChildrenToArray(data);
+    model = data;
 
-// Our ViewModel
-var vm = {
+    // create new Nodes from the data
+    vm.nodeData = new app.model.Node(model, false);
 
-  nodeData: new Node(myModel.node, undefined),
+    init();
+  });
 
-  selectedNodePath: ko.observable([]),
-  currentRoute: ko.observable(),
 
-  stack: [],
 
-};
-
-vm.getUrl = function(node) {
-  return '#/' + getPath(node);
-};
-
-function getPath(node) {
-  if (!node.parent) {
-    return '';
-  } else {
-    return getPath(node.parent) + '/' + node.key;
+  function init() {
+    app.router.updateRoute();
+    $(window).bind('hashchange', app.router.updateRoute);
   }
-}
 
-vm.currentHashLink = ko.computed(function() {
-  return '#/' + vm.currentRoute();
-});
+  ko.applyBindings(vm);
 
-vm.selectedNode = ko.computed(function() {
-  console.log(vm.selectedNodePath());
-  console.log(vm.nodeData);
-  var selectedNode = vm.selectedNodePath().reduce(function(orig, key) {
-    if (!orig || !orig.children) {
-      return undefined;
-    }
-    console.log(orig.children[key]);
-    return orig.children && orig.children[key] ? orig.children[key] : undefined;
-  }, vm.nodeData);
-
-  console.log(selectedNode);
-
-  return selectedNode || {
-    name: 'Invalid Route'
-  };
-});
-
-function init() {
-  updateRoute();
-}
-
-ko.applyBindings(vm);
+})(rr);
