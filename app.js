@@ -3,16 +3,15 @@ var Node = function(config, parent) {
   var mappingOptions = {
     children: {
       create: function(args) {
-        console.log(args);
-        console.log('creating node ', args.data);
-        var children = [];
-        Object.keys(args.data).forEach(function(key) {
-          console.log(args.data[key]);
-          var child = new Node(args.data[key], _this);
-          child.key = key;
-          children.push(child);
-        });
-        console.log(children);
+        var children = {};
+        var child;
+        for (var key in args.data) {
+          if (args.data.hasOwnProperty(key)) {
+            child = new Node(args.data[key], _this);
+            child.key = key;
+            children[key] = (child);
+          }
+        }
         return children;
       }
     }
@@ -68,11 +67,30 @@ var viewModel = {
 
 };
 
+viewModel.getUrl = function(node) {
+  return '#' + getPath(node);
+};
+
+function getPath(node) {
+  if (!node.parent) {
+    return '';
+  } else {
+    return getPath(node.parent) + '/' + node.key;
+  }
+}
+
+viewModel.currentHashLink = ko.computed(function() {
+  return '#/' + viewModel.currentRoute();
+});
+
 viewModel.selectedNode = ko.computed(function() {
+  console.log(viewModel.selectedNodePath());
+  console.log(viewModel.nodeData);
   var selectedNode = viewModel.selectedNodePath().reduce(function(orig, key) {
-    if (!orig.children) {
+    if (!orig || !orig.children) {
       return undefined;
     }
+    console.log(orig.children[key]);
     return orig.children && orig.children[key] ? orig.children[key] : undefined;
   }, viewModel.nodeData);
 

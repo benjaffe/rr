@@ -23,7 +23,7 @@
 
   <script type="text/html" id="childList">
     <li data-bind="">
-      <a data-bind="attr: {href: '#/' + $root.currentRoute() + key}, text: name"></a>
+      <a data-bind="attr: {href: $root.getUrl($data)}, text: name"></a>
     </li>
   </script>
 
