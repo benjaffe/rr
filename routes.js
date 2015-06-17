@@ -8,14 +8,10 @@ var rr = rr || {};
   router.currentRoute = ko.observable();
 
   app.router.updateRoute = function() {
-    var hash = sanitizeHash(location.hash);
-    var routes = hash.split('/');
+    var cleanHash = sanitizeHash(location.hash);
+    var routes = cleanHash.split('/');
 
-    if (!routes[routes.length - 1]) {
-      routes.pop();
-    }
-
-    router.currentRoute(hash);
+    router.currentRoute(cleanHash);
     app.vm.nodeHierarchy(routes);
   };
 
@@ -38,12 +34,13 @@ var rr = rr || {};
     }
 
     // remove the #
-    hash = (hash[0] === '#' ? hash.slice(1) : hash);
-    prefix = (prefix[0] === '#' ? prefix.slice(1) : prefix);
+    hash = hash.replace(/^\#/, '');
+    prefix = prefix.replace(/^\#/, '');
 
     // remove trailing slashes
-    hash = (hash.slice(-1) === '/' ? hash.slice(0, -1) : hash);
+    hash = hash.replace(/\/$/, '');
 
+    // remove prefix
     if (hash.slice(0, prefix.length) === prefix) {
       return hash.slice(prefix.length);
     }
