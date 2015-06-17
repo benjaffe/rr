@@ -28,14 +28,16 @@ var rr = rr || {};
       if (!orig || !orig.children) {
         return undefined;
       }
-      console.log(orig.children[key]);
+      if (key === '') {
+        return orig;
+      }
       return orig.children && orig.children[key] ? orig.children[key] : null;
     }, nodeData);
 
-    console.log(selectedNode);
-
     return selectedNode || {
-      name: 'Invalid Route'
+      name: 'Invalid Route',
+      msg: 'nodeHierarchy is ' + vm.nodeHierarchy() +
+            ', and nodeData = ' + nodeData
     };
   });
 
@@ -51,13 +53,12 @@ var rr = rr || {};
       if (!orig || !orig.children) {
         return undefined;
       }
-      console.log(orig.children[key]);
+      if (key === '') {
+        return orig;
+      }
       return orig.children && orig.children[key] ? orig.children[key] : null;
     }, nodeData);
 
-    console.log('--');
-    console.log(urlParts);
-    console.log(node);
     return node;
   };
 
@@ -67,7 +68,7 @@ var rr = rr || {};
   });
 
   // Load RR Data
-  $.getJSON('https://readreflect.firebaseio.com/rrs.json', function(data) {
+  $.getJSON('data2.json', function(data) {
     // convert all the children nodes to actual arrays
     // model = convertChildrenToArray(data);
     model = data;

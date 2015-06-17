@@ -22,7 +22,7 @@
   </p>
   <div class="children" data-bind="visible: displayChildren">
     <p>Children:</p>
-    <ul data-bind="template: {name: 'category-view', data: selectedNode()}"></ul>
+    <ul data-bind="template: {name: 'category-view', data: $root.selectedNode()}"></ul>
   </div>
 
   <div class="container" data-bind="visible: selectedNode().url">
