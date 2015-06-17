@@ -100,7 +100,11 @@
       "name": "Backbone",
       "type": "category",
       "description" : "These blog posts will help you get up and running with Backbone.",
-      "introSrc" : "ee3VY1lfSRg",
+      "introVideo" : {
+        "name": "Name",
+        "description": "Description",
+        "src": "ee3VY1lfSRg"
+      },
       "children" : {
         "concepts-in-backbone" : {
           "type": "item",

@@ -24,7 +24,7 @@ var rr = rr || {};
   };
 
   app.router.getUrlToNode = function(node) {
-    if (!node || !node.parent) {
+    if (node === window || !node || !node.parent) {
       return null;
     } else if (!node.parent.parent) {
       return node.key;
