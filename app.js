@@ -12,10 +12,12 @@ var rr = rr || {};
   app.storage.setRRData(new app.model.Node(model, undefined));
 
   // Our ViewModel
-  app.vm = vm = {
-    // the hierarchy of our current page and its parents
-    nodeHierarchy: ko.observable([])
-  };
+  app.vm = vm = {};
+
+  // the hierarchy of our current page and its parents
+  vm.nodeHierarchy = ko.computed(function(){
+    return app.router.currentRoute().split('/');
+  });
 
   vm.getUrl = function(node) {
     return '#/' + app.router.getUrlToNode(node);
@@ -34,17 +36,17 @@ var rr = rr || {};
     }, undefined);
   });
 
+  vm.getNodeFromUrl = function(urlParts) {
+    var route = urlParts.join('/');
+    return app.storage.getRRData(route);
+  };
+
   vm.nodeHierarchyObjects = ko.computed(function() {
     var arrayOfParentNodes = vm.nodeHierarchy().map(function(name, index, arr) {
       return vm.getNodeFromUrl(arr.slice(0, index + 1));
     });
     return arrayOfParentNodes;
   });
-
-  vm.getNodeFromUrl = function(urlParts) {
-    var route = urlParts.join('/');
-    return app.storage.getRRData(route);
-  };
 
   vm.displayChildren = ko.computed(function() {
     return vm.selectedNode().type && vm.selectedNode().type() === 'category';

@@ -8,7 +8,7 @@ var rr = rr || {};
   var prefix = '#/';
   var cleanPrefix = prefix.replace(/^#/, '');
 
-  router.currentRoute = ko.observable();
+  router.currentRoute = ko.observable('');
 
   // TODO: when prefix is omitted, things still work fine
   app.router.updateRoute = function() {
@@ -20,7 +20,6 @@ var rr = rr || {};
     }
 
     router.currentRoute(cleanHash);
-    app.vm.nodeHierarchy(routes);
   };
 
   app.router.getUrlToNode = function(node) {

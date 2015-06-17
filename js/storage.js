@@ -9,7 +9,7 @@ var rr = rr || {};
     }
   };
 
-  var rrData;
+  var rrData = ko.observable();
 
   /**
    * Returns user data for a specified route
@@ -46,7 +46,7 @@ var rr = rr || {};
         return orig;
       }
       return orig.children && orig.children[key] ? orig.children[key] : null;
-    }, rrData);
+    }, rrData());
 
     return selectedNode;
   };
@@ -56,7 +56,7 @@ var rr = rr || {};
    * @param {object} data: the data to set
    */
   storage.setRRData = function(data) {
-    rrData = data;
+    rrData(data);
   };
 
 })(rr);
