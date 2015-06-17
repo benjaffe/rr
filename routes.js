@@ -5,11 +5,19 @@ var rr = rr || {};
   app.router = app.router || {};
   router = app.router;
 
+  var prefix = '#/';
+  var cleanPrefix = prefix.replace(/^#/, '');
+
   router.currentRoute = ko.observable();
 
+  // TODO: when prefix is omitted, things still work fine
   app.router.updateRoute = function() {
     var cleanHash = sanitizeHash(location.hash);
     var routes = cleanHash.split('/');
+
+    if (/\/$/.test(location.hash)) {
+      app.utils.replaceHash(cleanPrefix + cleanHash);
+    }
 
     router.currentRoute(cleanHash);
     app.vm.nodeHierarchy(routes);
@@ -27,7 +35,6 @@ var rr = rr || {};
 
   // Removes # and prefix
   function sanitizeHash(hash) {
-    var prefix = '#/';
 
     if (!hash) {
       return '';
@@ -35,14 +42,13 @@ var rr = rr || {};
 
     // remove the #
     hash = hash.replace(/^\#/, '');
-    prefix = prefix.replace(/^\#/, '');
 
     // remove trailing slashes
     hash = hash.replace(/\/$/, '');
 
     // remove prefix
-    if (hash.slice(0, prefix.length) === prefix) {
-      return hash.slice(prefix.length);
+    if (hash.slice(0, cleanPrefix.length) === cleanPrefix) {
+      return hash.slice(cleanPrefix.length);
     }
 
     return hash;
