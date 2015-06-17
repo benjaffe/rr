@@ -8,6 +8,8 @@ var rr = rr || {};
   var prefix = '#/';
   var cleanPrefix = prefix.replace(/^#/, '');
 
+  router.prefix = prefix;
+
   router.currentRoute = ko.observable('');
 
   // TODO: when prefix is omitted, things still work fine
