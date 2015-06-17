@@ -20,9 +20,15 @@
   <p>Current:
     <span data-bind="text: nodeHierarchy().join(' - ')" style="font-style:italic;"></span>
   </p>
-  <div class="children" data-bind="visible: displayChildren">
-    <p>Children:</p>
-    <ul data-bind="template: {name: 'category-view', data: $root.selectedNode()}"></ul>
+
+  <!-- List of subcategories -->
+  <div class="children" data-bind="with: selectedNode, visible: displayChildren">
+    <ul data-bind="template: {name: 'category-view'}"></ul>
+  </div>
+
+  <!-- Item info -->
+  <div class="item" data-bind="with: selectedNode, visible: displayItem">
+    <ul data-bind="template: {name: 'item-view'}"></ul>
   </div>
 
   <div class="container" data-bind="visible: selectedNode().url">
@@ -33,8 +39,8 @@
   <hr style="margin-top:1000px;">
 
   <div data-bind="foreach: nodeHierarchyObjects()" style="opacity: 0.4;">
-    <div data-bind="template: {if: $data && $data.children, name: 'category-view'}"></div>
-    <div data-bind="template: {if: $data && !$data.children, name: 'item-view'}"></div>
+    <div data-bind="template: {if: type === 'category', name: 'category-view'}"></div>
+    <div data-bind="template: {if: type === 'item', name: 'item-view'}"></div>
     <hr>
   </div>
 
@@ -59,10 +65,16 @@
   </script>
 
   <script type="text/html" id="item-view">
-    <li class="item">
-      <div data-bind="text: name"></div>
-      <div data-bind="text: $data.description"></div>
-    </li>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
+          <!-- ko if: $data && $data.description -->
+          <p class="text-left" data-bind="text: description"></p>
+          <!-- /ko -->
+        </div>
+      </div>
+    </div>
   </script>
 
   <script type="text/html" id="childList">

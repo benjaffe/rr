@@ -63,8 +63,11 @@ var rr = rr || {};
   };
 
   vm.displayChildren = ko.computed(function() {
-    return vm.selectedNode().childrenArr &&
-        vm.selectedNode().childrenArr().length;
+    return vm.selectedNode().type && vm.selectedNode().type() === 'category';
+  });
+
+  vm.displayItem = ko.computed(function() {
+    return vm.selectedNode().type && vm.selectedNode().type() === 'item';
   });
 
   // Load RR Data
