@@ -11,15 +11,14 @@
   <!-- Heading -->
   <div class="row section-inverse section-inverse-standout text-inverse">
     <div class="col-xs-12">
-      <h3 class="text-center">Choose a Something!</h3>
+      <h3 class="text-center" data-bind="text: selectedNode().name"></h3>
     </div>
   </div>
   <div class="row row-gap-huge"></div>
 
   <!-- Nav -->
   <p>Current:
-    <span data-bind="text: nodeHierarchy().join(' - ')"></span> -
-    <span data-bind="text: selectedNode().name"></span>
+    <span data-bind="text: nodeHierarchy().join(' - ')" style="font-style:italic;"></span>
   </p>
   <div class="children" data-bind="visible: displayChildren">
     <p>Children:</p>
@@ -49,7 +48,7 @@
               <a data-bind="attr: {href: $root.getUrl($data)}">
                 <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
                 <!-- ko if: $data && $data.description -->
-                <p class="text-left" data-bind="text: $data.description()"></p>
+                <p class="text-left" data-bind="text: description"></p>
                 <!-- /ko -->
               </a>
             </li>
@@ -75,6 +74,7 @@
   <script src="bower_components/jquery/dist/jquery.js"></script>
   <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
   <script src="bower_components/knockout/dist/knockout.js"></script>
+  <script src="lib/small-libs.js"></script>
   <script src="lib/knockout.mapping-latest.js"></script>
   <script src="js/models/node.js"></script>
   <script src="routes.js"></script>
