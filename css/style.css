@@ -1,0 +1,17 @@
+.nav-pills p {
+  color: #666;
+}
+
+/* Article UI When Read */
+.article-list-item.read h3 {
+  text-decoration: line-through;
+}
+
+.article-list-item.read {
+  opacity: 0.5;
+}
+
+.article-list-item.read .article-list-item-link:hover {
+  text-decoration: none;
+}
+

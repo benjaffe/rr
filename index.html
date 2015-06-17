@@ -3,18 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Doop</title>
-  <style>
-  </style>
+  <link rel="stylesheet" href="https://www.udacity.com/media/css/udacity/udacity.min.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+  <!-- Heading -->
+  <div class="row section-inverse section-inverse-standout text-inverse">
+    <div class="col-xs-12">
+      <h3 class="text-center">Choose a Something!</h3>
+    </div>
+  </div>
+  <div class="row row-gap-huge"></div>
+
+  <!-- Nav -->
   <p>Current:
     <span data-bind="text: nodeHierarchy().join(' - ')"></span> -
     <span data-bind="text: selectedNode().name"></span>
   </p>
   <div class="children" data-bind="visible: displayChildren">
     <p>Children:</p>
-    <ul data-bind="template: {name: 'childList', foreach: selectedNode().childrenArr}"></ul>
+    <ul data-bind="template: {name: 'category-view', data: selectedNode()}"></ul>
   </div>
 
   <div class="container" data-bind="visible: selectedNode().url">
@@ -22,21 +31,39 @@
     <p class="text-center">Please stand by...</p>
   </div>
 
-  <div data-bind="foreach: nodeHierarchyObjects()">
+  <hr style="margin-top:1000px;">
+
+  <div data-bind="foreach: nodeHierarchyObjects()" style="opacity: 0.4;">
     <div data-bind="template: {if: $data && $data.children, name: 'category-view'}"></div>
     <div data-bind="template: {if: $data && !$data.children, name: 'item-view'}"></div>
     <hr>
   </div>
 
+
   <script type="text/html" id="category-view">
-  CATEGORY
-    <div data-bind="text: '> ' + name()"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <ul class="nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
+            <li class="subject-list-item">
+              <a data-bind="attr: {href: $root.getUrl($data)}">
+                <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
+                <!-- ko if: $data && $data.description -->
+                <p class="text-left" data-bind="text: $data.description()"></p>
+                <!-- /ko -->
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
   </script>
 
   <script type="text/html" id="item-view">
-  ITEM
-    <div data-bind="text: name"></div>
-    <div data-bind="text: $data.description"></div>
+    <li class="item">
+      <div data-bind="text: name"></div>
+      <div data-bind="text: $data.description"></div>
+    </li>
   </script>
 
   <script type="text/html" id="childList">
