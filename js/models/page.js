@@ -4,7 +4,7 @@ var rr = rr || {};
   app.model = app.model || {};
 
   // Model
-  app.model.Node = function(config, parent) {
+  app.model.Page = function(config, parent) {
     var _this = this;
     var mappingOptions = {
       children: {
@@ -13,7 +13,7 @@ var rr = rr || {};
           var child;
           for (var key in args.data) {
             if (args.data.hasOwnProperty(key)) {
-              child = new app.model.Node(args.data[key], _this);
+              child = new app.model.Page(args.data[key], _this);
               child.key = key;
               children[key] = (child);
             }

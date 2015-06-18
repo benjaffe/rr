@@ -17,33 +17,33 @@ var rr = rr || {};
 
   $.when(deferred.youtubeReady, deferred.dataLoaded).done(init);
 
-  app.storage.setRRData(new app.model.Node(model, undefined));
+  app.storage.setRRData(new app.model.Page(model, undefined));
 
   // Our ViewModel
   app.vm = vm = {};
 
-  vm.getUrl = function(node) {
-    return '#/' + app.router.getUrlToNode(node);
+  vm.getUrl = function(page) {
+    return '#/' + app.router.getUrlToPage(page);
   };
 
-  vm.getNodeFromUrl = function(urlParts) {
+  vm.getPageFromUrl = function(urlParts) {
     var route = urlParts.join('/');
     return app.storage.getRRData(route);
   };
 
-  // array of strings representing the hierarchy of our current page nodes and
+  // array of strings representing the hierarchy of our current page pages and
   // their parents
-  vm.nodeHierarchy = ko.computed(function() {
+  vm.pageHierarchy = ko.computed(function() {
     return app.router.currentRoute().split('/');
   });
 
-  // array of pointers to our current page nodes and their parents, with their
+  // array of pointers to our current page pages and their parents, with their
   // hierarchy maintained
-  vm.nodeHierarchyObjects = ko.computed(function() {
-    var arrayOfParentNodes = vm.nodeHierarchy().map(function(name, index, arr) {
-      return vm.getNodeFromUrl(arr.slice(0, index + 1));
+  vm.pageHierarchyObjects = ko.computed(function() {
+    var arrayOfParentPages = vm.pageHierarchy().map(function(name, index, arr) {
+      return vm.getPageFromUrl(arr.slice(0, index + 1));
     });
-    return arrayOfParentNodes;
+    return arrayOfParentPages;
   });
 
   // our current route as a link
@@ -52,24 +52,24 @@ var rr = rr || {};
     return app.router.prefix + app.router.currentRoute();
   });
 
-  // the currently-selected page node
-  vm.selectedNode = ko.computed(function() {
-    var route = vm.nodeHierarchy().join('/');
-    return app.storage.getRRData(route) || new app.model.Node({
+  // the currently-selected page page
+  vm.currentPage = ko.computed(function() {
+    var route = vm.pageHierarchy().join('/');
+    return app.storage.getRRData(route) || new app.model.Page({
       name: 'Invalid Route',
       msg: 'route is ' + route +
-            ', and nodeData = ' + app.storage.nodeData
+            ', and pageData = ' + app.storage.pageData
     }, undefined);
   });
 
   // a computed boolean of whether the current page should show its children
   vm.displayChildren = ko.computed(function() {
-    return vm.selectedNode().type && vm.selectedNode().type() === 'category';
+    return vm.currentPage().type && vm.currentPage().type() === 'category';
   });
 
   // a computed boolean of whether the current page should show item content
   vm.displayItem = ko.computed(function() {
-    return vm.selectedNode().type && vm.selectedNode().type() === 'item';
+    return vm.currentPage().type && vm.currentPage().type() === 'item';
   });
 
   // -------- //
@@ -82,8 +82,8 @@ var rr = rr || {};
 
   // Load RR Data
   $.getJSON('data2.json', function(data) {
-    // create new Nodes from the data
-    app.storage.setRRData(new app.model.Node(data, false));
+    // create new Pages from the data
+    app.storage.setRRData(new app.model.Page(data, false));
 
     // initialize our app
     deferred.dataLoaded.resolve();
@@ -91,13 +91,13 @@ var rr = rr || {};
 
   ko.applyBindings(vm);
 
-  vm.selectedNode.subscribe(function(node) {
+  vm.currentPage.subscribe(function(page) {
 
     // clear page state
-    node.pageState.clear();
+    page.pageState.clear();
 
     // add an intro video to the page action queue
-    if (node.introVideo) {
+    if (page.introVideo) {
       app.pageActions.addAction({
         run: function(cleanup) {
           var self = this;
@@ -108,7 +108,7 @@ var rr = rr || {};
           app.youtubePlayer = new YT.Player('youtube-player', {
             height: '390',
             width: '640',
-            videoId: vm.selectedNode().introVideo.src(),
+            videoId: vm.currentPage().introVideo.src(),
             playerVars: {
               autoplay: true,
               // controls: 0,
@@ -149,14 +149,14 @@ var rr = rr || {};
     }
 
     // add a navigate-to-resource to the page action queue
-    if (node.navigateTo) {
+    if (page.navigateTo) {
       app.pageActions.addAction({
         run: function(cleanup) {
-          window.open(node.navigateTo(), '_blank');
+          window.open(page.navigateTo(), '_blank');
           setTimeout(this.cleanup, 5000);
         },
         cleanup: function() {
-          app.vm.selectedNode().pageState.set({linkVisited: true});
+          app.vm.currentPage().pageState.set({linkVisited: true});
         }
       });
     }

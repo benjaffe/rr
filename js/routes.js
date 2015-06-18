@@ -27,13 +27,13 @@ var rr = rr || {};
     router.currentRoute(cleanHash);
   };
 
-  app.router.getUrlToNode = function(node) {
-    if (node === window || !node || !node.parent) {
+  app.router.getUrlToPage = function(page) {
+    if (page === window || !page || !page.parent) {
       return null;
-    } else if (!node.parent.parent) {
-      return node.key;
+    } else if (!page.parent.parent) {
+      return page.key;
     } else {
-      return router.getUrlToNode(node.parent) + '/' + node.key;
+      return router.getUrlToPage(page.parent) + '/' + page.key;
     }
   };
 

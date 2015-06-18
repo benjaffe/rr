@@ -34,11 +34,11 @@ var rr = rr || {};
   /**
    * Returns RR data for a specified route
    * @param  {string} route: the associated route
-   * @return {object}        the data for the node
+   * @return {object}        the data for the page
    */
   storage.getRRData = function(route) {
-    var nodeHierarchy = route.split('/');
-    var selectedNode = nodeHierarchy.reduce(function(orig, key) {
+    var pageHierarchy = route.split('/');
+    var selectedPage = pageHierarchy.reduce(function(orig, key) {
       if (!orig || !orig.children) {
         return undefined;
       }
@@ -48,7 +48,7 @@ var rr = rr || {};
       return orig.children && orig.children[key] ? orig.children[key] : null;
     }, rrData());
 
-    return selectedNode;
+    return selectedPage;
   };
 
   /**
