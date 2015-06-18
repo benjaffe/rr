@@ -21,6 +21,9 @@ var rr = rr || {};
       app.utils.replaceHash(cleanPrefix + cleanHash);
     }
 
+    // stop any current and future page actions because we're leaving this page
+    app.pageActions.cleanupAndStop();
+
     router.currentRoute(cleanHash);
   };
 

@@ -8,8 +8,8 @@ var rr = rr || {};
     children: [],
     type: 'item'
   };
-  var actionQueue = [];
-  var currentAction = null;
+  // var actionQueue = [];
+  // var currentAction = null;
   var deferred = {
     youtubeReady: $.Deferred(),
     dataLoaded: $.Deferred()
@@ -95,71 +95,69 @@ var rr = rr || {};
 
     // add an intro video to the page action queue
     if (node.introVideo) {
-      actionQueue.push(function(done) {
-        // show the modal
-        var modal = $('#video-modal').modal('show');
+      app.pageActions.addAction({
+        run: function(cleanup) {
+          var self = this;
+          // show the modal
+          var modal = $('#video-modal').modal('show');
 
-        // initialize a youtube player
-        app.youtubePlayer = new YT.Player('youtube-player', {
-          height: '390',
-          width: '640',
-          videoId: vm.selectedNode().introVideo.src(),
-          playerVars: {
-            autoplay: true,
-            // controls: 0,
-            rel: 0,
-            showinfo: 0
-          },
-          events: {
-            'onStateChange': onPlayerStateChange
+          // initialize a youtube player
+          app.youtubePlayer = new YT.Player('youtube-player', {
+            height: '390',
+            width: '640',
+            videoId: vm.selectedNode().introVideo.src(),
+            playerVars: {
+              autoplay: true,
+              // controls: 0,
+              rel: 0,
+              showinfo: 0
+            },
+            events: {
+              'onStateChange': onPlayerStateChange
+            }
+          });
+
+          // When video ends, finish the page action
+          function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.ENDED) {
+              self.cleanup();
+            }
           }
-        });
 
-        // When video ends, hide modal
-        function onPlayerStateChange(event) {
-          if (event.data === YT.PlayerState.ENDED) {
+          // when modal is hidden, finish the page action. (Since the modal is
+          // closed already, pass in parameters to tell our cleanup function to
+          // skip that functionality)
+          modal.on('hidden.bs.modal', function(e) {
+            self.cleanup({modal: false});
+          });
+        },
+        cleanup: function(options) {
+          app.youtubePlayer.destroy();
+          if (options && options.modal === false) {
             $('#video-modal').modal('hide');
           }
-        }
-
-        // when modal is hidden, stop video and finish the page action
-        modal.on('hidden.bs.modal', function(e) {
-          app.youtubePlayer.stopVideo();
-          done();
-        });
-
+        },
       });
     }
 
     // add a navigate-to-resource to the page action queue
     if (node.navigateTo) {
-      actionQueue.push(function(done) {
-        window.open(node.navigateTo(), '_blank');
-        done();
+      app.pageActions.addAction({
+        run: function(cleanup) {
+          window.open(node.navigateTo(), '_blank');
+          setTimeout(this.cleanup, 5000);
+        },
+        cleanup: function() {
+          console.log('hi');
+        }
       });
     }
-    resumeActionQueue();
+    app.pageActions.startActions();
   });
 
   window.onYouTubeIframeAPIReady = function() {
     deferred.youtubeReady.resolve();
   };
-
-  function markActionAsDone() {
-    currentAction = null;
-    resumeActionQueue();
-  }
-
-  function resumeActionQueue() {
-    if (currentAction) {
-      return false;
-    }
-
-    currentAction = actionQueue.shift();
-    if (currentAction) {
-      currentAction.call(null, markActionAsDone);
-    }
-  }
 
 })(rr);
 
