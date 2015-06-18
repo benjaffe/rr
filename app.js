@@ -8,6 +8,14 @@ var rr = rr || {};
     children: [],
     type: 'item'
   };
+  var actionQueue = [];
+  var currentAction = null;
+  var deferred = {
+    youtubeReady: $.Deferred(),
+    dataLoaded: $.Deferred()
+  };
+
+  $.when(deferred.youtubeReady, deferred.dataLoaded).done(init);
 
   app.storage.setRRData(new app.model.Node(model, undefined));
 
@@ -67,6 +75,7 @@ var rr = rr || {};
   // -------- //
 
   function init() {
+    console.log('Initializing...');
     app.router.updateRoute();
     $(window).bind('hashchange', app.router.updateRoute);
   }
@@ -77,9 +86,80 @@ var rr = rr || {};
     app.storage.setRRData(new app.model.Node(data, false));
 
     // initialize our app
-    init();
+    deferred.dataLoaded.resolve();
   });
 
   ko.applyBindings(vm);
 
+  vm.selectedNode.subscribe(function(node) {
+
+    // add an intro video to the page action queue
+    if (node.introVideo) {
+      actionQueue.push(function(done) {
+        // show the modal
+        var modal = $('#video-modal').modal('show');
+
+        // initialize a youtube player
+        app.youtubePlayer = new YT.Player('youtube-player', {
+          height: '390',
+          width: '640',
+          videoId: vm.selectedNode().introVideo.src(),
+          playerVars: {
+            autoplay: true,
+            // controls: 0,
+            rel: 0,
+            showinfo: 0
+          },
+          events: {
+            'onStateChange': onPlayerStateChange
+          }
+        });
+
+        // When video ends, hide modal
+        function onPlayerStateChange(event) {
+          if (event.data === YT.PlayerState.ENDED) {
+            $('#video-modal').modal('hide');
+          }
+        }
+
+        // when modal is hidden, stop video and finish the page action
+        modal.on('hidden.bs.modal', function(e) {
+          app.youtubePlayer.stopVideo();
+          done();
+        });
+
+      });
+    }
+
+    // add a navigate-to-resource to the page action queue
+    if (node.navigateTo) {
+      actionQueue.push(function(done) {
+        window.open(node.navigateTo(), '_blank');
+        done();
+      });
+    }
+    resumeActionQueue();
+  });
+
+  window.onYouTubeIframeAPIReady = function() {
+    deferred.youtubeReady.resolve();
+  };
+
+  function markActionAsDone() {
+    currentAction = null;
+    resumeActionQueue();
+  }
+
+  function resumeActionQueue() {
+    if (currentAction) {
+      return false;
+    }
+
+    currentAction = actionQueue.shift();
+    if (currentAction) {
+      currentAction.call(null, markActionAsDone);
+    }
+  }
+
 })(rr);
+

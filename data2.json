@@ -13,7 +13,7 @@
           "description" : "Description for the article goes here...",
           "logo" : "angular.png",
           "name" : "Adding to and removing from the beginning of an array",
-          "url" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
+          "navigateTo" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
         },
         "crazy": {
           "name": "Super Deep, Dude!",
@@ -30,7 +30,7 @@
                   "description" : "Manatees Rule",
                   "logo" : "foo.jpg",
                   "name" : "Manatee name",
-                  "url" : "http://google.com"
+                  "navigateTo" : "http://google.com"
                 }
               }
             },
@@ -44,7 +44,7 @@
                   "description" : "Manatees Rule",
                   "logo" : "foo.jpg",
                   "name" : "Manatee name",
-                  "url" : "http://google.com"
+                  "navigateTo" : "http://google.com"
                 }
               }
             }
@@ -55,7 +55,7 @@
           "description" : "Manatees Rule",
           "logo" : "foo.jpg",
           "name" : "Manatee name",
-          "url" : "http://google.com"
+          "navigateTo" : "http://google.com"
         }
       }
     },
@@ -69,28 +69,28 @@
           "description" : "Description for the article goes here...",
           "logo" : "angular.png",
           "name" : "Using a slider to change audio speed",
-          "url" : "http://ivancodes.blogspot.com/2014/11/use-slider-to-control-audio-speed-in.html"
+          "navigateTo" : "http://ivancodes.blogspot.com/2014/11/use-slider-to-control-audio-speed-in.html"
         },
         "unit-test": {
           "type": "item",
           "description" : "Description for the article goes here...",
           "logo" : "angular.png",
           "name" : "How to unit test Swift code",
-          "url" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
+          "navigateTo" : "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
         },
         "animations": {
           "type": "item",
           "description" : "Description for the article goes here...",
           "logo" : "angular.png",
           "name" : "Adding animations in Swift",
-          "url" : "http://990adjustments.tumblr.com/post/113915168355/swift-animation-sequence"
+          "navigateTo" : "http://990adjustments.tumblr.com/post/113915168355/swift-animation-sequence"
         },
         "adding-a-map": {
           "type": "item",
           "description" : "Description for the article goes here...",
           "logo" : "angular.png",
           "name" : "How to add a map in Swift",
-          "url" : "http://bill-song.blogspot.com/"
+          "navigateTo" : "http://bill-song.blogspot.com/"
         }
       }
     },
@@ -111,28 +111,33 @@
           "description" : "Read this first part of the series to get an idea of the pieces of a Backbone application. Most of them will probably be familiar already!",
           "logo" : "foo.jpg",
           "name" : "Concepts in Backbone",
-          "url" : "http://www.codeproject.com/Articles/795965/BackBone-Tutorial-Part-Introduction-to-Backbone-Js"
+          "navigateTo" : "http://www.codeproject.com/Articles/795965/BackBone-Tutorial-Part-Introduction-to-Backbone-Js",
+          "introVideo" : {
+            "name": "Name",
+            "description": "Description",
+            "src": "NGhXjCuucLI"
+          }
         },
         "intro-to-writing-code-with-backbone" : {
           "type": "item",
           "description" : "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
           "logo" : "foo.jpg",
           "name" : "Introduction to Writing Code with Backbone",
-          "url" : "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751"
+          "navigateTo" : "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751"
         },
         "hello-backbone" : {
           "type": "item",
           "description" : "These heavily commented code examples help you go from building simple apps to more complex ones.",
           "logo" : "foo.jpg",
           "name" : "Hello Backbone",
-          "url" : "http://arturadib.com/hello-backbonejs/"
+          "navigateTo" : "http://arturadib.com/hello-backbonejs/"
         },
         "routers-in-backbone" : {
           "type": "item",
           "description" : "Learn how to link the URL (also called the route) of your application with the view being showed.",
           "logo" : "foo.jpg",
           "name" : "Routers in Backbone",
-          "url" : "http://backbonetutorials.com/what-is-a-router/"
+          "navigateTo" : "http://backbonetutorials.com/what-is-a-router/"
         }
       }
     }
