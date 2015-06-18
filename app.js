@@ -131,11 +131,11 @@ var rr = rr || {};
           // closed already, pass in parameters to tell our cleanup function to
           // skip that functionality)
           modal.on('hidden.bs.modal', function(e) {
+            app.youtubePlayer.destroy();
             self.cleanup({modal: false});
           });
         },
         cleanup: function(options) {
-          app.youtubePlayer.destroy();
           if (!(options && options.modal === false)) {
             // remove the backdrop manually, since bootstrap keeps it around
             // when a new modal opens during the removal of the previous one
