@@ -25,22 +25,7 @@ var rr = rr || {};
 
     ko.mapping.fromJS(config, mappingOptions, this);
     this.parent = parent;
-    this.subRoutes = ko.computed(function() {
-      var subroutes = [];
-      var introVideo = _this.introVideo;
-      var userData = app.storage.getUserData(app.router.getUrlToNode(_this));
 
-      if (introVideo) {
-        subroutes.push(introVideo);
-      }
-
-      subroutes.push({
-        'name': 'Navigating to the Article',
-        'title': 'Please stand by...',
-        'urlToVisit': _this.url
-      });
-
-    });
 
     this.childrenArr = ko.computed(function() {
       if (!_this.children) {

@@ -148,7 +148,6 @@ var rr = rr || {};
           setTimeout(this.cleanup, 5000);
         },
         cleanup: function() {
-          console.log('hi');
         }
       });
     }
