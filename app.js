@@ -93,6 +93,9 @@ var rr = rr || {};
 
   vm.selectedNode.subscribe(function(node) {
 
+    // clear page state
+    node.pageState.clear();
+
     // add an intro video to the page action queue
     if (node.introVideo) {
       app.pageActions.addAction({
@@ -133,7 +136,12 @@ var rr = rr || {};
         },
         cleanup: function(options) {
           app.youtubePlayer.destroy();
-          if (options && options.modal === false) {
+          if (!(options && options.modal === false)) {
+            // remove the backdrop manually, since bootstrap keeps it around
+            // when a new modal opens during the removal of the previous one
+            $('.modal-backdrop').fadeOut(function() {
+              this.remove();
+            });
             $('#video-modal').modal('hide');
           }
         },
@@ -148,6 +156,7 @@ var rr = rr || {};
           setTimeout(this.cleanup, 5000);
         },
         cleanup: function() {
+          app.vm.selectedNode().pageState.set({linkVisited: true});
         }
       });
     }

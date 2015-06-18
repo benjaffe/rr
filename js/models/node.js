@@ -25,7 +25,15 @@ var rr = rr || {};
 
     ko.mapping.fromJS(config, mappingOptions, this);
     this.parent = parent;
+    this.pageState = ko.observable({});
+    this.pageState.set = function(options) {
+      $.extend(_this.pageState(), options);
+      _this.pageState.valueHasMutated();
+    };
 
+    this.pageState.clear = function() {
+      _this.pageState({});
+    };
 
     this.childrenArr = ko.computed(function() {
       if (!_this.children) {
