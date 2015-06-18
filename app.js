@@ -85,7 +85,7 @@ var rr = rr || {};
     // create new Pages from the data
     app.storage.setRRData(new app.model.Page(data, false));
 
-    // initialize our app
+    // when data is loaded, take us one step closer to initializing the app
     deferred.dataLoaded.resolve();
   });
 
@@ -127,14 +127,15 @@ var rr = rr || {};
             }
           }
 
-          // when modal is hidden, finish the page action. (Since the modal is
-          // closed already, pass in parameters to tell our cleanup function to
-          // skip that functionality)
+          // when modal is hidden, destroy the video and finish the page action.
+          // (Since the modal is closed already, pass in parameters to tell our
+          // cleanup function to skip that functionality)
           modal.on('hidden.bs.modal', function(e) {
             app.youtubePlayer.destroy();
             self.cleanup({modal: false});
           });
         },
+
         cleanup: function(options) {
           if (!(options && options.modal === false)) {
             // remove the backdrop manually, since bootstrap keeps it around
@@ -163,6 +164,7 @@ var rr = rr || {};
     app.pageActions.startActions();
   });
 
+  // when youtube api is ready, take us one step closer to initializing the app
   window.onYouTubeIframeAPIReady = function() {
     deferred.youtubeReady.resolve();
   };
