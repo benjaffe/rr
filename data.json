@@ -1,50 +1,263 @@
 {
-  "page": {
-    "name": "Root",
-    "children": [
-      {
-        "name": "Child 1",
-        "back": 1,
-        "children": [
-          {
-            "name": "Child 1_1",
-            "back": 1,
-            "children": [
-              {
-                "name": "Child 1_1_1",
-                "back": 4,
-                "children": []
-              },
-              {
-                "name": "Child 1_1_2",
-                "back": 2,
-                "children": []
-              },
-              {
-                "name": "Child 1_1_3",
-                "back": 1,
-                "children": []
-              }
-            ]
+  "name": "root",
+  "type": "category",
+  "description": "Description Here",
+  "children": {
+    "android": {
+      "name": "Android",
+      "description": "Learn what you need to know about Lt Commmander Data",
+      "type": "category",
+      "children": {
+        "controls": {
+          "name": "Controls",
+          "description": "Learn About Controls",
+          "type": "category",
+          "children": {
+            "date-picker": {
+              "name": "Using Date Pickers",
+              "description": "How would you use a date picker?",
+              "type": "item"
+            },
+            "toggle-button": {
+              "name": "Using Toggle Buttons",
+              "description": "How would you use a toggle button?",
+              "type": "item",
+              "navigateTo": "http://www.mkyong.com/android/android-togglebutton-example/"
+            },
+            "radio-button": {
+              "name": "Using Radio Buttons",
+              "description": "How would you use a radio button?",
+              "type": "item"
+            }
           }
-        ]
-      },
-      {
-        "name": "Child 2",
-        "back": 1,
-        "children": [
-          {
-            "name": "Child 2_1",
-            "back": 1,
-            "children": []
-          },
-          {
-            "name": "Child 2_2",
-            "back": 1,
-            "children": []
+        },
+
+        "layout": {
+          "name": "Layout",
+          "description": "Learn About Layout",
+          "type": "category",
+          "children": {
+            "list-view": {
+              "name": "List Views",
+              "description": "How would you use List View?",
+              "type": "item"
+            },
+            "grid-view": {
+              "name": "Grid Views",
+              "description": "How would you use a Grid View?",
+              "type": "item"
+            }
           }
-        ]
+        },
+
+        "events": {
+          "name": "Events",
+          "description": "Learn About Events",
+          "type": "category",
+          "children": {
+            "onLongClick": {
+              "name": "Handling Long Clicks",
+              "description": "How would you use onLongClick?",
+              "type": "item"
+            },
+            "onTouch": {
+              "name": "Handling Touch Events",
+              "description": "How would you use onTouch?",
+              "type": "item"
+            }
+          }
+        },
+
+        "menu": {
+          "name": "Menu",
+          "description": "Learn About Menu",
+          "type": "category",
+          "children": {
+            "creating-a-menu": {
+              "name": "Creating a Menu",
+              "description": "How would you create a menu in the app bar?",
+              "type": "item"
+            },
+            "creating-a-popup-menu": {
+              "name": "Creating a Popup Menu",
+              "description": "How would you create a pop-up menu?",
+              "type": "item"
+            },
+            "using-toasts": {
+              "name": "Using Toasts",
+              "description": "How will you use a Toast?",
+              "type": "item"
+            }
+          }
+        },
+
+        "others": {
+          "name": "Others",
+          "description": "Learn About Others",
+          "type": "category",
+          "children": {
+            "add-map": {
+              "name": "Add a Map",
+              "description": "How would you add a map?",
+              "type": "item"
+            },
+            "add-settings": {
+              "name": "Add Settings",
+              "description": "How do you add settings for your app?",
+              "type": "item"
+            },
+            "play-sound": {
+              "name": "Play Sound",
+              "description": "How would you play a sound?",
+              "type": "item"
+            },
+            "best-practices": {
+              "name": "Best Practices",
+              "description": "Best Practices for making android apps",
+              "type": "item"
+            }
+          }
+        }
       }
-    ]
+    },
+
+    "nonsense": {
+      "name": "Learn Nonsense",
+      "type": "category",
+      "description": "Learn Stuff with Udacity",
+      "children": {
+        "array-beginning-stuff": {
+          "type": "item",
+          "description": "Description for the article goes here...",
+          "logo": "angular.png",
+          "name": "Adding to and removing from the beginning of an array",
+          "navigateTo": "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
+        },
+        "crazy": {
+          "name": "Super Deep, Dude!",
+          "type": "category",
+          "description": "Description Here",
+          "children": {
+            "doop": {
+              "name": "Doop!",
+              "type": "category",
+              "description": "Description Here",
+              "children": {
+                "Manatee1": {
+                  "type": "item",
+                  "description": "Manatees Rule",
+                  "logo": "foo.jpg",
+                  "name": "Manatee name",
+                  "navigateTo": "http://google.com"
+                }
+              }
+            },
+            "deep": {
+              "name": "Deep!",
+              "type": "category",
+              "description": "Description Here",
+              "children": {
+                "Manatee2": {
+                  "type": "item",
+                  "description": "Manatees Rule",
+                  "logo": "foo.jpg",
+                  "name": "Manatee name",
+                  "navigateTo": "http://google.com"
+                }
+              }
+            }
+          }
+        },
+        "Manatee": {
+          "type": "item",
+          "description": "Manatees Rule",
+          "logo": "foo.jpg",
+          "name": "Manatee name",
+          "navigateTo": "http://google.com"
+        }
+      }
+    },
+    "swift": {
+      "name": "Swift",
+      "type": "category",
+      "description": "Learn about Swift",
+      "children": {
+        "slider": {
+          "type": "item",
+          "description": "Description for the article goes here...",
+          "logo": "angular.png",
+          "name": "Using a slider to change audio speed",
+          "navigateTo": "http://ivancodes.blogspot.com/2014/11/use-slider-to-control-audio-speed-in.html"
+        },
+        "unit-test": {
+          "type": "item",
+          "description": "Description for the article goes here...",
+          "logo": "angular.png",
+          "name": "How to unit test Swift code",
+          "navigateTo": "http://udacity-markham.blogspot.com/2015/03/how-to-start-unit-testing-swift-code.html"
+        },
+        "animations": {
+          "type": "item",
+          "description": "Description for the article goes here...",
+          "logo": "angular.png",
+          "name": "Adding animations in Swift",
+          "navigateTo": "http://990adjustments.tumblr.com/post/113915168355/swift-animation-sequence"
+        },
+        "adding-a-map": {
+          "type": "item",
+          "description": "Description for the article goes here...",
+          "logo": "angular.png",
+          "name": "How to add a map in Swift",
+          "navigateTo": "http://bill-song.blogspot.com/"
+        }
+      }
+    },
+
+
+    "backbone": {
+      "name": "Backbone",
+      "type": "category",
+      "description": "These blog posts will help you get up and running with Backbone.",
+      "introVideo": {
+        "name": "Name",
+        "description": "Description",
+        "src": "ee3VY1lfSRg"
+      },
+      "children": {
+        "concepts-in-backbone": {
+          "type": "item",
+          "description": "Read this first part of the series to get an idea of the pieces of a Backbone application. Most of them will probably be familiar already!",
+          "logo": "foo.jpg",
+          "name": "Concepts in Backbone",
+          "navigateTo": "http://www.codeproject.com/Articles/795965/BackBone-Tutorial-Part-Introduction-to-Backbone-Js",
+          "introVideo": {
+            "name": "Name",
+            "description": "Description",
+            "src": "NGhXjCuucLI"
+          }
+        },
+        "intro-to-writing-code-with-backbone": {
+          "type": "item",
+          "description": "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
+          "logo": "foo.jpg",
+          "name": "Introduction to Writing Code with Backbone",
+          "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751"
+        },
+        "hello-backbone": {
+          "type": "item",
+          "description": "These heavily commented code examples help you go from building simple apps to more complex ones.",
+          "logo": "foo.jpg",
+          "name": "Hello Backbone",
+          "navigateTo": "http://arturadib.com/hello-backbonejs/"
+        },
+        "routers-in-backbone": {
+          "type": "item",
+          "description": "Learn how to link the URL (also called the route) of your application with the view being showed.",
+          "logo": "foo.jpg",
+          "name": "Routers in Backbone",
+          "navigateTo": "http://backbonetutorials.com/what-is-a-router/"
+        }
+      }
+    }
   }
 }

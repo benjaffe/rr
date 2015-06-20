@@ -81,7 +81,7 @@ var rr = rr || {};
   }
 
   // Load RR Data
-  $.getJSON('data2.json', function(data) {
+  $.getJSON('data.json', function(data) {
     // create new Pages from the data
     app.storage.setRRData(new app.model.Page(data, false));
 
