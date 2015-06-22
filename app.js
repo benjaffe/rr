@@ -153,10 +153,25 @@ var rr = rr || {};
     if (page.navigateTo) {
       app.pageActions.addAction({
         run: function(cleanup) {
-          window.open(page.navigateTo(), '_blank');
-          setTimeout(this.cleanup, 5000);
+          var self = this;
+          console.log('running', this);
+          // ------
+
+          var modal = $('#iframe-modal').modal('show');
+          modal.on('hidden.bs.modal', function(e) {
+            self.cleanup({modal: false});
+          });
         },
-        cleanup: function() {
+        cleanup: function(options) {
+          if (!(options && options.modal === false)) {
+            // remove the backdrop manually, since bootstrap keeps it around
+            // when a new modal opens during the removal of the previous one
+            $('.modal-backdrop').fadeOut(function() {
+              this.remove();
+            });
+            $('#video-modal').modal('hide');
+          }
+
           app.vm.currentPage().pageState.set({linkVisited: true});
         }
       });

@@ -22,6 +22,7 @@
   </p>
 
   <div data-bind="template: {if: currentPage().introVideo, name: 'video-modal-template'}"></div>
+  <div data-bind="template: {if: currentPage().navigateTo, name: 'iframe-modal-template'}"></div>
 
   <!-- List of subcategories -->
   <div class="children" data-bind="with: currentPage, visible: displayChildren">
@@ -94,6 +95,27 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-primary">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+  <script type="text/html" id="iframe-modal-template">
+    <div class="modal fade iframe-modal" id="iframe-modal">
+      <div class="modal-dialog">
+        <div class="modal-content" data-bind="with: currentPage">
+          <div class="modal-body">
+            <div class="row-gap-huge"></div>
+            <div class="text-center">
+              <h3>The article couldn't load</h3>
+              <p>Click on the article link below, then return to this page when you're done.</p>
+            </div>
+            <iframe id="iframe" width="400" height="400" data-bind="attr: {src: navigateTo}" frameborder="0"></iframe>
+          </div>
+          <div class="modal-footer">
+            <h3 class="text-left h-slim-top text-center"><a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a></h3>
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">I'm Done Reading</span></button>
           </div>
         </div>
       </div>

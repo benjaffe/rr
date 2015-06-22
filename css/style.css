@@ -15,3 +15,47 @@
   text-decoration: none;
 }
 
+.iframe-modal .modal-header .close {
+  position: absolute;
+  top: 2px;
+  right: 0;
+  z-index: 1000;
+  padding: 0 5px 5px;
+}
+
+.iframe-modal .modal-dialog,
+.iframe-modal .modal-content,
+.iframe-modal .modal-body {
+  margin: 0;
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  width: auto;
+  height: auto;
+}
+
+.iframe-modal .modal-content .modal-footer {
+  position: absolute;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  padding: 0 20px;
+  background-color: white;
+}
+
+.iframe-modal .modal-footer .btn {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+}
+
+.iframe-modal iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 65px);
+  border: 1px solid rgba(0,0,0,0.2);
+}
