@@ -7,11 +7,13 @@ var rr = rr || {};
 
   app.pageActions = app.pageActions || {};
   var pageActions = app.pageActions;
+  var i = 0;
 
   function PageAction(options) {
     if (!options.run || !options.cleanup) {
       throw new Error('PageAction must have a run and cleanup function');
     }
+    options.uid = i++;
     $.extend(this, options);
   }
 
@@ -30,7 +32,7 @@ var rr = rr || {};
       }
       this.hasRun = true;
 
-      originalCleanup.apply(this, arguments);
+      originalCleanup.apply(currentAction, arguments);
       markActionAsDone();
     };
 
