@@ -50,6 +50,7 @@ var rr = rr || {};
     }
 
     currentAction = actionQueue.shift();
+    // console.debug('starting', JSON.stringify(actionQueue), JSON.stringify(currentAction));
     if (currentAction) {
       currentAction.run.call(currentAction);
     }
