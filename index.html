@@ -11,15 +11,16 @@
   <!-- Heading -->
   <div class="row section-inverse section-inverse-standout text-inverse">
     <div class="col-xs-12">
-      <h3 class="text-center" data-bind="text: currentPage().name"></h3>
+      <h2 class="text-center" data-bind="text: currentPage().name"></h2>
+      <p class="text-center" data-bind="text: currentPage().description"></p>
     </div>
   </div>
-  <div class="row row-gap-huge"></div>
+  <div class="row row-gap-large"></div>
 
   <!-- Nav -->
-  <p>Current:
+  <!-- <p>Current:
     <span data-bind="text: pageHierarchy().join(' - ')" style="font-style:italic;"></span>
-  </p>
+  </p> -->
 
   <div data-bind="template: {if: currentPage().introVideo, name: 'video-modal-template'}"></div>
   <div data-bind="template: {if: currentPage().navigateTo, name: 'iframe-modal-template'}"></div>
