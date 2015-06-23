@@ -17,13 +17,8 @@
   </div>
   <div class="row row-gap-large"></div>
 
-  <!-- Nav -->
-  <!-- <p>Current:
-    <span data-bind="text: pageHierarchy().join(' - ')" style="font-style:italic;"></span>
-  </p> -->
-
-  <div data-bind="template: {if: currentPage().introVideo, name: 'video-modal-template'}"></div>
-  <div data-bind="template: {if: currentPage().navigateTo, name: 'iframe-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'iframe-modal-template'}"></div>
 
   <!-- List of subcategories -->
   <div class="children" data-bind="with: currentPage, visible: displayChildren">
@@ -106,7 +101,7 @@
               <h3>The article couldn't load</h3>
               <p>Click on the article link below, then return to this page when you're done.</p>
             </div>
-            <iframe id="iframe" width="400" height="400" data-bind="attr: {src: navigateTo}" frameborder="0"></iframe>
+            <iframe id="iframe" width="400" height="400" data-bind="attr: {src: navigateTo}" sandbox="allow-scripts allow-forms" frameborder="0"></iframe>
           </div>
           <div class="modal-footer">
             <h3 class="text-left h-slim-top text-center"><a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a></h3>
