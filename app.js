@@ -32,6 +32,8 @@ var rr = rr || {};
     return app.storage.getRRData(route);
   };
 
+  vm.currentActionName = app.pageActions.currentActionName;
+
   // array of strings representing the hierarchy of our current page pages and
   // their parents
   vm.pageHierarchy = ko.computed(function() {
@@ -93,25 +95,32 @@ var rr = rr || {};
   ko.applyBindings(vm);
 
   vm.currentPage.subscribe(function(page) {
-
+    var pageActions = app.pageActions;
     // clear page state
-    page.pageState.clear();
+    // page.pageState.clear();
 
-    // add an intro video to the page action queue
-    if (page.introVideo) {
-      app.pageActions.addAction('VideoAction', {
-        videoId: vm.currentPage().introVideo.src()
-      });
+    if (!page.actions) {
+      page.actions = [];
+      // add an intro video to the page action queue
+      if (page.introVideo) {
+        page.actions.push(pageActions.createAction('VideoAction', {
+          page: page,
+          videoId: vm.currentPage().introVideo.src()
+        }));
+      }
+
+      // add a navigate-to-resource to the page action queue
+      if (page.navigateTo) {
+        page.actions.push(pageActions.createAction('NavigateAction', {
+          page: page
+        }));
+      }
+
     }
 
-    // add a navigate-to-resource to the page action queue
-    if (page.navigateTo) {
-      app.pageActions.addAction('NavigateAction', {
+    pageActions.push(page.actions);
 
-      });
-    }
-
-    app.pageActions.startActions();
+    pageActions.startActions();
 
   });
 

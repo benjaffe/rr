@@ -3,7 +3,6 @@ var rr = rr || {};
 (function(app) {
   var vm = app.vm || {};
   app.vm = vm;
-  vm.currentActionName = ko.observable('');
 
   var actionQueue = [];
   var currentAction = null;
@@ -12,10 +11,23 @@ var rr = rr || {};
   var pageActions = app.pageActions;
   var i = 0;
 
+  pageActions.currentActionName = ko.observable('');
+
   var Action = {
     run: function() {
+      // skip actions that have already run
+      if (this.hasRun) {
+        console.debug('skipping ' + this.type, this);
+        markActionAsDoneAndContinue();
+        return;
+      }
+
       console.debug('running ' + this.type, this);
-      vm.currentActionName(this.type);
+
+      // update the vm so the view can update
+      pageActions.currentActionName(this.type);
+
+      // run the function
       this._run.apply(this, arguments);
     },
     cleanup: function() {
@@ -27,7 +39,7 @@ var rr = rr || {};
       console.debug('cleaning up ' + this.type, this);
 
       this._cleanup.apply(currentAction, arguments);
-      vm.currentActionName('');
+      pageActions.currentActionName('');
       markActionAsDoneAndContinue();
     }
   };
@@ -68,6 +80,7 @@ var rr = rr || {};
     name: 'VideoAction',
     _run: function(cleanup) {
       var self = this;
+
       // show the modal
       var modal = $('#video-modal').modal('show');
 
@@ -122,10 +135,9 @@ var rr = rr || {};
     }
   };
 
-  pageActions.addAction = function(type, options) {
+  pageActions.createAction = function(type, options) {
     var Action = actions[type] || actions.custom;
     var action = Object.create(Action);
-    console.log(action);
 
     // ship the options with the page action
     action.options = options;
@@ -136,7 +148,16 @@ var rr = rr || {};
     }
     action.uid = i++;
 
-    actionQueue.push(action);
+    return action;
+  };
+
+  pageActions.push = function(actions) {
+    console.log(actions);
+    if (arguments[0] instanceof Array) {
+      Array.prototype.push.apply(actionQueue, actions);
+    } else {
+      Array.prototype.push.apply(actionQueue, arguments);
+    }
   };
 
   function markActionAsDoneAndContinue() {
