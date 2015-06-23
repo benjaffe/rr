@@ -22,7 +22,6 @@ var rr = rr || {};
 
   app.storage.setRRData(new app.model.Page(model, undefined));
 
-
   vm.getUrl = function(page) {
     return '#/' + app.router.getUrlToPage(page);
   };

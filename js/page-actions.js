@@ -53,11 +53,8 @@ var rr = rr || {};
     name: 'NavigateAction',
     _run: function(cleanup) {
       var self = this;
-      console.log('NAVIGATING', this, this.options);
-      // ------
 
       var modal = $('#iframe-modal').modal('show');
-      console.log('yo', $('#iframe-modal'));
       modal.on('hidden.bs.modal', function(e) {
         self.cleanup({modal: false});
       });
@@ -152,7 +149,6 @@ var rr = rr || {};
   };
 
   pageActions.push = function(actions) {
-    console.log(actions);
     if (arguments[0] instanceof Array) {
       Array.prototype.push.apply(actionQueue, actions);
     } else {
@@ -171,7 +167,6 @@ var rr = rr || {};
     }
 
     currentAction = actionQueue.shift();
-    // console.debug('starting', JSON.stringify(actionQueue), JSON.stringify(currentAction));
     if (currentAction) {
       currentAction.run.call(currentAction);
     }
