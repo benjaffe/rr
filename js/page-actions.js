@@ -14,10 +14,10 @@ var rr = rr || {};
 
   pageActions.currentActionName = ko.observable('');
 
-  // All Page Actions have a run function and a cleanup function
-  // which do some pre and post processing, then run the associated
-  // _run or _cleanup functions (which belong to objects with this
-  // object as their prototype.
+  // All Page Actions have a run function and an optional cleanup function
+  // which do some pre and post processing, then run the associated _run or
+  // _cleanup functions (which belong to objects for whom Action is their
+  // prototype.
   var Action = {
     run: function() {
       // skip actions that have already run
@@ -36,6 +36,8 @@ var rr = rr || {};
       this._run.apply(this, arguments);
     },
     cleanup: function() {
+      // TODO: this conditional shouldn't need to be duplicated
+      //        can it be safely removed?
       if (this.hasRun && this.options.runOnce) {
         return false;
       }
@@ -43,7 +45,9 @@ var rr = rr || {};
 
       console.debug('cleaning up ' + this.type, this);
 
-      this._cleanup.apply(currentAction, arguments);
+      if (this._cleanup) {
+        this._cleanup.apply(currentAction, arguments);
+      }
       pageActions.currentActionName('');
       markActionAsDoneAndContinue();
     }
@@ -79,6 +83,24 @@ var rr = rr || {};
       }
 
       app.vm.currentPage().pageState.set({linkVisited: true});
+    }
+  });
+
+  // Navigate to another R&R
+  actions.RRNavigateAction = $.extend(Object.create(Action), {
+    name: 'RRNavigateAction',
+    _run: function() {
+      var self = this;
+
+      if (this.options.dest === 'back') {
+        history.go(-1);
+      } else if (this.options.dest === '../') {
+        // TODO: properly handle this case
+        history.go(-1);
+      } else {
+        // TODO: add app.router.navigateTo() and use it here
+        location.hash = app.router.prefix + this.dest;
+      }
     }
   });
 
@@ -155,6 +177,7 @@ var rr = rr || {};
     action.options = options;
     action.type = type;
 
+    // TODO: Implement custom actions
     if (!action.run || !action.cleanup) {
       throw new Error('PageAction must have a run and cleanup function');
     }

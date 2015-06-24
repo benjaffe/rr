@@ -73,7 +73,7 @@ var rr = rr || {};
   // -------- //
 
   function init() {
-    console.log('Initializing...');
+    console.debug('Initializing...');
     app.router.updateRoute();
     $(window).bind('hashchange', app.router.updateRoute);
   }
@@ -101,7 +101,7 @@ var rr = rr || {};
         page.actions.push(pageActions.createAction('VideoAction', {
           page: page,
           videoId: page.introVideo.src(),
-          runOnce: page.introVideo.runOnce()
+          runOnce: page.introVideo.runOnce && page.introVideo.runOnce()
         }));
       }
 
@@ -109,6 +109,13 @@ var rr = rr || {};
       if (page.navigateTo) {
         page.actions.push(pageActions.createAction('NavigateAction', {
           page: page
+        }));
+      }
+
+      if (page.type() === 'item' && page.finalDestination !== false) {
+        page.actions.push(pageActions.createAction('RRNavigateAction', {
+          page: page,
+          dest: page.finalDestination || '../'
         }));
       }
 
