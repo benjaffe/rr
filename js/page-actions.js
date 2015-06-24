@@ -16,7 +16,7 @@ var rr = rr || {};
   var Action = {
     run: function() {
       // skip actions that have already run
-      if (this.hasRun) {
+      if (this.hasRun && this.options.runOnce) {
         console.debug('skipping ' + this.type, this);
         markActionAsDoneAndContinue();
         return;
@@ -31,7 +31,7 @@ var rr = rr || {};
       this._run.apply(this, arguments);
     },
     cleanup: function() {
-      if (this.hasRun) {
+      if (this.hasRun && this.options.runOnce) {
         return false;
       }
       this.hasRun = true;

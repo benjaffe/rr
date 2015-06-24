@@ -221,7 +221,8 @@
       "introVideo": {
         "name": "Name",
         "description": "Description",
-        "src": "ee3VY1lfSRg"
+        "src": "ee3VY1lfSRg",
+        "runOnce": true
       },
       "children": {
         "concepts-in-backbone": {

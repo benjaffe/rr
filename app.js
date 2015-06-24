@@ -104,7 +104,8 @@ var rr = rr || {};
       if (page.introVideo) {
         page.actions.push(pageActions.createAction('VideoAction', {
           page: page,
-          videoId: vm.currentPage().introVideo.src()
+          videoId: page.introVideo.src(),
+          runOnce: page.introVideo.runOnce()
         }));
       }
 
