@@ -7,12 +7,17 @@ var rr = rr || {};
   var actionQueue = [];
   var currentAction = null;
 
-  app.pageActions = app.pageActions || {};
-  var pageActions = app.pageActions;
-  var i = 0;
+  var pageActions = app.pageActions || {};
+  app.pageActions = pageActions;
+
+  var pageActionIndexCounter = 0;
 
   pageActions.currentActionName = ko.observable('');
 
+  // All Page Actions have a run function and a cleanup function
+  // which do some pre and post processing, then run the associated
+  // _run or _cleanup functions (which belong to objects with this
+  // object as their prototype.
   var Action = {
     run: function() {
       // skip actions that have already run
@@ -44,14 +49,18 @@ var rr = rr || {};
     }
   };
 
+  // This is a hash of all the different actions we support
   var actions = {};
 
-  // custom actions have no default _run and _cleanup functions
+  // Custom Actions have no default _run and _cleanup functions. Those
+  // functions will need to be passed in by the user when they create
+  // the Custom Action
   actions.CustomAction = $.extend(Object.create(Action), {});
 
+  // Navigate Actions open a modal and show an iframe with the content
   actions.NavigateAction = $.extend(Object.create(Action), {
     name: 'NavigateAction',
-    _run: function(cleanup) {
+    _run: function() {
       var self = this;
 
       var modal = $('#iframe-modal').modal('show');
@@ -73,9 +82,10 @@ var rr = rr || {};
     }
   });
 
+  // Video Actions show a modal with a youtube player
   actions.VideoAction = $.extend(Object.create(Action), {
     name: 'VideoAction',
-    _run: function(cleanup) {
+    _run: function() {
       var self = this;
 
       // show the modal
@@ -125,6 +135,7 @@ var rr = rr || {};
     }
   });
 
+  // Run the cleanup function for the current action, and don't run the next
   pageActions.cleanupAndStop = function() {
     actionQueue = [];
     if (currentAction) {
@@ -132,6 +143,10 @@ var rr = rr || {};
     }
   };
 
+  // This method creates actions when called with a type and options.
+  // Type-specific options are listed above by each type declaration.
+  // Always-supported options are:
+  //   [runOnce]: boolean - if true, the action will only run one time
   pageActions.createAction = function(type, options) {
     var Action = actions[type] || actions.custom;
     var action = Object.create(Action);
@@ -143,11 +158,13 @@ var rr = rr || {};
     if (!action.run || !action.cleanup) {
       throw new Error('PageAction must have a run and cleanup function');
     }
-    action.uid = i++;
+    action.uid = pageActionIndexCounter++;
 
     return action;
   };
 
+  // Adds actions to the actionQueue. Accepts actions either as an array,
+  // or as multiple arguments. (The actionQueue will always be a shallow array)
   pageActions.push = function(actions) {
     if (arguments[0] instanceof Array) {
       Array.prototype.push.apply(actionQueue, actions);
@@ -156,11 +173,18 @@ var rr = rr || {};
     }
   };
 
+  // Reset the current action to null, and move onto the next action
   function markActionAsDoneAndContinue() {
     currentAction = null;
     pageActions.startActions();
   }
 
+  // remove the first action in the queue, and run it. It will return early if
+  // currentAction is set to something. This is because every action is
+  // resposible for cleaning up after itself, and we're defensively treating
+  // every action as necessarily mutually independant, so we can't start the
+  // next action unless the cleanup function for the previous action is called,
+  // (which resets currentAction to null)
   pageActions.startActions = function() {
     if (currentAction) {
       return false;
