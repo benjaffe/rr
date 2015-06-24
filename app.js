@@ -57,11 +57,7 @@ var rr = rr || {};
   // the currently-selected page page
   vm.currentPage = ko.computed(function() {
     var route = vm.pageHierarchy().join('/');
-    return app.storage.getRRData(route) || new app.model.Page({
-      name: 'Invalid Route',
-      msg: 'route is ' + route +
-            ', and pageData = ' + app.storage.pageData
-    }, undefined);
+    return app.storage.getRRData(route);
   });
 
   // a computed boolean of whether the current page should show its children

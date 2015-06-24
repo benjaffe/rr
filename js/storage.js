@@ -48,7 +48,13 @@ var rr = rr || {};
       return orig.children && orig.children[key] ? orig.children[key] : null;
     }, rrData());
 
-    return selectedPage;
+    return selectedPage || new app.model.Page({
+      name: '404: Page Not Found',
+      description: 'We couldn\'t find a page here. Please check the url and try again.',
+      msg: 'route is ' + route +
+            ', and pageData = ' + app.storage.pageData,
+      type: '404'
+    }, undefined);
   };
 
   /**
