@@ -32,6 +32,8 @@ var rr = rr || {};
   };
 
   vm.currentActionName = app.pageActions.currentActionName;
+  vm.currentAction = app.pageActions.currentAction;
+  console.log(vm.currentAction.toString());
 
   // array of strings representing the hierarchy of our current page pages and
   // their parents
@@ -68,6 +70,13 @@ var rr = rr || {};
   // a computed boolean of whether the current page should show item content
   vm.displayItem = ko.computed(function() {
     return vm.currentPage().type && vm.currentPage().type() === 'item';
+  });
+
+  vm.currentPageForumUrl = ko.computed(function() {
+    var urlPrefix = 'https://discussions.udacity.com/t/';
+    var path = app.router.currentRoute();
+    var sanitizedPath = path.replace(/\//, '--');
+    return sanitizedPath ? urlPrefix + sanitizedPath : '';
   });
 
   // -------- //
@@ -109,6 +118,14 @@ var rr = rr || {};
       if (page.navigateTo) {
         page.actions.push(pageActions.createAction('NavigateAction', {
           page: page
+        }));
+      }
+
+      // add a forum-reflect action to the page action queue
+      if (page.forumReflect) {
+        page.actions.push(pageActions.createAction('ForumAction', {
+          page: page,
+          forumKey: app.router.currentRoute().replace('/', '-')
         }));
       }
 

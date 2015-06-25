@@ -20,6 +20,7 @@
 
   <div data-bind="template: {if: currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
   <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'iframe-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'ForumAction', name: 'forum-modal-template'}"></div>
 
   <!-- List of subcategories -->
   <div class="children" data-bind="with: currentPage, visible: displayChildren">
@@ -77,6 +78,8 @@
     </div>
   </script>
 
+
+
   <script type="text/html" id="video-modal-template">
     <div class="modal fade video-modal" id="video-modal">
       <div class="modal-dialog">
@@ -91,6 +94,8 @@
       </div>
     </div>
   </script>
+
+
 
   <script type="text/html" id="iframe-modal-template">
     <div class="modal fade iframe-modal" id="iframe-modal">
@@ -113,7 +118,33 @@
     </div>
   </script>
 
-  <!-- <div data-bind="text: rr.utils.stringify()"></div> -->
+
+
+  <script type="text/html" id="forum-modal-template">
+    <div class="modal fade" id="forum-error-modal">
+      <div class="modal-dialog">
+        <div class="modal-content" data-bind="with: currentPage">
+          <div class="modal-body">
+            <div class="row-gap-huge"></div>
+            <div class="text-center">
+              <h3>The forum couldn't load</h3>
+              <p>Click on the button below to visit the forum and participate with your fellow students.</p>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <a target="_blank" class="btn btn-primary" data-bind="attr: {href: $root.currentPageForumUrl}">Visit Forum</a>
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">I'm Done</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+  </script>
+
+
+
+  <div data-bind="text: rr.utils.stringify($root)"></div>
 
   <!-- TODO - Use CDN for Libraries -->
   <script src="lib/jquery.js"></script>

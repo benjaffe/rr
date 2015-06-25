@@ -5,13 +5,15 @@ var rr = rr || {};
   app.vm = vm;
 
   var actionQueue = [];
-  var currentAction = null;
 
   var pageActions = app.pageActions || {};
   app.pageActions = pageActions;
 
   var pageActionIndexCounter = 0;
 
+  var currentAction = ko.observable(null);
+
+  pageActions.currentAction = currentAction;
   pageActions.currentActionName = ko.observable('');
 
   // All Page Actions have a run function and an optional cleanup function
@@ -46,7 +48,7 @@ var rr = rr || {};
       console.debug('cleaning up ' + this.type, this);
 
       if (this._cleanup) {
-        this._cleanup.apply(currentAction, arguments);
+        this._cleanup.apply(currentAction(), arguments);
       }
       pageActions.currentActionName('');
       markActionAsDoneAndContinue();
@@ -101,6 +103,70 @@ var rr = rr || {};
         // TODO: add app.router.navigateTo() and use it here
         location.hash = app.router.prefix + this.dest;
       }
+    }
+  });
+
+  // Display the Discourse View
+  actions.ForumAction = $.extend(Object.create(Action), {
+    name: 'ForumAction',
+    _run: function() {
+      var self = this;
+      var topicUrl = 'https://discussions.udacity.com/t/' + self.options.forumKey;
+      var authUrl = 'https://www.udacity.com/account/sso/discourse';
+      self.options.forumUrl = ko.observable(topicUrl);
+      self.options.forumCannotLoad = ko.observable(false);
+
+      console.log(self);
+      console.log(topicUrl);
+
+      self.loadForumData({
+        topicUrl: topicUrl
+      });
+
+      // var modal = $('#forum-modal').modal('show');
+      // modal.on('hidden.bs.modal', function(e) {
+      //   self.cleanup({modal: false});
+      // });
+    },
+    loadForumData: function(options) {
+      var self = this;
+      $.ajax({
+        url: options.topicUrl + '.json',
+        xhrFields: {
+          withCredentials: true
+        }
+      }).success(function(data) {
+        console.log(data);
+        self.openErrorModal(); // TODO: replace this with an actual Discourse view
+        self.options.forumCannotLoad(true);
+      }).error(function(res) {
+        // TODO: distinguish between (being logged out) and (page not existing)
+        console.log('An error occurred. The discussion url is ' + options.topicUrl);
+        console.log(res);
+        self.openErrorModal();
+        self.options.forumCannotLoad(true);
+      });
+    },
+    openErrorModal: function() {
+      var self = this;
+
+      var modal = $('#forum-error-modal').modal('show');
+      modal.on('hidden.bs.modal', function(e) {
+        self.cleanup({modal: false});
+      });
+    },
+    _cleanup: function(options) {
+      // TODO: what is this conditional for?
+      if (!(options && options.modal === false)) {
+        // remove the backdrop manually, since bootstrap keeps it around
+        // when a new modal opens during the removal of the previous one
+        $('.modal-backdrop').fadeOut(function() {
+          this.remove();
+        });
+        $('#forum-error-modal').modal('hide');
+      }
+
+      // app.vm.currentPage().pageState.set({linkVisited: true});
     }
   });
 
@@ -160,8 +226,8 @@ var rr = rr || {};
   // Run the cleanup function for the current action, and don't run the next
   pageActions.cleanupAndStop = function() {
     actionQueue = [];
-    if (currentAction) {
-      currentAction.cleanup();
+    if (currentAction()) {
+      currentAction().cleanup();
     }
   };
 
@@ -198,7 +264,7 @@ var rr = rr || {};
 
   // Reset the current action to null, and move onto the next action
   function markActionAsDoneAndContinue() {
-    currentAction = null;
+    currentAction(null);
     pageActions.startActions();
   }
 
@@ -209,13 +275,13 @@ var rr = rr || {};
   // next action unless the cleanup function for the previous action is called,
   // (which resets currentAction to null)
   pageActions.startActions = function() {
-    if (currentAction) {
+    if (currentAction()) {
       return false;
     }
 
-    currentAction = actionQueue.shift();
-    if (currentAction) {
-      currentAction.run.call(currentAction);
+    currentAction(actionQueue.shift() || null);
+    if (currentAction()) {
+      currentAction().run.call(currentAction());
     }
   };
 
