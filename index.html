@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>R&amp;R - Udacity</title>
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://www.udacity.com/media/css/udacity/udacity.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
@@ -171,6 +172,7 @@
         <li>
           <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
           <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
+          <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
           <span data-bind="html: cooked"></span>
         </li>
       </ul>

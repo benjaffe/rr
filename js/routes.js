@@ -30,7 +30,7 @@ var rr = rr || {};
   app.router.getUrlToPage = function(page) {
     if (page === window) {
       throw new Error('page should not === window');
-    } else if(!page || !page.parent) {
+    } else if (!page || !page.parent) {
       return null;
     } else if (!page.parent.parent) {
       return page.key;
