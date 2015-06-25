@@ -35,6 +35,19 @@ var rr = rr || {};
   vm.currentAction = app.pageActions.currentAction;
   console.log(vm.currentAction.toString());
 
+  vm.forumDataRaw = ko.observable(undefined);
+  vm.forumData = ko.computed(function() {
+    if (!vm.forumDataRaw()) {
+      return {
+        post_stream: {
+          posts: []
+        }
+      }
+    }
+
+    return vm.forumDataRaw();
+  });
+
   // array of strings representing the hierarchy of our current page pages and
   // their parents
   vm.pageHierarchy = ko.computed(function() {
@@ -75,7 +88,7 @@ var rr = rr || {};
   vm.currentPageForumUrl = ko.computed(function() {
     var urlPrefix = 'https://discussions.udacity.com/t/';
     var path = app.router.currentRoute();
-    var sanitizedPath = path.replace(/\//, '--');
+    var sanitizedPath = path.replace(/\//, '-');
     return sanitizedPath ? urlPrefix + sanitizedPath : '';
   });
 
@@ -83,8 +96,8 @@ var rr = rr || {};
 
   function init() {
     console.debug('Initializing...');
-    app.router.updateRoute();
     $(window).bind('hashchange', app.router.updateRoute);
+    app.router.updateRoute();
   }
 
   // Load RR Data

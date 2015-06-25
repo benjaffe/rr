@@ -20,7 +20,8 @@
 
   <div data-bind="template: {if: currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
   <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'iframe-modal-template'}"></div>
-  <div data-bind="template: {if: currentActionName() === 'ForumAction', name: 'forum-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumDataRaw() !== null, name: 'forum-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumDataRaw() === null, name: 'forum-error-modal-template'}"></div>
 
   <!-- List of subcategories -->
   <div class="children" data-bind="with: currentPage, visible: displayChildren">
@@ -121,6 +122,27 @@
 
 
   <script type="text/html" id="forum-modal-template">
+    <div class="modal fade" id="forum-modal">
+      <div class="modal-dialog">
+        <div class="modal-content" data-bind="with: currentPage">
+          <div class="modal-body">
+            <div class="row-gap-huge"></div>
+            <div class="text-center">
+              <h3>The forum loaded!</h3>
+              <p>Click on the button below to visit the forum and participate with your fellow students.</p>
+            </div>
+            <div data-bind="template: {if: $root.forumData(), name: 'forum-posts-template'}"></div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">I'm Done</span></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </script>
+
+
+  <script type="text/html" id="forum-error-modal-template">
     <div class="modal fade" id="forum-error-modal">
       <div class="modal-dialog">
         <div class="modal-content" data-bind="with: currentPage">
@@ -138,8 +160,21 @@
         </div>
       </div>
     </div>
+  </script>
 
 
+
+  <script type="text/html" id="forum-posts-template">
+    <!-- <div data-bind="text: rr.utils.stringify($data)"></div> -->
+    <div data-bind="with: $root.forumData().post_stream">
+      <ul data-bind="foreach: posts">
+        <li>
+          <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
+          <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
+          <span data-bind="html: cooked"></span>
+        </li>
+      </ul>
+    </div>
   </script>
 
 

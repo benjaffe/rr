@@ -249,7 +249,8 @@
           "description": "These heavily commented code examples help you go from building simple apps to more complex ones.",
           "logo": "foo.jpg",
           "name": "Hello Backbone",
-          "navigateTo": "http://arturadib.com/hello-backbonejs/"
+          "navigateTo": "http://arturadib.com/hello-backbonejs/",
+          "forumReflect": true
         },
         "routers-in-backbone": {
           "type": "item",

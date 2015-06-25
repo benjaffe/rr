@@ -114,7 +114,6 @@ var rr = rr || {};
       var topicUrl = 'https://discussions.udacity.com/t/' + self.options.forumKey;
       var authUrl = 'https://www.udacity.com/account/sso/discourse';
       self.options.forumUrl = ko.observable(topicUrl);
-      self.options.forumCannotLoad = ko.observable(false);
 
       console.log(self);
       console.log(topicUrl);
@@ -137,14 +136,28 @@ var rr = rr || {};
         }
       }).success(function(data) {
         console.log(data);
-        self.openErrorModal(); // TODO: replace this with an actual Discourse view
-        self.options.forumCannotLoad(true);
+        vm.forumDataRaw(data);
+        self.openForumModal();
       }).error(function(res) {
         // TODO: distinguish between (being logged out) and (page not existing)
-        console.log('An error occurred. The discussion url is ' + options.topicUrl);
+        vm.forumDataRaw(null);
+        if (res.readyState === 4) {
+          console.log('Page was not found: ' + options.topicUrl);
+        } else if (res.readyState === 0) {
+          console.log('Access denied: ' + options.topicUrl);
+        } else {
+          console.log('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
+        }
         console.log(res);
         self.openErrorModal();
-        self.options.forumCannotLoad(true);
+      });
+    },
+    openForumModal: function() {
+      var self = this;
+
+      var modal = $('#forum-modal').modal('show');
+      modal.on('hidden.bs.modal', function(e) {
+        self.cleanup({modal: false});
       });
     },
     openErrorModal: function() {
