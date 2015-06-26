@@ -109,9 +109,10 @@ var rr = rr || {};
   // Display the Discourse View
   actions.ForumAction = $.extend(Object.create(Action), {
     name: 'ForumAction',
+    discussionForumUrl: 'https://discussions.udacity.com',
     _run: function() {
       var self = this;
-      var topicUrl = 'https://discussions.udacity.com/t/' + self.options.forumKey;
+      var topicUrl = this.discussionForumUrl + '/t/' + self.options.forumKey;
       var authUrl = 'https://www.udacity.com/account/sso/discourse';
       self.options.forumUrl = ko.observable(topicUrl);
 
@@ -119,7 +120,8 @@ var rr = rr || {};
       console.debug(topicUrl);
 
       self.loadForumData({
-        topicUrl: topicUrl
+        topicUrl: topicUrl,
+        forumKey: self.options.forumKey
       });
 
       // var modal = $('#forum-modal').modal('show');
@@ -143,6 +145,10 @@ var rr = rr || {};
         vm.forumDataRaw(null);
         if (res.readyState === 4) {
           console.debug('Page was not found: ' + options.topicUrl);
+          if (!options.retry) {
+            self.createTopic(options);
+            return;
+          }
         } else if (res.readyState === 0) {
           console.debug('Access denied: ' + options.topicUrl);
         } else {
@@ -150,6 +156,45 @@ var rr = rr || {};
         }
         console.debug('Response', res);
         self.openErrorModal();
+      });
+    },
+    createTopic: function(options) {
+      var self = this;
+
+      console.debug('attempting to create the topic');
+      $.ajax({
+        url: self.discussionForumUrl + '/session/csrf.json',
+        xhrFields: {
+          withCredentials: true
+        }
+      }).success(function(data) {
+        var csrf = data.csrf;
+
+        options.retry = true;
+
+        $.ajax('https://discussions.udacity.com/posts.json', {
+          type: 'POST',
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          data: {
+            'authenticity_token': csrf,
+            'title': options.forumKey,
+            'raw': 'Add your thoughts about this article!',
+            'category': 758,
+            is_warning:false,
+            archetype:'regular',
+            nested_post:true
+          }
+        }).success(function(msg) {
+          console.debug('Topic was successfully created!', arguments);
+          self.loadForumData(options);
+        }).error(function(msg) {
+          console.debug('Topic could not be created.', arguments);
+          self.loadForumData(options);
+        });
+
       });
     },
     openForumModal: function() {
