@@ -150,8 +150,8 @@
           <div class="modal-body">
             <div class="row-gap-huge"></div>
             <div class="text-center">
-              <h3>The forum couldn't load</h3>
-              <p>Click on the button below to visit the forum and participate with your fellow students.</p>
+              <h3>Reflection Time!</h3>
+              <p>Visit the forum, share your thoughts, and see what your fellow students have to say</p>
             </div>
           </div>
           <div class="modal-footer">
@@ -168,12 +168,20 @@
   <script type="text/html" id="forum-posts-template">
     <!-- <div data-bind="text: rr.utils.stringify($data)"></div> -->
     <div data-bind="with: $root.forumData().post_stream">
-      <ul data-bind="foreach: posts">
-        <li>
-          <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
-          <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
-          <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
-          <span data-bind="html: cooked"></span>
+      <ul class="unstyled-list container" data-bind="foreach: posts">
+        <li class="row">
+          <div class="topic-avatar">
+            <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
+          </div>
+          <div class="topic-body">
+            <div class="topic-meta-data">
+              <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
+              <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
+            </div>
+            <div class="topic-contents">
+              <span data-bind="html: cooked"></span>
+            </div>
+          </div>
         </li>
       </ul>
     </div>

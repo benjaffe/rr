@@ -142,7 +142,6 @@ var rr = rr || {};
         self.openForumModal();
       }).error(function(res) {
         // TODO: distinguish between (being logged out) and (page not existing)
-        vm.forumDataRaw(null);
         if (res.readyState === 4) {
           console.debug('Page was not found: ' + options.topicUrl);
           if (!options.retry) {
@@ -151,8 +150,10 @@ var rr = rr || {};
           }
         } else if (res.readyState === 0) {
           console.debug('Access denied: ' + options.topicUrl);
+          vm.forumDataRaw(null);
         } else {
           console.debug('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
+          vm.forumDataRaw(null);
         }
         console.debug('Response', res);
         self.openErrorModal();

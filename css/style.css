@@ -1,3 +1,7 @@
+.unstyled-list {
+  list-style: none;
+}
+
 .nav-pills p {
   color: #666;
 }
@@ -70,4 +74,19 @@
   width: 100%;
   height: calc(100% - 65px);
   border: 1px solid rgba(0,0,0,0.2);
+}
+
+
+.topic-avatar {
+  width: 45px;
+  float: left;
+  margin-top: 5px;
+}
+
+.topic-avatar img {
+  border-radius: 50%;
+}
+
+.topic-body {
+  margin-left: 60px
 }
