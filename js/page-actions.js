@@ -115,8 +115,8 @@ var rr = rr || {};
       var authUrl = 'https://www.udacity.com/account/sso/discourse';
       self.options.forumUrl = ko.observable(topicUrl);
 
-      console.log(self);
-      console.log(topicUrl);
+      console.debug(self);
+      console.debug(topicUrl);
 
       self.loadForumData({
         topicUrl: topicUrl
@@ -135,20 +135,20 @@ var rr = rr || {};
           withCredentials: true
         }
       }).success(function(data) {
-        console.log(data);
+        console.debug(data);
         vm.forumDataRaw(data);
         self.openForumModal();
       }).error(function(res) {
         // TODO: distinguish between (being logged out) and (page not existing)
         vm.forumDataRaw(null);
         if (res.readyState === 4) {
-          console.log('Page was not found: ' + options.topicUrl);
+          console.debug('Page was not found: ' + options.topicUrl);
         } else if (res.readyState === 0) {
-          console.log('Access denied: ' + options.topicUrl);
+          console.debug('Access denied: ' + options.topicUrl);
         } else {
-          console.log('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
+          console.debug('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
         }
-        console.log(res);
+        console.debug('Response', res);
         self.openErrorModal();
       });
     },

@@ -18,6 +18,7 @@ var rr = rr || {};
     dataLoaded: $.Deferred()
   };
 
+  // TODO: Display loading screen until this happens!
   $.when(deferred.youtubeReady, deferred.dataLoaded).done(init);
 
   app.storage.setRRData(new app.model.Page(model, undefined));
