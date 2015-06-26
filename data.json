@@ -235,14 +235,16 @@
             "name": "Name",
             "description": "Description",
             "src": "NGhXjCuucLI"
-          }
+          },
+          "forumReflect": true
         },
         "intro-to-writing-code-with-backbone": {
           "type": "item",
           "description": "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
           "logo": "foo.jpg",
           "name": "Introduction to Writing Code with Backbone",
-          "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751"
+          "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751",
+          "forumReflect": true
         },
         "hello-backbone": {
           "type": "item",
@@ -257,7 +259,8 @@
           "description": "Learn how to link the URL (also called the route) of your application with the view being showed.",
           "logo": "foo.jpg",
           "name": "Routers in Backbone",
-          "navigateTo": "http://backbonetutorials.com/what-is-a-router/"
+          "navigateTo": "http://backbonetutorials.com/what-is-a-router/",
+          "forumReflect": true
         }
       }
     }
