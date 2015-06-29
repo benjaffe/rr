@@ -36,19 +36,6 @@ var rr = rr || {};
   vm.currentAction = app.pageActions.currentAction;
   console.log(vm.currentAction.toString());
 
-  vm.forumDataRaw = ko.observable(undefined);
-  vm.forumData = ko.computed(function() {
-    if (!vm.forumDataRaw()) {
-      return {
-        post_stream: {
-          posts: []
-        }
-      }
-    }
-
-    return vm.forumDataRaw();
-  });
-
   // array of strings representing the hierarchy of our current page pages and
   // their parents
   vm.pageHierarchy = ko.computed(function() {
@@ -164,4 +151,3 @@ var rr = rr || {};
   };
 
 })(rr);
-

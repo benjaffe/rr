@@ -21,8 +21,8 @@
 
   <div data-bind="template: {if: currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
   <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'iframe-modal-template'}"></div>
-  <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumDataRaw() !== null, name: 'forum-modal-template'}"></div>
-  <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumDataRaw() === null, name: 'forum-error-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() !== null, name: 'forum-modal-template'}"></div>
+  <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() === null, name: 'forum-error-modal-template'"></div>
 
   <!-- List of subcategories -->
   <div class="children" data-bind="with: currentPage, visible: displayChildren">
@@ -123,19 +123,21 @@
 
 
   <script type="text/html" id="forum-modal-template">
-    <div class="modal fade" id="forum-modal">
+    <div class="modal fade" id="forum-modal" data-bind="with: forumVM">
       <div class="modal-dialog">
-        <div class="modal-content" data-bind="with: currentPage">
+        <div class="modal-content">
           <div class="modal-body">
             <div class="row-gap-huge"></div>
             <div class="text-center">
               <h3>The forum loaded!</h3>
               <p>Click on the button below to visit the forum and participate with your fellow students.</p>
             </div>
-            <div data-bind="template: {if: $root.forumData(), name: 'forum-posts-template'}"></div>
+            <div data-bind="template: {if: forumData(), name: 'forum-posts-template'}"></div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">I'm Done</span></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close" data-bind="visible: !replyingToPost()">
+              <span aria-hidden="true">I'm Done</span>
+            </button>
           </div>
         </div>
       </div>
@@ -156,7 +158,9 @@
           </div>
           <div class="modal-footer">
             <a target="_blank" class="btn btn-primary" data-bind="attr: {href: $root.currentPageForumUrl}">Visit Forum</a>
-            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">I'm Done</span></button>
+            <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">I'm Done</span>
+            </button>
           </div>
         </div>
       </div>
@@ -164,26 +168,41 @@
   </script>
 
 
+  <!-- <div data-bind="text: rr.utils.stringify($root.forumVM)"></div> -->
 
   <script type="text/html" id="forum-posts-template">
-    <!-- <div data-bind="text: rr.utils.stringify($data)"></div> -->
-    <div data-bind="with: $root.forumData().post_stream">
-      <ul class="unstyled-list container" data-bind="foreach: posts">
-        <li class="row">
-          <div class="topic-avatar">
-            <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
-          </div>
-          <div class="topic-body">
-            <div class="topic-meta-data">
-              <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
-              <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
+    <div>
+      <div data-bind="with: forumData().post_stream">
+        <ul class="unstyled-list container" data-bind="foreach: posts">
+          <li class="row">
+
+            <div class="topic-avatar">
+              <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
             </div>
-            <div class="topic-contents">
-              <span data-bind="html: cooked"></span>
+            <div class="topic-body">
+              <div class="topic-meta-data">
+                <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
+                <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
+              </div>
+              <div class="topic-contents">
+                <span data-bind="html: cooked"></span>
+              </div>
+              <button class="btn-btn-default" data-bind="click: $parents[1].replyToPost"><i class="fa fa-reply"></i> Reply</button>
+
             </div>
-          </div>
-        </li>
-      </ul>
+          </li>
+        </ul>
+      </div>
+      <div class="post-reply-form row" data-bind="visible: replyingToPost()">
+        <div class="col-xs-12">
+          <h4>What are your thoughts?</h4>
+        </div>
+        <div class="col-xs-12">
+          <textarea name="post-reply-content" rows="8" style="width:100%" data-bind="textInput: replyContent"></textarea>
+        </div>
+        <button class="btn btn-default" data-bind="click: cancelReplyToPost">Cancel</button>
+        <button class="btn btn-primary" data-bind="click: sendReplyToPost">Reply</button>
+      </div>
     </div>
   </script>
 

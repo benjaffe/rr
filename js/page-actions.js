@@ -4,6 +4,9 @@ var rr = rr || {};
   var vm = app.vm || {};
   app.vm = vm;
 
+  vm.forumVM = {};
+  var fvm = vm.forumVM;
+
   var actionQueue = [];
 
   var pageActions = app.pageActions || {};
@@ -84,6 +87,7 @@ var rr = rr || {};
         $('#video-modal').modal('hide');
       }
 
+      // TODO: replace with call to app.storage
       app.vm.currentPage().pageState.set({linkVisited: true});
     }
   });
@@ -106,7 +110,113 @@ var rr = rr || {};
     }
   });
 
-  // Display the Discourse View
+  // === Forum Action === //
+  fvm.self = ko.observable();
+  fvm.forumUrl = ko.observable();
+  fvm.forumDataRaw = ko.observable(undefined);
+
+  fvm.forumData = ko.computed(function() {
+    if (!fvm.forumDataRaw()) {
+      console.log(':(');
+      return {
+        post_stream: {
+          posts: []
+        }
+      }
+    }
+    console.log('coo');
+    return fvm.forumDataRaw();
+  });
+
+  fvm.replyingToPost = ko.observable(null);
+  fvm.replyContent = ko.observable('Hey, this is a sample reply. Looks good, I hope...');
+
+  fvm.replyToPost = function(post) {
+    fvm.replyingToPost(post);
+    console.log(post);
+    console.log(post.topic_id);
+  }
+
+  fvm.cancelReplyToPost = function() {
+    fvm.replyingToPost(null);
+  }
+
+  fvm.sendReplyToPost = function(post) {
+    var post = fvm.replyingToPost();
+    var postId = post.topic_id;
+
+    $.ajax('https://discussions.udacity.com/posts.json', {
+      type: 'POST',
+      xhrFields: {
+        withCredentials: true
+      },
+      crossDomain: true,
+      data: {
+        'authenticity_token': app.csrf,
+        'raw': fvm.replyContent(),
+        'topic_id': postId,
+        is_warning:false,
+        nested_post:true
+      }
+    }).success(function(msg) {
+      console.debug('Reply was successfully posted!', arguments);
+      console.log(arguments);
+      fvm.replyingToPost(null);
+      fvm.loadForumData({
+        topicUrl: fvm.forumUrl()
+      });
+    }).error(function(msg) {
+      console.debug('Reply could not be posted.', arguments);
+      console.log(arguments);
+    });
+  }
+
+  fvm.loadForumData = function(options) {
+    var self = fvm.self();
+    $.ajax({
+      url: options.topicUrl + '.json',
+      xhrFields: {
+        withCredentials: true
+      }
+    }).success(function(data) {
+      console.debug(data);
+      fvm.forumDataRaw(data); // TODO: abstract this out
+      self.openForumModal();
+
+      // get csrf so we can post
+      $.ajax({
+        url: self.discussionForumUrl + '/session/csrf.json',
+        xhrFields: {
+          withCredentials: true
+        }
+      }).success(function(data) {
+        app.csrf = data.csrf;
+        console.log('csrf acquired: ' + app.csrf);
+        localStorage.csrf = app.csrf;
+      });
+
+    }).error(function(res) {
+      if (res.readyState === 4) {
+        console.debug('Page was not found: ' + options.topicUrl);
+        if (!options.retry) {
+          self.createTopic(options);
+          return;
+        }
+      } else if (res.readyState === 0) {
+        console.debug('Access denied: ' + options.topicUrl);
+        fvm.forumDataRaw(null);
+      } else {
+        console.debug('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
+        fvm.forumDataRaw(null);
+      }
+      console.debug('Response', res);
+      self.openErrorModal();
+    });
+  };
+
+  if (localStorage.csrf) {
+    app.csrf = localStorage.csrf;
+  }
   actions.ForumAction = $.extend(Object.create(Action), {
     name: 'ForumAction',
     discussionForumUrl: 'https://discussions.udacity.com',
@@ -114,14 +224,15 @@ var rr = rr || {};
       var self = this;
       var topicUrl = this.discussionForumUrl + '/t/' + self.options.forumKey;
       var authUrl = 'https://www.udacity.com/account/sso/discourse';
-      self.options.forumUrl = ko.observable(topicUrl);
+      var fvm = vm.forumVM;
+      fvm.self(self);
+      fvm.forumUrl(topicUrl);
 
       console.debug(self);
       console.debug(topicUrl);
 
-      self.loadForumData({
-        topicUrl: topicUrl,
-        forumKey: self.options.forumKey
+      fvm.loadForumData({
+        topicUrl: topicUrl
       });
 
       // var modal = $('#forum-modal').modal('show');
@@ -129,73 +240,34 @@ var rr = rr || {};
       //   self.cleanup({modal: false});
       // });
     },
-    loadForumData: function(options) {
-      var self = this;
-      $.ajax({
-        url: options.topicUrl + '.json',
-        xhrFields: {
-          withCredentials: true
-        }
-      }).success(function(data) {
-        console.debug(data);
-        vm.forumDataRaw(data);
-        self.openForumModal();
-      }).error(function(res) {
-        // TODO: distinguish between (being logged out) and (page not existing)
-        if (res.readyState === 4) {
-          console.debug('Page was not found: ' + options.topicUrl);
-          if (!options.retry) {
-            self.createTopic(options);
-            return;
-          }
-        } else if (res.readyState === 0) {
-          console.debug('Access denied: ' + options.topicUrl);
-          vm.forumDataRaw(null);
-        } else {
-          console.debug('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
-          vm.forumDataRaw(null);
-        }
-        console.debug('Response', res);
-        self.openErrorModal();
-      });
-    },
     createTopic: function(options) {
       var self = this;
 
       console.debug('attempting to create the topic');
-      $.ajax({
-        url: self.discussionForumUrl + '/session/csrf.json',
+
+      options.retry = true;
+
+      $.ajax('https://discussions.udacity.com/posts.json', {
+        type: 'POST',
         xhrFields: {
           withCredentials: true
+        },
+        crossDomain: true,
+        data: {
+          'authenticity_token': app.csrf,
+          'title': options.forumKey,
+          'raw': 'Add your thoughts about this article!',
+          'category': 758,
+          is_warning:false,
+          archetype:'regular',
+          nested_post:true
         }
-      }).success(function(data) {
-        var csrf = data.csrf;
-
-        options.retry = true;
-
-        $.ajax('https://discussions.udacity.com/posts.json', {
-          type: 'POST',
-          xhrFields: {
-            withCredentials: true
-          },
-          crossDomain: true,
-          data: {
-            'authenticity_token': csrf,
-            'title': options.forumKey,
-            'raw': 'Add your thoughts about this article!',
-            'category': 758,
-            is_warning:false,
-            archetype:'regular',
-            nested_post:true
-          }
-        }).success(function(msg) {
-          console.debug('Topic was successfully created!', arguments);
-          self.loadForumData(options);
-        }).error(function(msg) {
-          console.debug('Topic could not be created.', arguments);
-          self.loadForumData(options);
-        });
-
+      }).success(function(msg) {
+        console.debug('Topic was successfully created!', arguments);
+        fvm.loadForumData(options);
+      }).error(function(msg) {
+        console.debug('Topic could not be created.', arguments);
+        fvm.loadForumData(options);
       });
     },
     openForumModal: function() {
