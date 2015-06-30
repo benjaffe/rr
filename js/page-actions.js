@@ -4,9 +4,6 @@ var rr = rr || {};
   var vm = app.vm || {};
   app.vm = vm;
 
-  vm.navigateVM = {};
-  var nvm = vm.navigateVM;
-
   vm.forumVM = {};
   var fvm = vm.forumVM;
 
@@ -26,7 +23,7 @@ var rr = rr || {};
   // which do some pre and post processing, then run the associated _run or
   // _cleanup functions (which belong to objects for whom Action is their
   // prototype.
-  var Action = {
+  app.Action = {
     run: function() {
       // skip actions that have already run
       if (this.hasRun && this.options.runOnce) {
@@ -62,302 +59,12 @@ var rr = rr || {};
   };
 
   // This is a hash of all the different actions we support
-  var actions = {};
+  app.actions = {};
 
   // Custom Actions have no default _run and _cleanup functions. Those
   // functions will need to be passed in by the user when they create
   // the Custom Action
-  actions.CustomAction = $.extend(Object.create(Action), {});
-
-  // === Navigate Action === //
-  nvm.self = ko.observable();
-
-  nvm.gotoArticle = function() {
-    // TODO: Am I making use of what's being passed in here? Is there a
-    // better way to handle things? Can I use passed arguments rather than
-    // referencing things directly?
-    console.log(arguments);
-    window.open(vm.currentPage().navigateTo(), '_blank')
-    nvm.self().cleanup();
-  };
-
-  nvm.skipArticle = function() {
-    nvm.self().cleanup();
-  };
-
-  actions.NavigateAction = $.extend(Object.create(Action), {
-    name: 'NavigateAction',
-    _run: function() {
-      var self = this;
-      nvm.self(self);
-    },
-    _cleanup: function(options) {
-      // TODO: replace with call to app.storage
-      app.vm.currentPage().pageState.set({linkVisited: true});
-    }
-  });
-
-  // Navigate to another R&R
-  actions.RRNavigateAction = $.extend(Object.create(Action), {
-    name: 'RRNavigateAction',
-    _run: function() {
-      var self = this;
-
-      if (this.options.dest === 'back') {
-        history.go(-1);
-      } else if (this.options.dest === '../') {
-        // TODO: properly handle this case
-        history.go(-1);
-      } else {
-        // TODO: add app.router.navigateTo() and use it here
-        location.hash = app.router.prefix + this.dest;
-      }
-    }
-  });
-
-  // === Forum Action === //
-  fvm.self = ko.observable();
-  fvm.forumUrl = ko.observable();
-  fvm.forumDataRaw = ko.observable(undefined);
-
-  fvm.forumData = ko.computed(function() {
-    if (!fvm.forumDataRaw()) {
-      console.log(':(');
-      return {
-        post_stream: {
-          posts: []
-        }
-      }
-    }
-    console.log('coo');
-    return fvm.forumDataRaw();
-  });
-
-  fvm.replyingToPost = ko.observable(null);
-  fvm.replyContent = ko.observable('Hey, this is a sample reply. Looks good, I hope...');
-
-  fvm.replyToPost = function(post) {
-    fvm.replyingToPost(post);
-    console.log(post);
-    console.log(post.topic_id);
-  }
-
-  fvm.cancelReplyToPost = function() {
-    fvm.replyingToPost(null);
-  }
-
-  fvm.sendReplyToPost = function(post) {
-    var post = fvm.replyingToPost();
-    var postId = post.topic_id;
-
-    $.ajax('https://discussions.udacity.com/posts.json', {
-      type: 'POST',
-      xhrFields: {
-        withCredentials: true
-      },
-      crossDomain: true,
-      data: {
-        'authenticity_token': app.csrf,
-        'raw': fvm.replyContent(),
-        'topic_id': postId,
-        is_warning:false,
-        nested_post:true
-      }
-    }).success(function(msg) {
-      console.debug('Reply was successfully posted!', arguments);
-      console.log(arguments);
-      fvm.replyingToPost(null);
-      fvm.loadForumData({
-        topicUrl: fvm.forumUrl()
-      });
-    }).error(function(msg) {
-      console.debug('Reply could not be posted.', arguments);
-      console.log(arguments);
-    });
-  }
-
-  fvm.loadForumData = function(options) {
-    var self = fvm.self();
-    $.ajax({
-      url: options.topicUrl + '.json',
-      xhrFields: {
-        withCredentials: true
-      }
-    }).success(function(data) {
-      console.debug(data);
-      fvm.forumDataRaw(data); // TODO: abstract this out
-      self.openForumModal();
-
-      // get csrf so we can post
-      $.ajax({
-        url: self.discussionForumUrl + '/session/csrf.json',
-        xhrFields: {
-          withCredentials: true
-        }
-      }).success(function(data) {
-        app.csrf = data.csrf;
-        console.log('csrf acquired: ' + app.csrf);
-        localStorage.csrf = app.csrf;
-      });
-
-    }).error(function(res) {
-      if (res.readyState === 4) {
-        console.debug('Page was not found: ' + options.topicUrl);
-        if (!options.retry) {
-          self.createTopic(options);
-          return;
-        }
-      } else if (res.readyState === 0) {
-        console.debug('Access denied: ' + options.topicUrl);
-        fvm.forumDataRaw(null);
-      } else {
-        console.debug('An error occurred, readyState = ' + res.readyState + '. The discussion url is ' + options.topicUrl);
-        fvm.forumDataRaw(null);
-      }
-      console.debug('Response', res);
-      self.openErrorModal();
-    });
-  };
-
-  if (localStorage.csrf) {
-    app.csrf = localStorage.csrf;
-  }
-  actions.ForumAction = $.extend(Object.create(Action), {
-    name: 'ForumAction',
-    discussionForumUrl: 'https://discussions.udacity.com',
-    _run: function() {
-      var self = this;
-      var topicUrl = this.discussionForumUrl + '/t/' + self.options.forumKey;
-      var authUrl = 'https://www.udacity.com/account/sso/discourse';
-      var fvm = vm.forumVM;
-      fvm.self(self);
-      fvm.forumUrl(topicUrl);
-
-      console.debug(self);
-      console.debug(topicUrl);
-
-      fvm.loadForumData({
-        topicUrl: topicUrl
-      });
-
-      // var modal = $('#forum-modal').modal('show');
-      // modal.on('hidden.bs.modal', function(e) {
-      //   self.cleanup({modal: false});
-      // });
-    },
-    createTopic: function(options) {
-      var self = this;
-
-      console.debug('attempting to create the topic');
-
-      options.retry = true;
-
-      $.ajax('https://discussions.udacity.com/posts.json', {
-        type: 'POST',
-        xhrFields: {
-          withCredentials: true
-        },
-        crossDomain: true,
-        data: {
-          'authenticity_token': app.csrf,
-          'title': options.forumKey,
-          'raw': 'Add your thoughts about this article!',
-          'category': 758,
-          is_warning:false,
-          archetype:'regular',
-          nested_post:true
-        }
-      }).success(function(msg) {
-        console.debug('Topic was successfully created!', arguments);
-        fvm.loadForumData(options);
-      }).error(function(msg) {
-        console.debug('Topic could not be created.', arguments);
-        fvm.loadForumData(options);
-      });
-    },
-    openForumModal: function() {
-      var self = this;
-
-      var modal = $('#forum-modal').modal('show');
-      modal.on('hidden.bs.modal', function(e) {
-        self.cleanup({modal: false});
-      });
-    },
-    openErrorModal: function() {
-      var self = this;
-
-      var modal = $('#forum-error-modal').modal('show');
-      modal.on('hidden.bs.modal', function(e) {
-        self.cleanup({modal: false});
-      });
-    },
-    _cleanup: function(options) {
-      // TODO: what is this conditional for?
-      if (!(options && options.modal === false)) {
-        // remove the backdrop manually, since bootstrap keeps it around
-        // when a new modal opens during the removal of the previous one
-        $('.modal-backdrop').fadeOut(function() {
-          this.remove();
-        });
-        $('#forum-error-modal').modal('hide');
-      }
-
-      // app.vm.currentPage().pageState.set({linkVisited: true});
-    }
-  });
-
-  // Video Actions show a modal with a youtube player
-  actions.VideoAction = $.extend(Object.create(Action), {
-    name: 'VideoAction',
-    _run: function() {
-      var self = this;
-
-      // show the modal
-      var modal = $('#video-modal').modal('show');
-
-      // initialize a youtube player
-      app.youtubePlayer = new YT.Player('youtube-player', {
-        height: '390',
-        width: '640',
-        videoId: this.options.videoId,
-        playerVars: {
-          autoplay: true,
-          // controls: 0,
-          rel: 0,
-          showinfo: 0
-        },
-        events: {
-          'onStateChange': onPlayerStateChange
-        }
-      });
-
-      // When video ends, finish the page action
-      function onPlayerStateChange(event) {
-        if (event.data === YT.PlayerState.ENDED) {
-          self.cleanup();
-        }
-      }
-
-      // when modal is hidden, destroy the video and finish the page action.
-      // (Since the modal is closed already, pass in parameters to tell our
-      // cleanup function to skip that functionality)
-      modal.on('hidden.bs.modal', function(e) {
-        app.youtubePlayer.destroy();
-        self.cleanup({modal: false});
-      });
-    },
-
-    _cleanup: function(options) {
-      if (!(options && options.modal === false)) {
-        // remove the backdrop manually, since bootstrap keeps it around
-        // when a new modal opens during the removal of the previous one
-        $('.modal-backdrop').fadeOut(function() {
-          this.remove();
-        });
-        $('#video-modal').modal('hide');
-      }
-    }
-  });
+  app.actions.CustomAction = $.extend(Object.create(app.Action), {});
 
   // Run the cleanup function for the current action, and don't run the next
   pageActions.cleanupAndStop = function() {
@@ -372,7 +79,7 @@ var rr = rr || {};
   // Always-supported options are:
   //   [runOnce]: boolean - if true, the action will only run one time
   pageActions.createAction = function(type, options) {
-    var Action = actions[type] || actions.custom;
+    var Action = app.actions[type] || app.actions.custom;
     var action = Object.create(Action);
 
     // ship the options with the page action
