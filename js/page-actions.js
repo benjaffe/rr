@@ -4,9 +4,6 @@ var rr = rr || {};
   var vm = app.vm || {};
   app.vm = vm;
 
-  vm.forumVM = {};
-  var fvm = vm.forumVM;
-
   var actionQueue = [];
 
   var pageActions = app.pageActions || {};

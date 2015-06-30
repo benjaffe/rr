@@ -14,14 +14,12 @@ var rr = rr || {};
 
   fvm.forumData = ko.computed(function() {
     if (!fvm.forumDataRaw()) {
-      console.log(':(');
       return {
         post_stream: {
           posts: []
         }
       }
     }
-    console.log('coo');
     return fvm.forumDataRaw();
   });
 
@@ -111,6 +109,10 @@ var rr = rr || {};
     });
   };
 
+  fvm.closeForum = function() {
+    fvm.self().cleanup();
+  }
+
   if (localStorage.csrf) {
     app.csrf = localStorage.csrf;
   }
@@ -131,11 +133,6 @@ var rr = rr || {};
       fvm.loadForumData({
         topicUrl: topicUrl
       });
-
-      // var modal = $('#forum-modal').modal('show');
-      // modal.on('hidden.bs.modal', function(e) {
-      //   self.cleanup({modal: false});
-      // });
     },
     createTopic: function(options) {
       var self = this;

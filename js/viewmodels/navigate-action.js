@@ -9,14 +9,11 @@ var rr = rr || {};
 
   // === Navigate Action === //
   nvm.self = ko.observable();
+  nvm.hasNavigated = ko.observable(false);
 
-  nvm.gotoArticle = function() {
-    // TODO: Am I making use of what's being passed in here? Is there a
-    // better way to handle things? Can I use passed arguments rather than
-    // referencing things directly?
-    console.log(arguments);
-    window.open(vm.currentPage().navigateTo(), '_blank')
-    nvm.self().cleanup();
+  nvm.gotoArticle = function(page) {
+    window.open(page.navigateTo(), '_blank')
+    nvm.hasNavigated(true)
   };
 
   nvm.skipArticle = function() {

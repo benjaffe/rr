@@ -14,7 +14,7 @@
     <!-- Heading -->
     <div class="row section-inverse section-inverse-standout text-inverse">
       <div class="col-xs-12">
-        <h1 class="text-center" data-bind="text: currentPage().name"></h1>
+        <h1 class="text-center"><i class="fa fa-coffee"></i> <span data-bind="text: currentPage().name"></span></h1>
         <p class="text-center" data-bind="text: currentPage().description, visible: currentPage().type() === 'category'"></p>
       </div>
     </div>
@@ -34,24 +34,21 @@
       <div data-bind="template: {if: currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
       <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'navigate-template'}"></div>
       <!-- <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'iframe-modal-template'}"></div> -->
-      <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() !== null, name: 'forum-modal-template'}"></div>
+      <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() !== null, name: 'forum-template'}"></div>
       <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() === null, name: 'forum-error-modal-template'"></div>
-    </div>
-
-    <div class="container" data-bind="visible: currentPage().url">
-      <h3 class="text-center">Navigating to the Article</h3>
-      <p class="text-center">Please stand by...</p>
     </div>
 
     <hr style="margin-top:1000px;">
 
     <div data-bind="foreach: pageHierarchyObjects()" style="opacity: 0.4;">
-      <div data-bind="template: {if: type === 'category', name: 'category-view'}"></div>
-      <div data-bind="template: {if: type === 'item', name: 'item-view'}"></div>
+      <div data-bind="template: {name: 'page-view'}"></div>
       <hr>
     </div>
 
 
+    <script type="text/html" id="page-view">
+      Page View
+    </script>
     <script type="text/html" id="category-view">
       <div class="container">
         <div class="row">
@@ -109,12 +106,19 @@
         <p data-bind="text: description"></p>
         <div class="row">
           <div class="col-xs-12">
-            <p class="clearfix">
-              <a class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.gotoArticle" target="_blank">Start Reading</a>
-            </p>
-            <p class="clearfix">
-              <button type="button" class="btn btn-default pull-right" data-bind="click: $root.navigateVM.skipArticle">I've Read This Before</button>
-            </p>
+            <div data-bind="visible: !$root.navigateVM.hasNavigated()">
+              <p class="clearfix">
+                <button class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.gotoArticle" target="_blank">Start Reading</button>
+              </p>
+              <p class="clearfix">
+                <button type="button" class="btn btn-default pull-right" data-bind="click: $root.navigateVM.skipArticle">I've Read This Before</button>
+              </p>
+            </div>
+            <div data-bind="visible: $root.navigateVM.hasNavigated()">
+              <p>
+                <button type="button" class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.skipArticle">Let's Reflect</button>
+              </p>
+            </div>
           </div>
         </div>
       </div>
@@ -143,20 +147,32 @@
 
 
 
-    <script type="text/html" id="forum-modal-template">
+    <script type="text/html" id="forum-template">
       <div data-bind="with: forumVM">
-        <h3>Let's Reflect</h3>
-        <p data-bind="visible: forumData().post_stream.posts.length && forumData().post_stream.posts.length <= 3">Looks like you are one of the first! Add your thoughts to the conversation.</p>
-        <p data-bind="visible: forumData().post_stream.posts.length > 3">Here are some of your peers' thoughts. Add your thoughts to the conversation.</p>
 
-        <div data-bind="template: {if: forumData(), name: 'forum-posts-template'}"></div>
+        <!-- Loading -->
+        <div data-bind="visible: forumData().post_stream.posts.length === 0">
+          <div class="loading text-center">
+            <i class="fa fa-cog fa-spin spinner"></i>
+            Loading
+          </div>
+        </div>
 
-        <div data-bind="text: rr.utils.stringify(forumData())"></div>
+        <!-- Forum -->
+        <div data-bind="visible: forumData().post_stream.posts.length">
+          <h3>Let's Reflect</h3>
+          <p data-bind="visible: forumData().post_stream.posts.length <= 3">Looks like you are one of the first! Add your thoughts to the conversation.</p>
+          <p data-bind="visible: forumData().post_stream.posts.length > 3">Here are some of your peers' thoughts. Add your thoughts to the conversation.</p>
 
+          <div data-bind="template: {if: forumData(), name: 'forum-posts-template'}"></div>
 
-        <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close" data-bind="visible: !replyingToPost()">
-          <span aria-hidden="true">I'm Done</span>
-        </button>
+          <!-- <div data-bind="text: rr.utils.stringify(forumData().post_stream.posts[0])"></div> -->
+
+          <button type="button" class="btn btn-default" data-bind="click: closeForum, visible: !replyingToPost()">
+            I'm Done
+          </button>
+        </div>
+
       </div>
     </script>
 

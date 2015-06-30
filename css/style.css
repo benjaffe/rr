@@ -101,3 +101,10 @@
 .topic-body {
   margin-left: 60px
 }
+
+
+.loading .spinner {
+  display: block;
+  font-size: 30px;
+  margin-bottom: 10px;
+}
