@@ -2,6 +2,11 @@
   list-style: none;
 }
 
+.section, .section-inverse {
+  padding-top: 30px;
+  padding-bottom: 40px;
+}
+
 .nav-pills p {
   color: #666;
 }
@@ -76,6 +81,12 @@
   border: 1px solid rgba(0,0,0,0.2);
 }
 
+
+.topic {
+  border-top: solid 1px #ccc;
+  padding-top: 20px;
+  margin-top: 20px;
+}
 
 .topic-avatar {
   width: 45px;

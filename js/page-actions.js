@@ -4,6 +4,9 @@ var rr = rr || {};
   var vm = app.vm || {};
   app.vm = vm;
 
+  vm.navigateVM = {};
+  var nvm = vm.navigateVM;
+
   vm.forumVM = {};
   var fvm = vm.forumVM;
 
@@ -66,27 +69,29 @@ var rr = rr || {};
   // the Custom Action
   actions.CustomAction = $.extend(Object.create(Action), {});
 
-  // Navigate Actions open a modal and show an iframe with the content
+  // === Navigate Action === //
+  nvm.self = ko.observable();
+
+  nvm.gotoArticle = function() {
+    // TODO: Am I making use of what's being passed in here? Is there a
+    // better way to handle things? Can I use passed arguments rather than
+    // referencing things directly?
+    console.log(arguments);
+    window.open(vm.currentPage().navigateTo(), '_blank')
+    nvm.self().cleanup();
+  };
+
+  nvm.skipArticle = function() {
+    nvm.self().cleanup();
+  };
+
   actions.NavigateAction = $.extend(Object.create(Action), {
     name: 'NavigateAction',
     _run: function() {
       var self = this;
-
-      var modal = $('#iframe-modal').modal('show');
-      modal.on('hidden.bs.modal', function(e) {
-        self.cleanup({modal: false});
-      });
+      nvm.self(self);
     },
     _cleanup: function(options) {
-      if (!(options && options.modal === false)) {
-        // remove the backdrop manually, since bootstrap keeps it around
-        // when a new modal opens during the removal of the previous one
-        $('.modal-backdrop').fadeOut(function() {
-          this.remove();
-        });
-        $('#video-modal').modal('hide');
-      }
-
       // TODO: replace with call to app.storage
       app.vm.currentPage().pageState.set({linkVisited: true});
     }
