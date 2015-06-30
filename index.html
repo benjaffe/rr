@@ -20,67 +20,57 @@
     </div>
     <div class="row row-gap-large"></div>
 
-    <!-- List of subcategories -->
-    <div class="children" data-bind="with: currentPage, visible: displayChildren">
-      <ul data-bind="template: {name: 'category-view'}"></ul>
+
+    <div data-bind="foreach: pageHierarchyObjects().reverse()">
+      <div class="container">
+        <div data-bind="template: {name: 'page-view'}"></div>
+      </div>
     </div>
 
-    <!-- Item info -->
-    <!-- <div class="item" data-bind="with: currentPage, visible: displayItem">
-      <ul data-bind="template: {name: 'item-view'}"></ul>
-    </div> -->
+    <!-- Page View -->
+    <script type="text/html" id="page-view">
+      <hr>
+      <!-- Category View -->
+      <div data-bind="template: {if: type() === 'category', name: 'category-template'}"></div>
 
-    <div class="container">
-      <div data-bind="template: {if: currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
-      <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'navigate-template'}"></div>
-      <!-- <div data-bind="template: {if: currentActionName() === 'NavigateAction', name: 'iframe-modal-template'}"></div> -->
-      <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() !== null, name: 'forum-template'}"></div>
-      <div data-bind="template: {if: currentActionName() === 'ForumAction' && forumVM.forumDataRaw() === null, name: 'forum-error-modal-template'"></div>
-    </div>
+      <!-- Item View -->
+      <div data-bind="template: {if: type() === 'item', name: 'item-template'}"></div>
+
+      <!-- <div data-bind="text: rr.utils.stringify($data)" style="height: 100px;width: 600px; margin: 0 auto;border-bottom: 1px solid blue;overflow: scroll; padding: 20px;"></div> -->
+    </script>
+
+
 
     <hr style="margin-top:1000px;">
 
-    <div data-bind="foreach: pageHierarchyObjects()" style="opacity: 0.4;">
-      <div data-bind="template: {name: 'page-view'}"></div>
-      <hr>
-    </div>
 
-
-    <script type="text/html" id="page-view">
-      Page View
-    </script>
-    <script type="text/html" id="category-view">
-      <div class="container">
-        <div class="row">
-          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-            <ul class="nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
-              <li class="subject-list-item">
-                <a data-bind="attr: {href: $root.getUrl($data)}">
-                  <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
-                  <!-- ko if: $data && $data.description -->
-                  <p class="text-left" data-bind="text: description"></p>
-                  <!-- /ko -->
-                </a>
-              </li>
-            </ul>
-          </div>
+    <script type="text/html" id="category-template">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <ul class="nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
+            <li class="subject-list-item">
+              <a data-bind="attr: {href: $root.getUrl($data)}">
+                <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
+                <p class="text-left" data-bind="text: description"></p>
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </script>
 
-    <script type="text/html" id="item-view">
-      <div class="container" data-bind="visible: pageState().linkVisited">
-        <div class="row">
-          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-            <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
-            <!-- ko if: $data && $data.description -->
-            <p class="text-left" data-bind="text: description"></p>
-            <!-- /ko -->
-          </div>
+    <script type="text/html" id="item-template">
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <div data-bind="template: {if: $root.currentActionName() === 'NavigateAction', name: 'navigate-template'}"></div>
+          <div data-bind="template: {if: $root.currentActionName() === 'ForumAction' && $root.forumVM.forumDataRaw() !== null, name: 'forum-template', data: $root.forumVM}"></div>
         </div>
       </div>
     </script>
 
+
+    <!-- Modals -->
+    <div data-bind="template: {if: $root.currentActionName() === 'VideoAction', name: 'video-modal-template'}"></div>
 
 
     <script type="text/html" id="video-modal-template">
@@ -100,56 +90,34 @@
 
 
     <script type="text/html" id="navigate-template">
-      <div data-bind="with: currentPage">
-        <!-- <div data-bind="text: rr.utils.stringify($data)"></div> -->
-        <h3>Let's Read</h3>
-        <p data-bind="text: description"></p>
-        <div class="row">
-          <div class="col-xs-12">
-            <div data-bind="visible: !$root.navigateVM.hasNavigated()">
-              <p class="clearfix">
-                <button class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.gotoArticle" target="_blank">Start Reading</button>
-              </p>
-              <p class="clearfix">
-                <button type="button" class="btn btn-default pull-right" data-bind="click: $root.navigateVM.skipArticle">I've Read This Before</button>
-              </p>
-            </div>
-            <div data-bind="visible: $root.navigateVM.hasNavigated()">
-              <p>
-                <button type="button" class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.skipArticle">Let's Reflect</button>
-              </p>
-            </div>
+      <h3>Let's Read</h3>
+      <p data-bind="text: description"></p>
+      <div class="row">
+        <div class="col-xs-12">
+          <div data-bind="visible: !$root.navigateVM.hasNavigated()">
+            <p class="clearfix">
+              <button class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.gotoArticle" target="_blank">Start Reading</button>
+            </p>
+            <p class="clearfix">
+              <button type="button" class="btn btn-default pull-right" data-bind="click: $root.navigateVM.skipArticle">I've Read This Before</button>
+            </p>
+          </div>
+          <div data-bind="visible: $root.navigateVM.hasNavigated()">
+            <p>
+              <button type="button" class="btn btn-lg btn-primary pull-right" data-bind="click: $root.navigateVM.skipArticle">Let's Reflect</button>
+            </p>
           </div>
         </div>
       </div>
     </script>
 
-    <!-- <script type="text/html" id="iframe-modal-template">
-      <div class="modal fade iframe-modal" id="iframe-modal">
-        <div class="modal-dialog">
-          <div class="modal-content" data-bind="with: currentPage">
-            <div class="modal-body">
-              <div class="row-gap-huge"></div>
-              <div class="text-center">
-                <h3>The article couldn't load</h3>
-                <p>Click on the article link below, then return to this page when you're done.</p>
-              </div>
-              <iframe id="iframe" width="400" height="400" data-bind="attr: {src: navigateTo}" sandbox="allow-scripts allow-forms" frameborder="0"></iframe>
-            </div>
-            <div class="modal-footer">
-              <h3 class="text-left h-slim-top text-center"><a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a></h3>
-              <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">I'm Done Reading</span></button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </script> -->
-
-
 
     <script type="text/html" id="forum-template">
-      <div data-bind="with: forumVM">
+      <!-- In Case of Error -->
+      <div data-bind="template: {if: $root.forumVM.forumDataRaw() === null, name: 'forum-error-modal-template'"></div>
 
+      <!-- If Data Loads Successfully -->
+      <div data-bind="visible: $root.forumVM.forumDataRaw() !== null">
         <!-- Loading -->
         <div data-bind="visible: forumData().post_stream.posts.length === 0">
           <div class="loading text-center">
@@ -164,7 +132,20 @@
           <p data-bind="visible: forumData().post_stream.posts.length <= 3">Looks like you are one of the first! Add your thoughts to the conversation.</p>
           <p data-bind="visible: forumData().post_stream.posts.length > 3">Here are some of your peers' thoughts. Add your thoughts to the conversation.</p>
 
-          <div data-bind="template: {if: forumData(), name: 'forum-posts-template'}"></div>
+          <div data-bind="">
+            <ul class="unstyled-list" data-bind="template: {name: 'forum-post-template', foreach: forumData().post_stream.posts}"></ul>
+
+            <div class="post-reply-form row" data-bind="visible: replyingToPost()">
+              <div class="col-xs-12">
+                <h4>What are your thoughts?</h4>
+              </div>
+              <div class="col-xs-12">
+                <textarea name="post-reply-content" rows="8" style="width:100%" data-bind="textInput: replyContent"></textarea>
+              </div>
+              <button class="btn btn-default" data-bind="click: cancelReplyToPost">Cancel</button>
+              <button class="btn btn-primary" data-bind="click: sendReplyToPost">Reply</button>
+            </div>
+          </div>
 
           <!-- <div data-bind="text: rr.utils.stringify(forumData().post_stream.posts[0])"></div> -->
 
@@ -174,6 +155,28 @@
         </div>
 
       </div>
+    </script>
+
+
+    <!-- <div data-bind="text: rr.utils.stringify($root.forumVM)"></div> -->
+
+    <script type="text/html" id="forum-post-template">
+      <li class="row topic">
+        <div class="topic-avatar">
+          <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
+        </div>
+        <div class="topic-body">
+          <div class="topic-meta-data">
+            <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
+            <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
+          </div>
+          <div class="topic-contents">
+            <span data-bind="html: cooked"></span>
+          </div>
+          <button class="btn btn-default btn-sm pull-right" data-bind="click: $parents[1].replyToPost"><i class="fa fa-reply"></i> Reply</button>
+
+        </div>
+      </li>
     </script>
 
 
@@ -195,45 +198,6 @@
               </button>
             </div>
           </div>
-        </div>
-      </div>
-    </script>
-
-
-    <!-- <div data-bind="text: rr.utils.stringify($root.forumVM)"></div> -->
-
-    <script type="text/html" id="forum-posts-template">
-      <div>
-        <div data-bind="with: forumData().post_stream">
-          <ul class="unstyled-list container" data-bind="foreach: posts">
-            <li class="row topic">
-
-              <div class="topic-avatar">
-                <img width="45" height="45" class="avatar" data-bind="attr:{title: username, src: 'https://discourse-cdn.global.ssl.fastly.net/udacity/' + avatar_template.replace('{size}', '45')}">
-              </div>
-              <div class="topic-body">
-                <div class="topic-meta-data">
-                  <a data-bind="text: name, attr: {href: 'https://discussions.udacity.com/users/' + username}"></a>
-                  <i data-bind="visible: staff" class="fa fa-shield" title="This user is a moderator" alt="This user is a moderator"></i>
-                </div>
-                <div class="topic-contents">
-                  <span data-bind="html: cooked"></span>
-                </div>
-                <button class="btn btn-default btn-sm pull-right" data-bind="click: $parents[1].replyToPost"><i class="fa fa-reply"></i> Reply</button>
-
-              </div>
-            </li>
-          </ul>
-        </div>
-        <div class="post-reply-form row" data-bind="visible: replyingToPost()">
-          <div class="col-xs-12">
-            <h4>What are your thoughts?</h4>
-          </div>
-          <div class="col-xs-12">
-            <textarea name="post-reply-content" rows="8" style="width:100%" data-bind="textInput: replyContent"></textarea>
-          </div>
-          <button class="btn btn-default" data-bind="click: cancelReplyToPost">Cancel</button>
-          <button class="btn btn-primary" data-bind="click: sendReplyToPost">Reply</button>
         </div>
       </div>
     </script>

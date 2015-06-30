@@ -63,16 +63,6 @@ var rr = rr || {};
     return app.storage.getRRData(route);
   });
 
-  // a computed boolean of whether the current page should show its children
-  vm.displayChildren = ko.computed(function() {
-    return vm.currentPage().type && vm.currentPage().type() === 'category';
-  });
-
-  // a computed boolean of whether the current page should show item content
-  vm.displayItem = ko.computed(function() {
-    return vm.currentPage().type && vm.currentPage().type() === 'item';
-  });
-
   vm.currentPageForumUrl = ko.computed(function() {
     var urlPrefix = 'https://discussions.udacity.com/t/';
     var path = app.router.currentRoute();
