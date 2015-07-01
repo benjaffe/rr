@@ -10,7 +10,7 @@ var rr = rr || {};
 
   router.prefix = prefix;
 
-  router.currentRoute = ko.observable('');
+  router.currentRoute = ko.observable(sanitizeHash(location.hash));
 
   // TODO: when prefix is omitted, things still work fine
   app.router.updateRoute = function() {
