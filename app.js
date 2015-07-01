@@ -64,11 +64,8 @@ var rr = rr || {};
       if (memoryHierarchy[i] !== currentHierarchy[i]) {
         memoryHierarchy[i] = currentHierarchy[i];
         memoryHierarchy.length = i + 1;
-        // we're always ready for a transition, even if we don't have data yet
-        // memoryHierarchy.push({ name: 'loading' });
       }
     }
-    console.log(memoryHierarchy.length);
     return memoryHierarchy;
   });
 
