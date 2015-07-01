@@ -111,49 +111,37 @@ var rr = rr || {};
 
   ko.applyBindings(vm);
 
+  // when we navigate to a page, create it and add all the actions
   vm.currentPage.subscribe(function(page) {
     var pageActions = app.pageActions;
     // clear page state
     // page.pageState.clear();
 
+    // initialize the page
+    app.page.init(page);
+
     if (!page.actions) {
       page.actions = [];
       // add an intro video to the page action queue
-      if (page.introVideo) {
-        page.actions.push(pageActions.createAction('VideoAction', {
-          page: page,
-          videoId: page.introVideo.src(),
-          runOnce: page.introVideo.runOnce && page.introVideo.runOnce()
-        }));
-      }
+      // if (page.introVideo) {
+      //   page.actions.push(pageActions.createAction('VideoAction', page, {
+      //     videoId: page.introVideo.src(),
+      //     runOnce: page.introVideo.runOnce && page.introVideo.runOnce()
+      //   }));
+      // }
 
-      // add a navigate-to-resource to the page action queue
-      if (page.navigateTo) {
-        page.actions.push(pageActions.createAction('NavigateAction', {
-          page: page
-        }));
-      }
-
-      // add a forum-reflect action to the page action queue
-      if (page.forumReflect) {
-        page.actions.push(pageActions.createAction('ForumAction', {
-          page: page,
-          forumKey: app.router.currentRoute().replace('/', '-')
-        }));
-      }
-
-      if (page.type() === 'item' && page.finalDestination !== false) {
-        page.actions.push(pageActions.createAction('RRNavigateAction', {
-          page: page,
-          dest: page.finalDestination || '../'
-        }));
-      }
+      // if (page.type() === 'item' && page.finalDestination !== false) {
+      //   page.actions.push(pageActions.createAction('RRNavigateAction', page, {
+      //     dest: page.finalDestination || '../'
+      //   }));
+      // }
 
     }
 
     pageActions.push(page.actions);
 
     pageActions.startActions();
+
 
   });
 

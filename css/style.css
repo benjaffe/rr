@@ -1,5 +1,6 @@
 .unstyled-list {
   list-style: none;
+  padding: 0;
 }
 
 .section, .section-inverse {
@@ -114,6 +115,15 @@
   left: 0;
   right: 0;
   transition: all 0.5s ease-in-out;
+}
+
+.shielded {
+  opacity: 0.2;
+  -webkit-filter: blur(1px);
+  filter: blur(1px);
+}
+.shieldable {
+  transition: all 0.5s ease-out;
 }
 
 .active {

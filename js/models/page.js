@@ -26,6 +26,7 @@ var rr = rr || {};
     ko.mapping.fromJS(config, mappingOptions, this);
     this.parent = parent;
     this.pageState = ko.observable({});
+    this.hasInit = ko.observable(false);
     this.pageState.set = function(options) {
       $.extend(_this.pageState(), options);
       _this.pageState.valueHasMutated();

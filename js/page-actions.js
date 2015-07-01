@@ -75,11 +75,12 @@ var rr = rr || {};
   // Type-specific options are listed above by each type declaration.
   // Always-supported options are:
   //   [runOnce]: boolean - if true, the action will only run one time
-  pageActions.createAction = function(type, options) {
+  pageActions.createAction = function(type, page, options) {
     var Action = app.actions[type] || app.actions.custom;
     var action = Object.create(Action);
 
     // ship the options with the page action
+    action.page = page;
     action.options = options;
     action.type = type;
 
