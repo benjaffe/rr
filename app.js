@@ -4,6 +4,7 @@ var rr = rr || {};
   // Our ViewModel
   var vm = app.vm || {};
   app.vm = vm;
+  var memoryHierarchy = [];
 
   // Initial data
   var model = {
@@ -44,12 +45,36 @@ var rr = rr || {};
 
   // array of pointers to our current page pages and their parents, with their
   // hierarchy maintained
-  vm.pageHierarchyObjects = ko.computed(function() {
+  vm.pageObjHierarchy = ko.computed(function() {
     var arrayOfParentPages = vm.pageHierarchy().map(function(name, index, arr) {
       return vm.getPageFromUrl(arr.slice(0, index + 1));
     });
     return arrayOfParentPages;
   });
+
+  // array of pointers to our current page pages and their parents, with their
+  // hierarchy maintained, and all data persisted unless overwritten by index.
+  // In other words, this is list of all routes we have loaded, with no
+  // unloading until we go to a different route at the same depth.
+  vm.pageObjHierarchyPersistent = ko.computed(function() {
+    var currentHierarchy = vm.pageObjHierarchy();
+    memoryHierarchy.length = Math.max(currentHierarchy.length, memoryHierarchy.length);
+    for (var i = 0; i < currentHierarchy.length; i++) {
+
+      if (memoryHierarchy[i] !== currentHierarchy[i]) {
+        memoryHierarchy[i] = currentHierarchy[i];
+        memoryHierarchy.length = i + 1;
+        // we're always ready for a transition, even if we don't have data yet
+        // memoryHierarchy.push({ name: 'loading' });
+      }
+    }
+    console.log(memoryHierarchy.length);
+    return memoryHierarchy;
+  });
+
+  vm.currentPageHierarchyIndex = ko.computed(function() {
+    return vm.pageObjHierarchy().length - 1;
+  }).extend({rateLimit: { timeout: 0, method: "notifyWhenChangesStop" }});
 
   // our current route as a link
   // TODO: not currently used

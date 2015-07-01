@@ -108,3 +108,26 @@
   font-size: 30px;
   margin-bottom: 10px;
 }
+
+.page {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: all 0.5s ease-in-out;
+}
+
+.active {
+  transform: translate(0, 0);
+  opacity: 1;
+}
+
+.slid-left {
+  transform: translate(-20%, 0);
+  opacity: 0;
+  pointer-events: none;
+}
+.slid-right {
+  transform: translate(20%, 0);
+  opacity: 0;
+  pointer-events: none;
+}

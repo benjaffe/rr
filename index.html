@@ -11,7 +11,6 @@
 <body>
 
   <div class="main">
-    <!-- Heading -->
     <div class="row section-inverse section-inverse-standout text-inverse">
       <div class="col-xs-12">
         <h1 class="text-center"><i class="fa fa-coffee"></i> <span data-bind="text: currentPage().name"></span></h1>
@@ -20,10 +19,19 @@
     </div>
     <div class="row row-gap-large"></div>
 
-
-    <div data-bind="foreach: pageHierarchyObjects().reverse()">
-      <div class="container">
-        <div data-bind="template: {name: 'page-view'}"></div>
+    <!-- All Pages in the Hierarchy -->
+    <div data-bind="foreach: pageObjHierarchyPersistent()">
+      <div class="page" data-bind="css: {
+          'active': $index() === $root.currentPageHierarchyIndex(),
+          'slid-left': $index() < $root.currentPageHierarchyIndex(),
+          'slid-right': $index() > $root.currentPageHierarchyIndex()
+        }">
+        <div class="container">
+          <div data-bind="text: name"></div>
+          <div data-bind="text: $index"></div>
+          <!-- <pre data-bind="text: rr.utils.stringify($data.key)"></pre> -->
+          <div data-bind="template: {if: $data.key, name: 'page-view'}"></div>
+        </div>
       </div>
     </div>
 
