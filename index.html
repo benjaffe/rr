@@ -11,17 +11,41 @@
 <body>
 
   <div class="main">
-    <div class="row section-inverse section-inverse-standout text-inverse">
-      <div class="col-xs-12">
+    <div class="row section-inverse section-inverse-standout text-inverse header">
+      <div class="container">
         <h1 class="text-center">
           <i class="fa fa-coffee"></i>
           <span data-bind="text: currentPage().name"></span>
         </h1>
-        <p class="text-center" data-bind="
+        <!-- <p class="text-center" data-bind="
           text: currentPage().description,
-          visible: currentPage().type() === 'category'
-        "></p>
+          visible: currentPage().type() === 'item'
+        "></p> -->
+
+        <div class="nav-indicator-wrapper">
+          <span class="nav-indicator" data-bind="css: {
+              'nav-indicator-selected': currentPage().type() === 'category'
+            }">
+            Choose
+          </span>
+          <span class="nav-indicator-separator"></span>
+          <span class="nav-indicator" data-bind="css: {
+              'nav-indicator-selected': currentPage().type() === 'item' &&
+                                        currentPage().hasInit() &&
+                                        !currentPage().hasNavigated()
+            }">
+            Read
+          </span>
+          <span class="nav-indicator-separator"></span>
+          <span class="nav-indicator" data-bind="css: {
+              'nav-indicator-selected': currentPage().hasInit() &&
+                                        currentPage().hasNavigated()
+            }">
+            Reflect
+          </span>
+        </div>
       </div>
+
     </div>
     <div class="row row-gap-large"></div>
 
@@ -30,8 +54,10 @@
       <!-- Hierarchical list of pages: -->
       <!-- <div data-bind="text: name() + ' - ' + $index()"></div> -->
 
-      <div class="page" data-bind="
-        template: {if: $data, name: 'page-view'},
+      <div class="page" data-bind="template: {
+          if: $data,
+          name: 'page-view'
+        },
         css: {
           'active': $index() === $root.currentPageHierarchyIndex(),
           'slid-left': $index() < $root.currentPageHierarchyIndex(),
@@ -44,14 +70,16 @@
     <!-- Page View -->
     <script type="text/html" id="page-view">
       <!-- Category View -->
-      <div data-bind="
-        template: {if: type() === 'category', name: 'category-template'}
-      "></div>
+      <div data-bind="template: {
+        if: type() === 'category',
+        name: 'category-template'
+      }"></div>
 
       <!-- Item View -->
-      <div data-bind="
-        template: {if: type() === 'item', name: 'item-template'}
-      "></div>
+      <div data-bind="template: {
+        if: type() === 'item',
+        name: 'item-template'
+      }"></div>
 
       <!-- <div data-bind="text: rr.utils.stringify($data)" style="height: 100px;width: 600px; margin: 0 auto;border-bottom: 1px solid blue;overflow: scroll; padding: 20px;"></div> -->
     </script>
@@ -80,13 +108,13 @@
       <!-- <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
  -->
-          <div class="section" data-bind="
-            template: {if: hasInit(), name: 'navigate-template'}
-          "></div>
+          <div class="section" data-bind="template: {
+            if: hasInit(),
+            name: 'navigate-template'
+          }"></div>
 
-          <div class="section section-standout" data-bind="
-            template: {
-              if: hasInit() && forumDataRaw() !== null,
+          <div class="section section-standout" data-bind="template: {
+              if: hasInit() && forumDataRaw() !== undefined && hasNavigated(),
               name: 'forum-template'
             }
           "></div>
@@ -97,9 +125,10 @@
 
 
     <!-- Modals -->
-    <div data-bind="
-      template: {if: $root.currentActionName() === 'VideoAction', name: 'video-modal-template'}
-    "></div>
+    <div data-bind="template: {
+      if: $root.currentActionName() === 'VideoAction',
+      name: 'video-modal-template'
+    }"></div>
 
 
     <script type="text/html" id="video-modal-template">
@@ -155,13 +184,15 @@
         <div class="shieldable" data-bind="css: {
           'shielded': !hasNavigated()
         }">
+
           <!-- In Case of Error -->
-          <div data-bind="
-            template: {if: forumDataRaw() === null, name: 'forum-error-modal-template'
-          "></div>
+          <div data-bind="template: {
+            if: forumDataRaw() === null, name: 'forum-error-template'
+          }"></div>
 
           <!-- If Data Loads Successfully -->
           <div data-bind="visible: forumDataRaw() !== null">
+
             <!-- Loading -->
             <div data-bind="visible: forumData().post_stream.posts.length === 0">
               <div class="loading text-center">
@@ -181,21 +212,10 @@
                 Here are some of your peers' thoughts. Add your thoughts to the conversation.
               </p>
 
-              <ul class="unstyled-list" data-bind="
-                template: {name: 'forum-post-template', foreach: forumData().post_stream.posts}
-              "></ul>
-
-              <div class="post-reply-form row" data-bind="visible: replyingToPost()">
-                <div class="col-xs-12">
-                  <h4>What are your thoughts?</h4>
-                </div>
-                <div class="col-xs-12">
-                  <textarea name="post-reply-content" rows="8" style="width:100%" data-bind="textInput: replyContent">
-                  </textarea>
-                </div>
-                <button class="btn btn-default" data-bind="click: cancelReplyToPost">Cancel</button>
-                <button class="btn btn-primary" data-bind="click: sendReplyToPost">Reply</button>
-              </div>
+              <ul class="unstyled-list" data-bind="template: {
+                name: 'forum-post-template',
+                foreach: forumData().post_stream.posts
+              }"></ul>
 
               <!-- <div data-bind="text: rr.utils.stringify(forumData().post_stream.posts[0])"></div> -->
 
@@ -210,7 +230,6 @@
     </script>
 
 
-    <!-- <div data-bind="text: rr.utils.stringify($root.forumVM)"></div> -->
 
     <script type="text/html" id="forum-post-template">
       <li class="row">
@@ -230,40 +249,45 @@
             <div class="topic-contents">
               <span data-bind="html: cooked"></span>
             </div>
-            <button class="btn btn-default btn-sm pull-right" data-bind="click: $parents[1].replyToPost">
+            <button class="btn btn-default btn-sm pull-right" data-bind="click: $parent.replyToPost">
               <i class="fa fa-reply"></i>
               Reply
             </button>
 
           </div>
         </div>
+
+        <!-- <pre data-bind="text: rr.utils.stringify($parent)"></pre> -->
+        <div class="post-reply-form" data-bind="visible: $parent.replyingToPost() === $data">
+          <div class="col-xs-12">
+            <h4>What are your thoughts?</h4>
+          </div>
+          <div class="col-xs-12">
+            <textarea name="post-reply-content" rows="8" style="width:100%" data-bind="textInput: $parent.replyContent">
+            </textarea>
+          </div>
+          <button class="btn btn-default" data-bind="click: $parent.cancelReplyToPost">Cancel</button>
+          <button class="btn btn-primary" data-bind="click: $parent.sendReplyToPost">Reply</button>
+        </div>
+        <div class="row-gap-medium"></div>
+        <div class="post-replied-message col-xs-12 alert alert-success" data-bind="visible: $parent.repliedToPost() === $data.id">Your reply has been posted!</div>
       </li>
     </script>
 
 
-    <script type="text/html" id="forum-error-modal-template">
+    <script type="text/html" id="forum-error-template">
       Sad :(
-      <div class="modal fade" id="forum-error-modal">
-        <div class="modal-dialog">
-          <div class="modal-content" data-bind="with: currentPage">
-            <div class="modal-body">
-              <div class="row-gap-huge"></div>
-              <div class="text-center">
-                <h3>Reflection Time!</h3>
-                <p>Visit the forum, share your thoughts, and see what your fellow students have to say</p>
-              </div>
-            </div>
-            <div class="modal-footer">
-              <a target="_blank" class="btn btn-primary" data-bind="attr: {href: $root.currentPageForumUrl}">
-                Visit Forum
-              </a>
-              <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">I'm Done</span>
-              </button>
-            </div>
-          </div>
-        </div>
+      <div class="row-gap-huge"></div>
+      <div class="text-center">
+        <h3>Reflection Time!</h3>
+        <p>Visit the forum, share your thoughts, and see what your fellow students have to say</p>
       </div>
+      <a target="_blank" class="btn btn-primary" data-bind="attr: {href: $root.currentPageForumUrl}">
+        Visit Forum
+      </a>
+      <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">I'm Done</span>
+      </button>
     </script>
 
 
@@ -283,7 +307,6 @@
   <script src="js/viewmodels/page.js"></script>
   <script src="js/viewmodels/navigate-action.js"></script>
   <script src="js/viewmodels/video-action.js"></script>
-  <script src="js/viewmodels/forum-action.js"></script>
   <script src="js/routes.js"></script>
   <script src="app.js"></script>
   <script src="https://www.youtube.com/iframe_api"></script>

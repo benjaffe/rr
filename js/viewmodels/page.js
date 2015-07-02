@@ -11,10 +11,10 @@ var rr = rr || {};
       return false;
     }
 
-
     // === Read Action === //
 
     page.hasNavigated = ko.observable(false);
+    page.hasReflected = ko.observable(false);
 
     page.gotoArticle = function(page) {
       window.open(page.navigateTo(), '_blank');
@@ -28,16 +28,16 @@ var rr = rr || {};
     // === Forum Action === //
 
     if (page.forumReflect) {
-      addForum(page);
+      addForumStuff(page);
     }
 
     // Our page has now initialized
     page.hasInit(true);
   };
 
-  function addForum(page) {
+  function addForumStuff(page) {
     page.forumUrl = ko.observable();
-    page.forumDataRaw = ko.observable(undefined);
+    page.forumDataRaw = ko.observable();
 
     page.forumData = ko.computed(function() {
       if (!page.forumDataRaw()) {
@@ -51,7 +51,9 @@ var rr = rr || {};
     });
 
     page.replyingToPost = ko.observable(null);
-    page.replyContent = ko.observable('Hey, this is a sample reply. Looks good, I hope...');
+    page.repliedToPost = ko.observable(null);
+    page.replyContent = ko.observable('Hey, this is a sample reply. ' +
+      'Looks good, I hope...');
 
     page.replyToPost = function(post) {
       page.replyingToPost(post);
@@ -63,9 +65,7 @@ var rr = rr || {};
       page.replyingToPost(null);
     };
 
-
     page.sendReplyToPost = function(post) {
-      var post = page.replyingToPost();
       var postId = post.topic_id;
 
       $.ajax('https://discussions.udacity.com/posts.json', {
@@ -78,21 +78,24 @@ var rr = rr || {};
           'authenticity_token': app.csrf,
           'raw': page.replyContent(),
           'topic_id': postId,
-          is_warning:false,
-          nested_post:true
+          'is_warning': false,
+          'nested_post': true
         }
       }).success(function(msg) {
         console.debug('Reply was successfully posted!', arguments);
         console.log(arguments);
+        page.repliedToPost(post.id);
         page.replyingToPost(null);
         page.loadForumData({
           topicUrl: page.forumUrl()
         });
+        currentPage().hasReflected(true);
       }).error(function(msg) {
+        // TODO: Handle reply failure visually
         console.debug('Reply could not be posted.', arguments);
         console.log(arguments);
       });
-    }
+    };
 
     page.loadForumData = function(options) {
       var self = this;
@@ -160,7 +163,6 @@ var rr = rr || {};
       var self = this;
 
       console.debug('attempting to create the topic');
-      debugger;
 
       options.retry = true;
 

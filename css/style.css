@@ -136,8 +136,66 @@
   opacity: 0;
   pointer-events: none;
 }
+
 .slid-right {
   transform: translate(20%, 0);
   opacity: 0;
   pointer-events: none;
+}
+
+
+.header {
+  padding: 4px 0;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  height: 100px;
+}
+
+.main {
+  padding-top: 100px;
+}
+
+.nav-indicator-wrapper {
+  /*display: none;*/
+  position: absolute;
+  bottom: 10px;
+}
+
+.nav-indicator {
+  position: relative;
+  color: #294860;
+  font-size: 16px;
+}
+
+.nav-indicator:before {
+  content: "";
+  border: 1px solid #294860;
+  font-size: 40px;
+  position: absolute;
+  left: 50%;
+  margin-left: -6px;
+  top: -18px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  text-align: center;
+}
+
+.nav-indicator-selected {
+  font-weight: bold;
+}
+
+.nav-indicator-selected:before {
+  background-color: #294860;
+}
+
+.nav-indicator-separator {
+  display: inline-block;
+  vertical-align: middle;
+  height: 2px;
+  background-color: #333;
+  width: 20px;
 }
