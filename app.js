@@ -100,7 +100,7 @@ var rr = rr || {};
     if (vm.currentPage().type() === 'item') {
       if (vm.currentPage().hasInit() &&
           vm.currentPage().hasNavigated()) {
-        return 'Here\'s What Your Peers Say';
+        return 'Let\'s Reflect';
       } else {
         return 'Let\'s Read';
       }

@@ -18,7 +18,6 @@ var rr = rr || {};
 
     page.gotoArticle = function(page) {
       window.open(page.navigateTo(), '_blank');
-      page.hasNavigated(true);
     };
 
     page.skipArticle = function() {

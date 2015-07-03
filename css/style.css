@@ -3,6 +3,10 @@
   padding: 0;
 }
 
+.btn-wrappable {
+  white-space: normal;
+}
+
 .section, .section-inverse {
   padding-top: 30px;
   padding-bottom: 40px;
@@ -120,15 +124,6 @@
   transition: all 0.5s ease-in-out;
 }
 
-.shielded {
-  opacity: 0.2;
-  -webkit-filter: blur(1px);
-  filter: blur(1px);
-}
-.shieldable {
-  transition: all 0.5s ease-out;
-}
-
 .active {
   transform: translate(0, 0);
   opacity: 1;
@@ -162,43 +157,43 @@
 }
 
 .nav-indicator-wrapper {
-  /*display: none;*/
   position: absolute;
-  bottom: 10px;
+  top: 56px;
+  color: rgba(0,0,0,0.7);
 }
 
 .nav-indicator {
   position: relative;
-  color: #294860;
-  font-size: 16px;
+  font-size: 13px;
 }
 
 .nav-indicator:before {
   content: "";
-  border: 1px solid #294860;
+  border: 1px solid rgba(0,0,0,0.7);
   font-size: 40px;
   position: absolute;
   left: 50%;
-  margin-left: -6px;
-  top: -18px;
-  width: 12px;
-  height: 12px;
+  margin-left: -8px;
+  top: -23px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   text-align: center;
 }
 
 .nav-indicator-selected {
-  font-weight: bold;
+  color: black;
 }
 
 .nav-indicator-selected:before {
-  background-color: #294860;
+  background-color: rgba(0,0,0,0.7);
+  border-color: transparent;
 }
 
 .nav-indicator-separator {
   display: inline-block;
   vertical-align: middle;
-  height: 2px;
-  background-color: #333;
-  width: 20px;
+  height: 1px;
+  background-color: rgba(0,0,0,0.7);
+  width: 10px;
 }

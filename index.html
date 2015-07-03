@@ -13,37 +13,42 @@
   <div class="main">
     <div class="row section-inverse section-inverse-standout text-inverse header">
       <div class="container">
-        <h1 class="text-center">
-          <i class="fa fa-coffee"></i>
-          <span data-bind="text: pageTitle"></span>
-        </h1>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="nav-indicator-wrapper">
+              <span class="nav-indicator" data-bind="css: {
+                  'nav-indicator-selected': currentPage().type() === 'category'
+                }">
+                Choose
+              </span>
+              <span class="nav-indicator-separator"></span>
+              <span class="nav-indicator" data-bind="css: {
+                  'nav-indicator-selected': currentPage().type() === 'item' &&
+                                            currentPage().hasInit() &&
+                                            !currentPage().hasNavigated()
+                }">
+                Read
+              </span>
+              <span class="nav-indicator-separator"></span>
+              <span class="nav-indicator" data-bind="css: {
+                  'nav-indicator-selected': currentPage().hasInit() &&
+                                            currentPage().hasNavigated()
+                }">
+                Reflect
+              </span>
+            </div>
+          </div>
 
-        <div class="nav-indicator-wrapper">
-          <span class="nav-indicator" data-bind="css: {
-              'nav-indicator-selected': currentPage().type() === 'category'
-            }">
-            Choose
-          </span>
-          <span class="nav-indicator-separator"></span>
-          <span class="nav-indicator" data-bind="css: {
-              'nav-indicator-selected': currentPage().type() === 'item' &&
-                                        currentPage().hasInit() &&
-                                        !currentPage().hasNavigated()
-            }">
-            Read
-          </span>
-          <span class="nav-indicator-separator"></span>
-          <span class="nav-indicator" data-bind="css: {
-              'nav-indicator-selected': currentPage().hasInit() &&
-                                        currentPage().hasNavigated()
-            }">
-            Reflect
-          </span>
+          <!-- Page Title -->
+          <div class="col-sm-9">
+            <h1>
+              <i class="fa fa-coffee"></i>
+              <span data-bind="text: pageTitle"></span>
+            </h1>
+          </div>
         </div>
       </div>
-
     </div>
-    <div class="row row-gap-large"></div>
 
     <!-- All Pages in the Hierarchy -->
     <div data-bind="foreach: pageObjHierarchyPersistent()">
@@ -81,10 +86,6 @@
     </script>
 
 
-
-    <hr style="margin-top:1000px;">
-
-
     <script type="text/html" id="category-template">
       <div class="row">
         <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
@@ -101,22 +102,17 @@
     </script>
 
     <script type="text/html" id="item-template">
-      <!-- <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
- -->
-          <div class="section" data-bind="template: {
-            if: hasInit(),
-            name: 'navigate-template'
-          }"></div>
+          <!-- Article Section -->
+          <div data-bind="if: hasInit() && !hasNavigated()">
+            <div class="section"
+              data-bind="template: { name: 'navigate-template' }"></div>
+          </div>
 
-          <div class="section section-standout" data-bind="template: {
-              if: hasInit() && forumDataRaw() !== undefined && hasNavigated(),
-              name: 'forum-template'
-            }
-          "></div>
-
-<!--         </div>
-      </div> -->
+          <!-- Forum Section -->
+          <div data-bind="if: hasInit() && hasNavigated()">
+            <div class="section section-standout"
+              data-bind="template: { name: 'forum-template' }"></div>
+          </div>
     </script>
 
 
@@ -145,35 +141,29 @@
 
     <script type="text/html" id="navigate-template">
       <div class="container">
+        <div class="row row-gap-medium"></div>
         <div class="row">
-          <div class="col-xs-12">
-            <h3 class="h-slim-top" data-bind="text: name"></h3>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-xs-10">
+          <div class="col-sm-9">
+            <h3 class="h-slim-top">
+              <a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a>
+            </h3>
             <p data-bind="text: description"></p>
+            <div data-bind="if: $data.instructions">
+              <hr>
+              <p data-bind="text: instructions"></p>
+            </div>
           </div>
-          <div class="col-xs-2">
-            <div data-bind="visible: !hasNavigated()">
-              <p class="clearfix">
-                <button class="btn btn-lg btn-primary pull-right" target="_blank" data-bind="click: gotoArticle">
-                  Start Reading
-                </button>
-              </p>
-              <p class="clearfix">
-                <button type="button" class="btn btn-default pull-right" data-bind="click: skipArticle">
-                  I've Read This Before
-                </button>
-              </p>
-            </div>
-            <div data-bind="visible: hasNavigated()">
-              <p>
-                <button class="btn btn-default pull-right" target="_blank" data-bind="click: gotoArticle">
-                  Visit Article
-                </button>
-              </p>
-            </div>
+          <div class="col-sm-3" data-bind="visible: !hasNavigated()">
+            <p class="clearfix">
+              <button class="btn btn-wrappable btn-lg btn-primary pull-right" target="_blank" data-bind="click: gotoArticle">
+                Start Reading
+              </button>
+            </p>
+            <p class="clearfix">
+              <button type="button" class="btn btn-wrappable btn-default pull-right" data-bind="click: skipArticle">
+                Done Reading
+              </button>
+            </p>
           </div>
         </div>
       </div>
@@ -205,27 +195,32 @@
 
             <!-- Forum -->
             <div data-bind="visible: forumData().post_stream.posts.length">
-              <h3>Let's Reflect</h3>
-              <p data-bind="visible: forumData().post_stream.posts.length <= 3">
-                Looks like you are one of the first! Add your thoughts to the conversation.
-              </p>
+              <div class="row row-gap-medium"></div>
 
-              <p data-bind="visible: forumData().post_stream.posts.length > 3">
-                Here are some of your peers' thoughts. Add your thoughts to the conversation.
-              </p>
+              <h3 class="h-slim-top">Let's Reflect on <a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a></h3>
+              <div class="row">
+                <div class="col-sm-10">
+                  <p data-bind="visible: forumData().post_stream.posts.length <= 3">
+                    Looks like you are one of the first! Add your thoughts to the conversation.
+                  </p>
+
+                  <p data-bind="visible: forumData().post_stream.posts.length > 3">
+                    Here are some of your peers' thoughts. Add your thoughts to the conversation.
+                  </p>
+                </div>
+                <div class="col-sm-2">
+                  <button type="button" class="btn btn-wrappable btn-default pull-right" data-bind="click: closeForum, visible: !replyingToPost()">
+                    I'm Done
+                  </button>
+                </div>
+              </div>
 
               <ul class="unstyled-list" data-bind="template: {
                 name: 'forum-post-template',
                 foreach: forumData().post_stream.posts
               }"></ul>
 
-              <!-- <div data-bind="text: rr.utils.stringify(forumData().post_stream.posts[0])"></div> -->
-
-              <button type="button" class="btn btn-default" data-bind="click: closeForum, visible: !replyingToPost()">
-                I'm Done
-              </button>
             </div>
-
           </div>
         </div>
       </div>
@@ -278,23 +273,31 @@
 
 
     <script type="text/html" id="forum-error-template">
-      Sad :(
       <div class="row-gap-huge"></div>
-      <div class="text-center">
-        <h3>Reflection Time!</h3>
-        <p>Visit the forum, share your thoughts, and see what your fellow students have to say</p>
+      <div class="row">
+        <div class="col-xs-12">
+          <h3>Reflection Time!</h3>
+        </div>
       </div>
-      <a target="_blank" class="btn btn-primary" data-bind="attr: {href: $root.currentPageForumUrl}">
-        Visit Forum
-      </a>
-      <button type="button" class="btn btn-default" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">I'm Done</span>
-      </button>
+      <div class="row">
+        <div class="col-sm-9">
+          <p>Visit the forum, share your thoughts, and see what your fellow students have to say</p>
+        </div>
+        <div class="col-sm-3">
+          <p class="clearfix">
+            <a target="_blank" class="btn btn-wrappable btn-lg btn-primary pull-right" data-bind="attr: {href: $root.currentPageForumUrl}">
+              Let's Reflect
+            </a>
+          </p>
+          <p class="clearfix">
+            <button type="button" class="btn btn-wrappable btn-default pull-right" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">I'm Done</span>
+            </button>
+          </p>
+        </div>
+      </div>
     </script>
 
-
-
-    <div data-bind="text: rr.utils.stringify($root)"></div>
   </div>
 
   <!-- TODO - Use CDN for Libraries -->
