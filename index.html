@@ -296,13 +296,13 @@
         </div>
         <div class="col-sm-3">
           <p class="clearfix">
-            <a target="_blank" class="btn btn-wrappable btn-lg btn-primary pull-right" data-bind="attr: {href: $root.currentPageForumUrl}">
+            <button target="_blank" class="btn btn-wrappable btn-lg btn-primary pull-right" data-bind="attr: {href: $root.currentPageForumUrl}">
               Let's Reflect
-            </a>
+            </button>
           </p>
           <p class="clearfix">
-            <button type="button" class="btn btn-wrappable btn-default pull-right" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">I'm Done</span>
+            <button type="button" class="btn btn-wrappable btn-default pull-right" data-bind="click: gotoParent">
+              I'm Done
             </button>
           </p>
         </div>
