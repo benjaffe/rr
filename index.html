@@ -15,12 +15,8 @@
       <div class="container">
         <h1 class="text-center">
           <i class="fa fa-coffee"></i>
-          <span data-bind="text: currentPage().name"></span>
+          <span data-bind="text: pageTitle"></span>
         </h1>
-        <!-- <p class="text-center" data-bind="
-          text: currentPage().description,
-          visible: currentPage().type() === 'item'
-        "></p> -->
 
         <div class="nav-indicator-wrapper">
           <span class="nav-indicator" data-bind="css: {
@@ -149,10 +145,16 @@
 
     <script type="text/html" id="navigate-template">
       <div class="container">
-        <h3>Let's Read</h3>
-        <p data-bind="text: description"></p>
         <div class="row">
           <div class="col-xs-12">
+            <h3 class="h-slim-top" data-bind="text: name"></h3>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-10">
+            <p data-bind="text: description"></p>
+          </div>
+          <div class="col-xs-2">
             <div data-bind="visible: !hasNavigated()">
               <p class="clearfix">
                 <button class="btn btn-lg btn-primary pull-right" target="_blank" data-bind="click: gotoArticle">

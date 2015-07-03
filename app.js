@@ -92,6 +92,23 @@ var rr = rr || {};
     return sanitizedPath ? urlPrefix + sanitizedPath : '';
   });
 
+  vm.pageTitle = ko.computed(function(){
+    if (vm.currentPage().type() === 'category') {
+      return vm.currentPage().name();
+    }
+
+    if (vm.currentPage().type() === 'item') {
+      if (vm.currentPage().hasInit() &&
+          vm.currentPage().hasNavigated()) {
+        return 'Here\'s What Your Peers Say';
+      } else {
+        return 'Let\'s Read';
+      }
+    }
+
+    return '';
+  });
+
   // -------- //
 
   function init() {
