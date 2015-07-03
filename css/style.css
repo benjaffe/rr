@@ -217,11 +217,14 @@
   .nav-indicator {
     display: block;
     font-size: 14px;
-    left: 5px;
+    left: 10px;
     line-height: 1.3;
     transition: transform 0.3s;
   }
   .nav-indicator-selected {
-    transform: translateX(3px);
+    /*transform: translateX(3px);*/
+    border-left: 3px solid rgba(0,0,0,0.7);
+    padding-left: 4px;
+    margin-left: -7px;
   }
 }
