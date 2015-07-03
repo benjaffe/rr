@@ -24,10 +24,6 @@ var rr = rr || {};
 
   app.storage.setRRData(new app.model.Page(model, undefined));
 
-  vm.getUrl = function(page) {
-    return '#/' + app.router.getUrlToPage(page);
-  };
-
   vm.getPageFromUrl = function(urlParts) {
     var route = urlParts.join('/');
     return app.storage.getRRData(route);

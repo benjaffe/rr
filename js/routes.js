@@ -27,15 +27,15 @@ var rr = rr || {};
     router.currentRoute(cleanHash);
   };
 
-  app.router.getUrlToPage = function(page) {
+  app.router.getRouteToPage = function(page) {
     if (page === window) {
       throw new Error('page should not === window');
     } else if (!page || !page.parent) {
       return null;
     } else if (!page.parent.parent) {
-      return prefix + page.key;
+      return page.key;
     } else {
-      return router.getUrlToPage(page.parent) + '/' + page.key;
+      return router.getRouteToPage(page.parent) + '/' + page.key;
     }
   };
 

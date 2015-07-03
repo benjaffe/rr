@@ -44,8 +44,12 @@ var rr = rr || {};
       return Object.keys(_this.children).map(valueFromKeyIn(_this.children));
     });
 
+    this.route = ko.computed(function() {
+      return app.router.getRouteToPage(_this);
+    });
+
     this.url = ko.computed(function() {
-      return app.router.getUrlToPage(_this);
+      return app.router.prefix + _this.route();
     });
   };
 
