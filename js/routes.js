@@ -33,10 +33,14 @@ var rr = rr || {};
     } else if (!page || !page.parent) {
       return null;
     } else if (!page.parent.parent) {
-      return page.key;
+      return prefix + page.key;
     } else {
       return router.getUrlToPage(page.parent) + '/' + page.key;
     }
+  };
+
+  app.router.navigateToPage = function(route) {
+    location.href = route;
   };
 
   // Removes # and prefix

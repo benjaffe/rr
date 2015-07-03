@@ -14,33 +14,36 @@
     <div class="row section-inverse section-inverse-standout text-inverse header">
       <div class="container">
         <div class="row">
-          <div class="col-sm-3">
-            <div class="nav-indicator-wrapper">
+          <div class="col-xs-4 col-sm-3" data-bind="if: currentPage().hasInit()">
+            <div class="nav-indicator-wrapper" data-bind="with: currentPage">
               <span class="nav-indicator" data-bind="css: {
-                  'nav-indicator-selected': currentPage().type() === 'category'
-                }">
+                  'nav-indicator-selected': type() === 'category'
+                },
+                click: gotoParent">
                 Choose
               </span>
               <span class="nav-indicator-separator"></span>
               <span class="nav-indicator" data-bind="css: {
-                  'nav-indicator-selected': currentPage().type() === 'item' &&
-                                            currentPage().hasInit() &&
-                                            !currentPage().hasNavigated()
-                }">
+                  'nav-indicator-selected': type() === 'item' &&
+                                            hasInit() &&
+                                            showingArticle()
+                },
+                click: showArticle">
                 Read
               </span>
               <span class="nav-indicator-separator"></span>
               <span class="nav-indicator" data-bind="css: {
-                  'nav-indicator-selected': currentPage().hasInit() &&
-                                            currentPage().hasNavigated()
-                }">
+                  'nav-indicator-selected': hasInit() &&
+                                            showingForum()
+                },
+                click: showForum">
                 Reflect
               </span>
             </div>
           </div>
 
           <!-- Page Title -->
-          <div class="col-sm-9">
+          <div class="col-xs-8 col-sm-9">
             <h1>
               <i class="fa fa-coffee"></i>
               <span data-bind="text: pageTitle"></span>
@@ -87,29 +90,31 @@
 
 
     <script type="text/html" id="category-template">
-      <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-          <ul class="nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
-            <li class="subject-list-item">
-              <a data-bind="attr: {href: $root.getUrl($data)}">
-                <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
-                <p class="text-left" data-bind="text: description"></p>
-              </a>
-            </li>
-          </ul>
+      <div class="section">
+        <div class="row">
+          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <ul class="nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
+              <li class="subject-list-item">
+                <a data-bind="attr: {href: url}">
+                  <h3 class="text-left h-slim-top" data-bind="text: name"></h3>
+                  <p class="text-left" data-bind="text: description"></p>
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </script>
 
     <script type="text/html" id="item-template">
           <!-- Article Section -->
-          <div data-bind="if: hasInit() && !hasNavigated()">
+          <div data-bind="if: hasInit() && showingArticle()">
             <div class="section"
               data-bind="template: { name: 'navigate-template' }"></div>
           </div>
 
           <!-- Forum Section -->
-          <div data-bind="if: hasInit() && hasNavigated()">
+          <div data-bind="if: hasInit() && showingForum()">
             <div class="section section-standout"
               data-bind="template: { name: 'forum-template' }"></div>
           </div>
@@ -141,7 +146,7 @@
 
     <script type="text/html" id="navigate-template">
       <div class="container">
-        <div class="row row-gap-medium"></div>
+        <div class="row row-gap-small"></div>
         <div class="row">
           <div class="col-sm-9">
             <h3 class="h-slim-top">
@@ -153,14 +158,16 @@
               <p data-bind="text: instructions"></p>
             </div>
           </div>
-          <div class="col-sm-3" data-bind="visible: !hasNavigated()">
+          <div class="col-sm-3">
             <p class="clearfix">
-              <button class="btn btn-wrappable btn-lg btn-primary pull-right" target="_blank" data-bind="click: gotoArticle">
+              <button class="btn btn-wrappable btn-lg btn-primary pull-right"
+                  target="_blank"
+                  data-bind="click: openArticle">
                 Start Reading
               </button>
             </p>
             <p class="clearfix">
-              <button type="button" class="btn btn-wrappable btn-default pull-right" data-bind="click: skipArticle">
+              <button type="button" class="btn btn-wrappable btn-default pull-right" data-bind="click: markArticleAsRead">
                 Done Reading
               </button>
             </p>
@@ -195,8 +202,7 @@
 
             <!-- Forum -->
             <div data-bind="visible: forumData().post_stream.posts.length">
-              <div class="row row-gap-medium"></div>
-
+              <div class="row row-gap-small"></div>
               <h3 class="h-slim-top">Let's Reflect on <a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a></h3>
               <div class="row">
                 <div class="col-sm-10">
@@ -209,8 +215,10 @@
                   </p>
                 </div>
                 <div class="col-sm-2">
-                  <button type="button" class="btn btn-wrappable btn-default pull-right" data-bind="click: closeForum, visible: !replyingToPost()">
-                    I'm Done
+                  <button type="button"
+                      class="btn btn-wrappable btn-default pull-right"
+                      data-bind="click: gotoParent, visible: !replyingToPost()">
+                    Done Reflecting
                   </button>
                 </div>
               </div>

@@ -159,6 +159,7 @@
 .nav-indicator-wrapper {
   position: absolute;
   top: 56px;
+  left: 20px;
   color: rgba(0,0,0,0.7);
 }
 

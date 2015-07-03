@@ -43,6 +43,10 @@ var rr = rr || {};
 
       return Object.keys(_this.children).map(valueFromKeyIn(_this.children));
     });
+
+    this.url = ko.computed(function() {
+      return app.router.getUrlToPage(_this);
+    });
   };
 
   // takes an array and returns a function that takes keys and

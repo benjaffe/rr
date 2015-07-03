@@ -16,12 +16,36 @@ var rr = rr || {};
     page.hasNavigated = ko.observable(false);
     page.hasReflected = ko.observable(false);
 
-    page.gotoArticle = function(page) {
+    page.showingArticle = ko.observable(true);
+    page.showingForum = ko.observable(false);
+
+    page.openArticle = function(page) {
       window.open(page.navigateTo(), '_blank');
     };
 
-    page.skipArticle = function() {
+    page.markArticleAsRead = function() {
       page.hasNavigated(true);
+      page.showForum();
+    };
+
+    page.showArticle = function() {
+      if (page.type() === 'item') {
+        page.showingArticle(true);
+        page.showingForum(false);
+      }
+    };
+
+    page.showForum = function() {
+      if (page.type() === 'item') {
+        page.showingArticle(false);
+        page.showingForum(true);
+      }
+    };
+
+    page.gotoParent = function() {
+      if (page.type() === 'item' && page.parent.url()) {
+        app.router.navigateToPage(page.parent.url());
+      }
     };
 
     // === Forum Action === //
@@ -137,8 +161,8 @@ var rr = rr || {};
       });
     };
 
-    page.closeForum = function() {
-      // this.cleanup();
+    page.goBack = function() {
+      currentPage().parent.key
     };
 
     if (localStorage.csrf) {
