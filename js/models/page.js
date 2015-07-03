@@ -51,6 +51,12 @@ var rr = rr || {};
     this.url = ko.computed(function() {
       return app.router.prefix + _this.route();
     });
+
+    this.completed = ko.computed(function() {
+      app._dummyObservable();
+      var userData = app.storage.getUserData(_this.route());
+      return userData && userData.completed;
+    });
   };
 
   // takes an array and returns a function that takes keys and

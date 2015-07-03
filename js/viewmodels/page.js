@@ -46,6 +46,11 @@ var rr = rr || {};
       if (page.type() === 'item' && page.parent.url()) {
         app.router.navigateToPage(page.parent.url());
       }
+      if (page.hasNavigated()) {
+        setTimeout(function() {
+          app.storage.setUserData(page.route(), {completed: true});
+        }, 1000);
+      }
     };
 
     // === Forum Action === //

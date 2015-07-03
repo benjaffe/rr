@@ -17,7 +17,14 @@ var rr = rr || {};
    * @return {object}       the user data
    */
   storage.getUserData = function(route) {
-    return storage[route] || null;
+    if (!storage[route]) {
+      if (localStorage[route]) {
+        storage[route] = JSON.parse(localStorage[route]);
+      } else {
+        storage.initUserData(route);
+      }
+    }
+    return storage[route];
   };
 
   /**
@@ -29,6 +36,17 @@ var rr = rr || {};
     var currentValue = app.storage.getUserData(route) || {};
     $.extend(currentValue, data);
     storage[route] = currentValue;
+    localStorage[route] = JSON.stringify(storage[route]);
+    app._dummyObservable.notifySubscribers();
+  };
+
+  /**
+   * Sets user data at a specified route, merging with previous data
+   * @param  {string} route: the associated route
+   * @param  {string} data: the data to be set
+   */
+  storage.initUserData = function(route) {
+    storage[route] = {};
   };
 
   /**

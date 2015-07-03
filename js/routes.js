@@ -31,7 +31,7 @@ var rr = rr || {};
     if (page === window) {
       throw new Error('page should not === window');
     } else if (!page || !page.parent) {
-      return null;
+      return '';
     } else if (!page.parent.parent) {
       return page.key;
     } else {

@@ -6,6 +6,8 @@ var rr = rr || {};
   app.vm = vm;
   var memoryHierarchy = [];
 
+  app._dummyObservable = ko.observable();
+
   // Initial data
   var model = {
     name: 'Loading',
