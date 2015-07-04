@@ -54,8 +54,20 @@ var rr = rr || {};
 
     this.completed = ko.computed(function() {
       app._dummyObservable();
-      var userData = app.storage.getUserData(_this.route());
-      return userData && userData.completed;
+      if (_this.type() === 'category') {
+        return _this.childrenArr().reduce(function(prevValue, item){
+          if (!item.completed()) {
+            return false;
+          } else {
+            return prevValue;
+          }
+        }, true);
+      }
+
+      if (_this.type() === 'item') {
+        var userData = app.storage.getUserData(_this.route());
+        return userData && userData.completed;
+      }
     });
   };
 

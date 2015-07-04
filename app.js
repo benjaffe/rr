@@ -133,10 +133,13 @@ var rr = rr || {};
     // page.pageState.clear();
 
     // initialize the page
-    app.page.init(page);
+    page.childrenArr().forEach(function(page){
 
-    if (!page.actions) {
-      page.actions = [];
+      app.page.init(page);
+
+      if (!page.actions) {
+        page.actions = [];
+      }
       // add an intro video to the page action queue
       // if (page.introVideo) {
       //   page.actions.push(pageActions.createAction('VideoAction', page, {
@@ -151,7 +154,7 @@ var rr = rr || {};
       //   }));
       // }
 
-    }
+    });
 
     pageActions.push(page.actions);
 

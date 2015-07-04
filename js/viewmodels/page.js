@@ -25,7 +25,13 @@ var rr = rr || {};
 
     page.markArticleAsRead = function() {
       page.hasNavigated(true);
+      app.storage.setUserData(page.route(), {completed: true});
       page.showForum();
+    };
+
+    page.markArticleAsUnread = function() {
+      page.hasNavigated(false);
+      app.storage.setUserData(page.route(), {completed: false});
     };
 
     page.showArticle = function() {
@@ -49,6 +55,7 @@ var rr = rr || {};
       if (page.hasNavigated()) {
         setTimeout(function() {
           app.storage.setUserData(page.route(), {completed: true});
+          page.showArticle();
         }, 1000);
       }
     };
@@ -175,7 +182,7 @@ var rr = rr || {};
     }
     var discussionForumUrl = 'https://discussions.udacity.com';
     console.log(page);
-    this.forumKey = app.router.currentRoute().replace('/', '-');
+    this.forumKey = page.route().replace('/', '-');
     var topicUrl = discussionForumUrl + '/t/' + this.forumKey;
     var authUrl = 'https://www.udacity.com/account/sso/discourse';
     page.forumUrl(topicUrl);
