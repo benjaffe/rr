@@ -90,6 +90,21 @@
 
     <script type="text/html" id="category-template">
       <div class="section">
+        <div class="row vertical-slide" data-bind="css: {'hiding': !completed()}">
+          <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+            <div>
+              <div class="info-box bg-success">
+                <h3 class="clearfix h-slim">
+                  You're done with all the items here!
+                  <button type="button" class="btn btn-primary pull-right" data-bind="click: $parent.currentPage().gotoParent">
+                    Navigate Back
+                  </button>
+                </h3>
+              </div>
+            </div>
+            <div class="row row-gap-medium"></div>
+          </div>
+        </div>
         <div class="row">
           <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
             <ul class="row nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
@@ -107,9 +122,6 @@
                 </a>
               </li>
             </ul>
-            <div data-bind="visible: completed">
-              You're all done!
-            </div>
           </div>
         </div>
       </div>
@@ -145,7 +157,7 @@
               <div class="youtube-player" id="youtube-player"></div>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn btn-default" data-dismiss="modal">Skip</button>
+              <button type="button" class="btn btn-default">Skip</button>
             </div>
           </div>
         </div>

@@ -25,7 +25,6 @@ var rr = rr || {};
 
     page.markArticleAsRead = function() {
       page.hasNavigated(true);
-      app.storage.setUserData(page.route(), {completed: true});
       page.showForum();
     };
 
@@ -49,10 +48,15 @@ var rr = rr || {};
     };
 
     page.gotoParent = function() {
-      if (page.type() === 'item' && page.parent.url()) {
+      if (!page.parent) {
+        return false; // we're at the top
+      }
+
+      if (page.parent.url()) {
         app.router.navigateToPage(page.parent.url());
       }
-      if (page.hasNavigated()) {
+
+      if (page.type() === 'item' && page.hasNavigated()) {
         setTimeout(function() {
           app.storage.setUserData(page.route(), {completed: true});
           page.showArticle();
