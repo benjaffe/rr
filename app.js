@@ -132,7 +132,9 @@ var rr = rr || {};
     // clear page state
     // page.pageState.clear();
 
-    // initialize the page
+    // initialize the page and its children
+    app.page.init(page);
+
     page.childrenArr().forEach(function(page){
 
       app.page.init(page);
