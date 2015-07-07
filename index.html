@@ -12,42 +12,44 @@
 
   <div class="main">
     <div class="row section-inverse section-inverse-standout text-inverse header">
-      <div class="container">
-        <div class="row">
-          <div class="col-xs-3" data-bind="if: currentPage().hasInit()">
-            <div class="nav-indicator-wrapper" data-bind="with: currentPage">
-              <span class="nav-indicator visible-xs-block" data-bind="css: {
-                  'nav-indicator-selected': type() === 'category'
-                },
-                click: gotoParent">
-                <span class="nav-indicator-bullet hidden-xs"></span>Choose
-              </span>
-              <div class="nav-indicator-separator hidden-xs"></div>
-              <span class="nav-indicator visible-xs-block" data-bind="css: {
-                  'nav-indicator-selected': type() === 'item' &&
-                                            hasInit() &&
-                                            showingArticle()
-                },
-                click: showArticle">
-                <span class="nav-indicator-bullet hidden-xs"></span>Read
-              </span>
-              <div class="nav-indicator-separator hidden-xs"></div>
-              <span class="nav-indicator visible-xs-block" data-bind="css: {
-                  'nav-indicator-selected': hasInit() &&
-                                            showingForum()
-                },
-                click: showForum">
-                <span class="nav-indicator-bullet hidden-xs"></span>Reflect
-              </span>
+      <div class="row">
+        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+          <div class="row">
+            <!-- Page Title -->
+            <div class="col-xs-9">
+              <h1 class="page-title">
+                <span data-bind="text: pageTitle"></span>
+              </h1>
             </div>
-          </div>
 
-          <!-- Page Title -->
-          <div class="col-xs-9">
-            <h1>
-              <i class="fa fa-coffee"></i>
-              <span data-bind="text: pageTitle"></span>
-            </h1>
+            <!-- Map -->
+            <div class="col-xs-3 map" data-bind="if: currentPage().hasInit()">
+              <div class="map-indicator-wrapper" data-bind="with: currentPage">
+                <span class="map-indicator visible-xs-block" data-bind="css: {
+                    'map-indicator-selected': type() === 'category'
+                  },
+                  click: gotoParent">
+                  <span class="map-indicator-bullet hidden-xs"></span>Choose
+                </span>
+                <div class="map-indicator-separator hidden-xs"></div>
+                <span class="map-indicator visible-xs-block" data-bind="css: {
+                    'map-indicator-selected': type() === 'item' &&
+                                              hasInit() &&
+                                              showingArticle()
+                  },
+                  click: showArticle">
+                  <span class="map-indicator-bullet hidden-xs"></span>Read
+                </span>
+                <div class="map-indicator-separator hidden-xs"></div>
+                <span class="map-indicator visible-xs-block" data-bind="css: {
+                    'map-indicator-selected': hasInit() &&
+                                              showingForum()
+                  },
+                  click: showForum">
+                  <span class="map-indicator-bullet hidden-xs"></span>Reflect
+                </span>
+              </div>
+            </div>
           </div>
         </div>
       </div>
