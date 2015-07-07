@@ -12,6 +12,13 @@ body {
   white-space: normal;
 }
 
+.btn-hg {
+  padding: 12px 18px;
+  font-size: 20px;
+  line-height: 1.4;
+  border-radius: 0;
+}
+
 .section, .section-inverse {
   padding-top: 30px;
   padding-bottom: 40px;
