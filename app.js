@@ -33,7 +33,6 @@ var rr = rr || {};
 
   vm.currentActionName = app.pageActions.currentActionName;
   vm.currentAction = app.pageActions.currentAction;
-  console.log(vm.currentAction.toString());
 
   // array of strings representing the hierarchy of our current page pages and
   // their parents
@@ -147,12 +146,6 @@ var rr = rr || {};
       //   page.actions.push(pageActions.createAction('VideoAction', page, {
       //     videoId: page.introVideo.src(),
       //     runOnce: page.introVideo.runOnce && page.introVideo.runOnce()
-      //   }));
-      // }
-
-      // if (page.type() === 'item' && page.finalDestination !== false) {
-      //   page.actions.push(pageActions.createAction('RRNavigateAction', page, {
-      //     dest: page.finalDestination || '../'
       //   }));
       // }
 

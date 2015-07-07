@@ -130,7 +130,7 @@ var rr = rr || {};
         page.loadForumData({
           topicUrl: page.forumUrl()
         });
-        currentPage().hasReflected(true);
+        page.hasReflected(true);
       }).error(function(msg) {
         // TODO: Handle reply failure visually
         console.debug('Reply could not be posted.', arguments);
@@ -146,20 +146,7 @@ var rr = rr || {};
           withCredentials: true
         }
       }).success(function(data) {
-        console.debug(data);
         page.forumDataRaw(data); // TODO: abstract this out
-
-        // get csrf so we can post
-        $.ajax({
-          url: discussionForumUrl + '/session/csrf.json',
-          xhrFields: {
-            withCredentials: true
-          }
-        }).success(function(data) {
-          app.csrf = data.csrf;
-          console.log('csrf acquired: ' + app.csrf);
-          localStorage.csrf = app.csrf;
-        });
 
       }).error(function(res) {
         if (res.readyState === 4) {
@@ -179,22 +166,28 @@ var rr = rr || {};
       });
     };
 
-    page.goBack = function() {
-      currentPage().parent.key
-    };
-
-    if (localStorage.csrf) {
-      app.csrf = localStorage.csrf;
-    }
     var discussionForumUrl = 'https://discussions.udacity.com';
-    console.log(page);
+
+    // get a fresh csrf so we can post (and let's only do it once)
+    if (!app.csrf) {
+      $.ajax({
+        url: discussionForumUrl + '/session/csrf.json',
+        xhrFields: {
+          withCredentials: true
+        }
+      }).success(function(data) {
+        app.csrf = data.csrf;
+        console.log('csrf acquired: ' + app.csrf);
+        localStorage.csrf = app.csrf;
+      });
+    }
+
+    app.csrf = localStorage.csrf || '';
+
     this.forumKey = page.route().replace('/', '-');
     var topicUrl = discussionForumUrl + '/t/' + this.forumKey;
     var authUrl = 'https://www.udacity.com/account/sso/discourse';
     page.forumUrl(topicUrl);
-
-    console.debug(self);
-    console.debug(topicUrl);
 
     page.loadForumData({
       topicUrl: topicUrl
