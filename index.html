@@ -12,43 +12,41 @@
 
   <div class="main">
     <div class="row section-inverse section-inverse-standout text-inverse header">
-      <div class="row">
-        <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
-          <div class="row">
-            <!-- Page Title -->
-            <div class="col-xs-9">
-              <h1 class="page-title">
-                <span data-bind="text: pageTitle"></span>
-              </h1>
-            </div>
+      <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
+        <div class="row">
+          <!-- Page Title -->
+          <div class="col-xs-9">
+            <h1 class="page-title">
+              <span data-bind="text: pageTitle"></span>
+            </h1>
+          </div>
 
-            <!-- Map -->
-            <div class="col-xs-3 map" data-bind="if: currentPage().hasInit()">
-              <div class="map-indicator-wrapper" data-bind="with: currentPage">
-                <span class="map-indicator visible-xs-block" data-bind="css: {
-                    'map-indicator-selected': type() === 'category'
-                  },
-                  click: gotoParent">
-                  <span class="map-indicator-bullet hidden-xs"></span>Choose
-                </span>
-                <div class="map-indicator-separator hidden-xs"></div>
-                <span class="map-indicator visible-xs-block" data-bind="css: {
-                    'map-indicator-selected': type() === 'item' &&
-                                              hasInit() &&
-                                              showingArticle()
-                  },
-                  click: showArticle">
-                  <span class="map-indicator-bullet hidden-xs"></span>Read
-                </span>
-                <div class="map-indicator-separator hidden-xs"></div>
-                <span class="map-indicator visible-xs-block" data-bind="css: {
-                    'map-indicator-selected': hasInit() &&
-                                              showingForum()
-                  },
-                  click: showForum">
-                  <span class="map-indicator-bullet hidden-xs"></span>Reflect
-                </span>
-              </div>
+          <!-- Map -->
+          <div class="col-xs-3 map" data-bind="if: currentPage().hasInit()">
+            <div class="map-indicator-wrapper" data-bind="with: currentPage">
+              <span class="map-indicator visible-xs-block" data-bind="css: {
+                  'map-indicator-selected': type() === 'category'
+                },
+                click: gotoParent">
+                <span class="map-indicator-bullet hidden-xs"></span>Choose
+              </span>
+              <div class="map-indicator-separator hidden-xs"></div>
+              <span class="map-indicator visible-xs-block" data-bind="css: {
+                  'map-indicator-selected': type() === 'item' &&
+                                            hasInit() &&
+                                            showingArticle()
+                },
+                click: showArticle">
+                <span class="map-indicator-bullet hidden-xs"></span>Read
+              </span>
+              <div class="map-indicator-separator hidden-xs"></div>
+              <span class="map-indicator visible-xs-block" data-bind="css: {
+                  'map-indicator-selected': hasInit() &&
+                                            showingForum()
+                },
+                click: showForum">
+                <span class="map-indicator-bullet hidden-xs"></span>Reflect
+              </span>
             </div>
           </div>
         </div>
@@ -175,8 +173,16 @@
         <div class="row">
           <div class="col-sm-9">
             <h3 class="h-slim-top">
-              <a data-bind="text: name, attr: {href: navigateTo}" target="_blank"></a>
+              You're about to read
+              <a target="_blank" data-bind="
+                text: name,
+                attr: {href: navigateTo}"></a>
             </h3>
+            <p class="" data-bind="if: $data.timeEstimate">
+              It should take you around
+              <span data-bind="text: timeEstimate"></span>
+              <span data-bind="visible: typeof timeEstimate() === 'number'">minutes</span>
+            </p>
             <p data-bind="text: description"></p>
             <div data-bind="if: $data.instructions">
               <hr>

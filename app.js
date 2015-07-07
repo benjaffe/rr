@@ -98,9 +98,9 @@ var rr = rr || {};
     if (vm.currentPage().type() === 'item') {
       if (vm.currentPage().hasInit() &&
           vm.currentPage().hasNavigated()) {
-        return 'Let\'s Reflect';
+        return 'Time to Reflect';
       } else {
-        return 'Let\'s Read';
+        return 'Time to Read';
       }
     }
 
