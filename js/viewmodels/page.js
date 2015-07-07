@@ -15,8 +15,7 @@ var rr = rr || {};
 
     page.hasNavigated = ko.observable(false);
     page.hasReflected = ko.observable(false);
-
-    page.showingArticle = ko.observable(true);
+    page.showingArticle = ko.observable(page.type() === 'item');
     page.showingForum = ko.observable(false);
 
     page.openArticle = function(page) {
@@ -60,6 +59,9 @@ var rr = rr || {};
         setTimeout(function() {
           app.storage.setUserData(page.route(), {completed: true});
           page.showArticle();
+          if (page.forumData) {
+            page.replyingToPost(null);
+          }
         }, 1000);
       }
     };
