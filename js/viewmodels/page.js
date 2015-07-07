@@ -11,7 +11,7 @@ var rr = rr || {};
       return false;
     }
 
-    // === Read Action === //
+    // === Read Page === //
 
     page.hasNavigated = ko.observable(false);
     page.hasReflected = ko.observable(false);
@@ -66,11 +66,8 @@ var rr = rr || {};
       }
     };
 
-    // === Forum Action === //
-
-    if (page.forumReflect) {
-      addForumStuff(page);
-    }
+    // === Forum Page === //
+    addForumStuff(page);
 
     // Our page has now initialized
     page.hasInit(true);
