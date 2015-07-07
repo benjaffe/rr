@@ -112,7 +112,7 @@
             <ul class="row nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
               <li class="subject-list-item" data-bind="if: hasInit(), css: {'completed': completed}">
                 <a class="clearfix" data-bind="attr: {href: url}">
-                  <div class="col-xs-1 subject-list-item-number" data-bind="text: $index"></div>
+                  <div class="col-xs-1 subject-list-item-number" data-bind="text: $index() + 1"></div>
                   <div class="col-xs-11 col-xs-offset-1">
                     <h3 class="text-left h-slim-top">
                       <!-- <div data-bind="text: rr.utils.stringify($data.hasInit())" style="height: 100px;width: 600px; margin: 0 auto;border-bottom: 1px solid blue;overflow: scroll; padding: 20px;"></div> -->
