@@ -25,7 +25,7 @@
               <span class="map-indicator" data-bind="css: {
                   'map-indicator-selected': type() === 'category'
                 },
-                click: gotoParent">
+                click: type() === 'item' && gotoParent">
                 Choose
               </span>
               <span class="map-indicator" data-bind="css: {
