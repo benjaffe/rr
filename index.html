@@ -14,40 +14,43 @@
     <div class="row section-inverse section-inverse-standout text-inverse header">
       <div class="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
         <div class="row">
-          <!-- Page Title -->
-          <div class="col-xs-9">
-            <h1 class="page-title">
-              <span data-bind="text: pageTitle"></span>
-            </h1>
+          <!-- Logo -->
+          <div class="header-logo-wrapper col-xs-1">
+            <div class="header-logo"></div>
           </div>
 
           <!-- Map -->
-          <div class="col-xs-3 map" data-bind="if: currentPage().hasInit()">
-            <div class="map-indicator-wrapper" data-bind="with: currentPage">
-              <span class="map-indicator visible-xs-block" data-bind="css: {
+          <div class="map-indicator-wrapper" data-bind="if: currentPage().hasInit()">
+            <div data-bind="with: currentPage">
+              <span class="map-indicator" data-bind="css: {
                   'map-indicator-selected': type() === 'category'
                 },
                 click: gotoParent">
-                <span class="map-indicator-bullet hidden-xs"></span>Choose
+                Choose
               </span>
-              <div class="map-indicator-separator hidden-xs"></div>
-              <span class="map-indicator visible-xs-block" data-bind="css: {
+              <span class="map-indicator" data-bind="css: {
                   'map-indicator-selected': type() === 'item' &&
                                             hasInit() &&
                                             showingArticle()
                 },
                 click: showArticle">
-                <span class="map-indicator-bullet hidden-xs"></span>Read
+                Read
               </span>
-              <div class="map-indicator-separator hidden-xs"></div>
-              <span class="map-indicator visible-xs-block" data-bind="css: {
+              <span class="map-indicator" data-bind="css: {
                   'map-indicator-selected': hasInit() &&
                                             showingForum()
                 },
                 click: showForum">
-                <span class="map-indicator-bullet hidden-xs"></span>Reflect
+                Reflect
               </span>
             </div>
+          </div>
+
+          <!-- Page Title -->
+          <div class="col-xs-12">
+            <h1 class="page-title text-center">
+              <span data-bind="text: pageTitle"></span>
+            </h1>
           </div>
         </div>
       </div>
