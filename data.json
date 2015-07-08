@@ -47,52 +47,58 @@
         }
       }
     },
-    "user-input-controls": {
-      "name": "User Input Controls",
+    "android": {
+      "name": "Android",
       "type": "category",
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque praesentium, temporibus officia sapiente totam, in molestiae, fugit corrupti suscipit aut architecto beatae vel et. Sed sint debitis voluptatibus error odit.",
       "children": {
-        "toggle-button": {
-          "name": "How do you use a toggle button in Android?",
-          "topic": "toggle buttons",
-          "type": "item",
-          "description": "Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
-          "navigateTo": "https://www.google.com",
-          "instructions": "Lorem ipsum dolor sit amet",
-          "timeEstimate": 8
-        },
+        "user-input-controls": {
+          "name": "User Input Controls",
+          "type": "category",
+          "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque praesentium, temporibus officia sapiente totam, in molestiae, fugit corrupti suscipit aut architecto beatae vel et. Sed sint debitis voluptatibus error odit.",
+          "children": {
+            "toggle-button": {
+              "name": "How do you use a toggle button in Android?",
+              "topic": "toggle buttons",
+              "type": "item",
+              "description": "Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
+              "navigateTo": "https://www.google.com",
+              "timeEstimate": 8
+            },
 
-        "edit-text": {
-          "name": "Best ways of using an Edit Text in your app",
-          "topic": "EditText",
-          "type": "item",
-          "description": "Read this blog and learn how you can use EditText inside your own apps.",
-          "navigateTo": "https://www.google.com",
-          "instructions": "Lorem ipsum dolor sit amet",
-          "timeEstimate": 8
-        },
+            "edit-text": {
+              "name": "Best ways of using an Edit Text in your app",
+              "topic": "EditText",
+              "type": "item",
+              "description": "Read this blog and learn how you can use EditText inside your own apps.",
+              "navigateTo": "https://www.google.com",
+              "instructions": "Lorem ipsum dolor sit amet",
+              "timeEstimate": 12
+            },
 
-        "autocomplete": {
-          "name": "How does one use Autocomplete in a mobile app?",
-          "topic": "Autocomplete",
-          "type": "item",
-          "description": "In this blog you will find instructions on how autocomplete works in the Android ecosystem. Create a new app and practice how to incorporate Autocomplete within it.",
-          "navigateTo": "https://www.google.com",
-          "instructions": "Lorem ipsum dolor sit amet",
-          "timeEstimate": 8
-        },
+            "autocomplete": {
+              "name": "How does one use Autocomplete in a mobile app?",
+              "topic": "Autocomplete",
+              "type": "item",
+              "description": "In this blog you will find instructions on how autocomplete works in the Android ecosystem. Create a new app and practice how to incorporate Autocomplete within it.",
+              "navigateTo": "https://www.google.com",
+              "instructions": "Lorem ipsum dolor sit amet",
+              "timeEstimate": 8
+            },
 
-        "mvc-in-android": {
-          "name": "Is there an MVC pattern in Android?",
-          "topic": "MVC",
-          "type": "item",
-          "description": "Read this Stackoverflow entry to learn more about how MVC is accomplished in Android.",
-          "navigateTo": "https://www.google.com",
-          "instructions": "Lorem ipsum dolor sit amet",
-          "timeEstimate": 8
+            "mvc-in-android": {
+              "name": "Is there an MVC pattern in Android?",
+              "topic": "MVC",
+              "type": "item",
+              "description": "Read this Stackoverflow entry to learn more about how MVC is accomplished in Android.",
+              "navigateTo": "https://www.google.com",
+              "instructions": "Lorem ipsum dolor sit amet",
+              "timeEstimate": 8
+            }
+
+
+          }
         }
-
-
       }
     }
   }
