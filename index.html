@@ -84,7 +84,7 @@
 
       <!-- Item View -->
       <div data-bind="template: {
-        if: type() === 'item',
+        if: type() === 'item' && hasInit(),
         name: 'item-template'
       }"></div>
 
@@ -133,17 +133,23 @@
     </script>
 
     <script type="text/html" id="item-template">
-          <!-- Article Section -->
-          <div data-bind="if: hasInit() && showingArticle()">
-            <div class="section"
-              data-bind="template: { name: 'navigate-template' }"></div>
-          </div>
 
-          <!-- Forum Section -->
-          <div data-bind="if: hasInit() && showingForum()">
-            <div class="section"
-              data-bind="template: { name: 'forum-template' }"></div>
-          </div>
+      <!-- Article Section -->
+      <div class="section page"
+        data-bind="template: {
+          name: 'navigate-template'
+        }, css: {
+          'slid-up': showingForum
+        }"></div>
+
+      <!-- Forum Section -->
+      <div class="section page"
+        data-bind="template: {
+          name: 'forum-template'
+        }, css: {
+          'slid-down': showingArticle
+        }"></div>
+
     </script>
 
 
