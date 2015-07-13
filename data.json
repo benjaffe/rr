@@ -18,6 +18,7 @@
           "name": "Concepts in Backbone",
           "topic": "",
           "type": "item",
+          "order": 1,
           "description": "Read this first part of the series to get an idea of the pieces of a Backbone application. Most of them will probably be familiar already!",
           "instructions": "Be sure to take your time reading the article. There are a lot of subtle points you could miss if you rush through it.",
           "timeEstimate": 20,
@@ -32,6 +33,7 @@
           "name": "Introduction to Writing Code with Backbone",
           "topic": "",
           "type": "item",
+          "order": 2,
           "description": "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
           "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751",
           "timeEstimate": 20
@@ -40,6 +42,7 @@
           "name": "Hello Backbone",
           "topic": "",
           "type": "item",
+          "order": 3,
           "description": "These heavily commented code examples help you go from building simple apps to more complex ones.",
           "navigateTo": "http://arturadib.com/hello-backbonejs/",
           "timeEstimate": 10
@@ -48,6 +51,7 @@
           "name": "Routers in Backbone",
           "topic": "",
           "type": "item",
+          "order": 4,
           "description": "Learn how to link the URL (also called the route) of your application with the view being showed.",
           "navigateTo": "http://backbonetutorials.com/what-is-a-router/",
           "timeEstimate": 10
@@ -68,6 +72,7 @@
               "name": "How do you use a toggle button in Android?",
               "topic": "toggle buttons",
               "type": "item",
+              "order": 1,
               "description": "Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
               "navigateTo": "https://www.google.com",
               "timeEstimate": 8
@@ -77,6 +82,7 @@
               "name": "Best ways of using an Edit Text in your app",
               "topic": "EditText",
               "type": "item",
+              "order": 2,
               "description": "Read this blog and learn how you can use EditText inside your own apps.",
               "navigateTo": "https://www.google.com",
               "instructions": "Lorem ipsum dolor sit amet",
@@ -87,6 +93,7 @@
               "name": "How does one use Autocomplete in a mobile app?",
               "topic": "Autocomplete",
               "type": "item",
+              "order": 3,
               "description": "In this blog you will find instructions on how autocomplete works in the Android ecosystem. Create a new app and practice how to incorporate Autocomplete within it.",
               "navigateTo": "https://www.google.com",
               "instructions": "Lorem ipsum dolor sit amet",
@@ -97,6 +104,7 @@
               "name": "Is there an MVC pattern in Android?",
               "topic": "MVC",
               "type": "item",
+              "order": 4,
               "description": "Read this Stackoverflow entry to learn more about how MVC is accomplished in Android.",
               "navigateTo": "https://www.google.com",
               "instructions": "Lorem ipsum dolor sit amet",

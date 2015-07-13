@@ -41,7 +41,9 @@ var rr = rr || {};
         return [];
       }
 
-      return Object.keys(_this.children).map(valueFromKeyIn(_this.children));
+      return Object.keys(_this.children)
+        .map(valueFromKeyIn(_this.children))
+        .sort(orderByOrderKey);
     });
 
     this.route = ko.computed(function() {
@@ -55,7 +57,7 @@ var rr = rr || {};
     this.completed = ko.computed(function() {
       app._dummyObservable();
       if (_this.type() === 'category') {
-        return _this.childrenArr().reduce(function(prevValue, item){
+        return _this.childrenArr().reduce(function(prevValue, item) {
           if (!item.completed()) {
             return false;
           } else {
@@ -70,6 +72,23 @@ var rr = rr || {};
       }
     });
   };
+
+  function orderByOrderKey(item1, item2) {
+    // protect against invalid items from before the data is loaded
+    if (!item1.order || !item2.order) {
+      return 0;
+    }
+
+    if (item1.order() < item2.order()) {
+      return -1;
+    } else if (item1.order() > item2.order()) {
+      return 1;
+    } else {
+      console.error('Two children have the same order weight. Their order is ' +
+        'not guaranteed:', item1, item2);
+      return 0;
+    }
+  }
 
   // takes an array and returns a function that takes keys and
   // returns values from the original array
