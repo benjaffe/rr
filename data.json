@@ -15,11 +15,12 @@
       },
       "children": {
         "concepts-in-backbone": {
+          "name": "Concepts in Backbone",
+          "topic": "",
           "type": "item",
           "description": "Read this first part of the series to get an idea of the pieces of a Backbone application. Most of them will probably be familiar already!",
           "instructions": "Be sure to take your time reading the article. There are a lot of subtle points you could miss if you rush through it.",
           "timeEstimate": 20,
-          "name": "Concepts in Backbone",
           "navigateTo": "http://www.codeproject.com/Articles/795965/BackBone-Tutorial-Part-Introduction-to-Backbone-Js",
           "introVideo": {
             "name": "Name",
@@ -28,22 +29,28 @@
           }
         },
         "intro-to-writing-code-with-backbone": {
+          "name": "Introduction to Writing Code with Backbone",
+          "topic": "",
           "type": "item",
           "description": "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
-          "name": "Introduction to Writing Code with Backbone",
-          "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751"
+          "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751",
+          "timeEstimate": 20
         },
         "hello-backbone": {
+          "name": "Hello Backbone",
+          "topic": "",
           "type": "item",
           "description": "These heavily commented code examples help you go from building simple apps to more complex ones.",
-          "name": "Hello Backbone",
-          "navigateTo": "http://arturadib.com/hello-backbonejs/"
+          "navigateTo": "http://arturadib.com/hello-backbonejs/",
+          "timeEstimate": 10
         },
         "routers-in-backbone": {
+          "name": "Routers in Backbone",
+          "topic": "",
           "type": "item",
           "description": "Learn how to link the URL (also called the route) of your application with the view being showed.",
-          "name": "Routers in Backbone",
-          "navigateTo": "http://backbonetutorials.com/what-is-a-router/"
+          "navigateTo": "http://backbonetutorials.com/what-is-a-router/",
+          "timeEstimate": 10
         }
       }
     },
