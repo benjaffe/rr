@@ -250,11 +250,21 @@ body {
   height: 100px;
 }
 
-.page-title {
-  margin-left: 50px;
-  margin-right: 70px;
+.header .page-title {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  padding: 0 90px 0 40px;
+
   font-weight: normal;
   text-rendering: optimizeLegibility;
+  display: table;
+}
+
+.header .page-title span {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
 }
 
 .main {
