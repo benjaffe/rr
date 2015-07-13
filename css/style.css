@@ -8,6 +8,10 @@ body {
   padding: 0;
 }
 
+.nav.nav-stacked {
+  border-right: none;
+}
+
 .btn-wrappable {
   white-space: normal;
 }
@@ -247,7 +251,7 @@ body {
 }
 
 .page-title {
-  margin-left: 70px;
+  margin-left: 50px;
   margin-right: 70px;
   font-weight: normal;
   text-rendering: optimizeLegibility;
@@ -260,9 +264,10 @@ body {
 .header-logo {
   position: absolute;
   top: 17px;
-  right: -3px;
+  /*right: -3px;*/
   width: 60px;
   height: 60px;
+  margin-left: -11px;
   background-image: url("../img/logo.png");
   background-position: center top;
   background-repeat: no-repeat;
@@ -271,7 +276,7 @@ body {
 
 .map-indicator-wrapper {
   position: absolute;
-  right: 24px;
+  right: 11px;
   top: 17px;
   z-index: 10;
   color: rgba(0,0,0,0.5);
@@ -281,17 +286,16 @@ body {
   position: relative;
   display: block;
   font-size: 16px;
-  left: 10px;
   line-height: 1.3;
   text-align: right;
   transition: transform 0.3s;
+  border-right: 3px solid transparent;
+  padding-right: 6px;
 }
 
 .map-indicator-selected {
   color: rgba(0,0,0,0.7);
-  border-right: 3px solid rgba(0,0,0,0.5);
-  padding-right: 6px;
-  margin-right: -9px;
+  border-color: rgba(0,0,0,0.5);
 }
 
 .map-indicator-selected .map-indicator-bullet {
