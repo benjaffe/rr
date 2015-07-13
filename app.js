@@ -116,8 +116,10 @@ var rr = rr || {};
 
   // Load RR Data
   $.getJSON('data.json', function(data) {
+    var sanitizedData = sanitizeData(data);
+
     // create new Pages from the data
-    app.storage.setRRData(new app.model.Page(data, false));
+    app.storage.setRRData(new app.model.Page(sanitizedData, false));
 
     // when data is loaded, take us one step closer to initializing the app
     deferred.dataLoaded.resolve();
@@ -162,5 +164,42 @@ var rr = rr || {};
   window.onYouTubeIframeAPIReady = function() {
     deferred.youtubeReady.resolve();
   };
+
+  function sanitizeData(data) {
+    if (data.type === 'category') {
+      if (typeof data.name === 'undefined' ||
+          typeof data.description === 'undefined' ||
+          typeof data.children === 'undefined') {
+        console.error('a category is missing a key: ', data);
+        return null;
+      }
+    } else if (data.type === 'item') {
+      if (typeof data.name === 'undefined' ||
+          typeof data.topic === 'undefined' ||
+          typeof data.description === 'undefined' ||
+          typeof data.timeEstimate === 'undefined' ||
+          typeof data.navigateTo === 'undefined') {
+        console.error('an item is missing a key: ', data);
+        return null;
+      }
+    } else {
+      // object has no key `type`
+      console.error('an object has no type:', data);
+      return null;
+    }
+
+    if (data.type === 'category') {
+      var newChildren = {};
+      Object.keys(data.children).forEach(function(key){
+        var newChild = sanitizeData(data.children[key]);
+        if (newChild) {
+          newChildren[key] = newChild;
+        }
+      });
+      data.children = newChildren;
+    }
+
+    return data;
+  }
 
 })(rr);
