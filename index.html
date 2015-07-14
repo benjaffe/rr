@@ -99,11 +99,25 @@
           <div>
             <div class="info-box bg-success">
               <h3 class="clearfix h-slim">
-                You're done with all the items here!
-                <button type="button" class="btn btn-primary pull-right" data-bind="click: $parent.currentPage().gotoParent">
-                  Navigate Back
-                </button>
+                Great work!
               </h3>
+              <p>
+                Professional developers read articles and documentation all the time. By practicing this skill, you're setting yourself up for success.
+              </p>
+              <div class="row">
+                <iframe src="" frameborder="0" id="hidden_iframe" name="hidden_iframe" class="hidden"></iframe>
+                <div class="col-xs-8" id="feedback-form-wrapper" data-bind="template: {
+                  if: $parent.showingFeedbackForm,
+                  name: 'feedback-form-template'
+                }"></div>
+
+                <div class="col-xs-12" data-bind="visible: !$parent.showingFeedbackForm()">
+                  <div data-bind="visible: $parent.currentPage().showFeedbackForm && $parent.currentPage().showFeedbackForm()"><strong>Thank you for the feedback!</strong></div>
+                  Let's move on. Go back to the Udacity classroom to continue.
+                  <div class="row row-gap-small"></div>
+                </div>
+              </div>
+
             </div>
           </div>
           <div class="row row-gap-medium"></div>
@@ -131,6 +145,52 @@
         </div>
       </div>
     </div>
+  </script>
+
+  <script type="text/html" id="feedback-form-template">
+    <form action="https://docs.google.com/a/knowlabs.com/forms/d/1Yo9TDhxegOpZIPJkY3ANNe-B4r6xjYbYoZEDSr3xx34/formResponse" method="POST" target="hidden_iframe" onsubmit="rr.vm.feedbackFormSubmitted();" id="feedback-form">
+      <div class="row" role="radiogroup" aria-label="How would you rate this learning experience?">
+        <h4 class="ss-q-title col-xs-12">
+          How would you rate this learning experience?
+        </h4>
+        <div class="col-xs-12">
+          <div>
+            <label class="col-xs-2 text-center">
+              <input class="" type="radio" name="entry.897162337" value="1" id="group_897162337_1" role="radio" aria-label="1">
+              <div class="ss-choice-label">1 <span class="form-note">(Worst)</span></div>
+            </label>
+          </div>
+          <div>
+            <label class="col-xs-2 text-center">
+              <input class="" type="radio" name="entry.897162337" value="2" id="group_897162337_2" role="radio" aria-label="2">
+              <div class="ss-choice-label">2</div>
+            </label>
+          </div>
+          <div>
+            <label class="col-xs-2 text-center">
+              <input class="" type="radio" name="entry.897162337" value="3" id="group_897162337_3" role="radio" aria-label="3">
+              <div class="ss-choice-label">3</div>
+            </label>
+          </div>
+          <div>
+            <label class="col-xs-2 text-center">
+              <input class="" type="radio" name="entry.897162337" value="4" id="group_897162337_4" role="radio" aria-label="4">
+              <div class="ss-choice-label">4</div>
+            </label>
+          </div>
+          <div>
+            <label class="col-xs-2 text-center">
+              <input class="" type="radio" name="entry.897162337" value="5" id="group_897162337_5" role="radio" aria-label="5">
+              <div class="ss-choice-label">5 <span class="form-note">(Best)</span></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="col-xs-offset-2 col-sm-offset-3 col-sm-4 col-xs-7">
+          <input class="col-xs-12 btn btn-primary btn-small" type="submit" name="submit" value="Submit" id="ss-submit">
+        </div>
+      </div>
+    </form>
   </script>
 
   <script type="text/html" id="item-template">

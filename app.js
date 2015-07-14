@@ -106,6 +106,20 @@ var rr = rr || {};
     return '';
   });
 
+  vm.hasCompletedFeedback = ko.observable(false);
+  vm.showingFeedbackForm = ko.computed(function() {
+    return vm.currentPage().showFeedbackForm &&
+           vm.currentPage().showFeedbackForm() &&
+           !vm.hasCompletedFeedback();
+  });
+
+  vm.feedbackFormSubmitted = function() {
+    console.log('woot');
+    setTimeout(function(){
+      vm.hasCompletedFeedback(true);
+    });
+  };
+
   // -------- //
 
   function init() {

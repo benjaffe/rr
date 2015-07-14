@@ -36,6 +36,10 @@ body {
   color: #666;
 }
 
+.form-note {
+  opacity: 0.5;
+}
+
 
 .fixed-footer {
   position: fixed;
@@ -323,7 +327,6 @@ body {
 
 
 .vertical-slide {
-  max-height: 150px;
   overflow: hidden;
   transition: max-height 0.8s;
 }
