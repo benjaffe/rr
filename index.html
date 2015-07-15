@@ -131,7 +131,7 @@
             <li class="subject-list-item" data-bind="if: hasInit(), css: {'completed': completed, 'optional': $data.optional}">
               <a class="clearfix" data-bind="attr: {href: url}">
                 <div class="col-xs-2 col-sm-1">
-                  <div class="subject-list-item-number" data-bind="text: $data.optional ? 'opt' : $data.order || '?'"></div>
+                  <div class="subject-list-item-number" data-bind="text: $data.optional ? 'opt' : $data.order || ''"></div>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-11 col-sm-offset-1">
                   <h3 class="text-left h-slim-top">
