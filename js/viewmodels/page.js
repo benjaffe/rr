@@ -13,14 +13,35 @@ var rr = rr || {};
 
     // === Read Page === //
 
+    page.articleHasBeenOpenedDuringVisit = ko.observable(false);
+    page.forumHasBeenOpenedDuringVisit = ko.observable(false);
     page.hasNavigated = ko.observable(false);
-    page.hasReflected = ko.observable(false);
     page.showingArticle = ko.observable(page.type() === 'item');
     page.showingForum = ko.observable(false);
 
+    // TODO: This will become important after the cookie issue is resolved
+    //   Make sure the button highlighting (ie. user attention) is properly handled
+    page.hasReflected = ko.observable(false);
+
+    page.reset = function() {
+      page.showArticle();
+      page.articleHasBeenOpenedDuringVisit(false);
+
+      if (page.forumData) {
+        page.replyingToPost(null);
+      }
+    };
+
     page.openArticle = function(page) {
+      page.articleHasBeenOpenedDuringVisit(true);
       window.open(page.navigateTo(), '_blank');
     };
+
+    page.openForum = function(page) {
+      console.log('boom');
+      page.forumHasBeenOpenedDuringVisit(true);
+      window.open(vm.currentPageForumUrl(), '_blank');
+    }
 
     page.markArticleAsRead = function() {
       page.hasNavigated(true);
@@ -57,11 +78,8 @@ var rr = rr || {};
 
       if (page.type() === 'item' && page.hasNavigated()) {
         setTimeout(function() {
+          page.reset();
           app.storage.setUserData(page.route(), {completed: true});
-          page.showArticle();
-          if (page.forumData) {
-            page.replyingToPost(null);
-          }
         }, 1000);
       }
     };
