@@ -58,7 +58,7 @@ var rr = rr || {};
       app._dummyObservable();
       if (_this.type() === 'category') {
         return _this.childrenArr().reduce(function(prevValue, item) {
-          if (!item.completed() && !item.optional()) {
+          if (!item.completed() && !item.optional) {
             return false;
           } else {
             return prevValue;
