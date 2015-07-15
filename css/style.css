@@ -3,6 +3,11 @@ body {
   overflow-x: hidden;
 }
 
+.btn,
+.btn:focus {
+  outline: none;
+}
+
 .unstyled-list {
   list-style: none;
   padding: 0;
