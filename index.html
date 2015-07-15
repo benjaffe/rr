@@ -106,7 +106,7 @@
               </p>
               <div class="row">
                 <iframe src="" frameborder="0" id="hidden_iframe" name="hidden_iframe" class="hidden"></iframe>
-                <div class="col-xs-8" id="feedback-form-wrapper" data-bind="template: {
+                <div class="col-sm-8 col-xs-10" id="feedback-form-wrapper" data-bind="template: {
                   if: $parent.showingFeedbackForm,
                   name: 'feedback-form-template'
                 }"></div>
@@ -154,7 +154,7 @@
 
   <script type="text/html" id="feedback-form-template">
     <form action="https://docs.google.com/a/knowlabs.com/forms/d/1Yo9TDhxegOpZIPJkY3ANNe-B4r6xjYbYoZEDSr3xx34/formResponse" method="POST" target="hidden_iframe" onsubmit="rr.vm.feedbackFormSubmitted();" id="feedback-form">
-      <div class="">
+      <div class="hidden">
         <input type="text" name="entry.1797651770" value="" class="ss-q-short" id="entry_1797651770" dir="auto" title="" data-bind="value: $parent.currentPage().route()">
       </div>
       <div class="row" role="radiogroup" aria-label="How would you rate this learning experience?">
