@@ -85,7 +85,7 @@ var rr = rr || {};
   vm.currentPageForumUrl = ko.computed(function() {
     var urlPrefix = 'https://discussions.udacity.com/t/';
     var path = app.router.currentRoute();
-    var sanitizedPath = path.replace(/\//, '-');
+    var sanitizedPath = path.replace(/\//g, '-');
     return sanitizedPath ? urlPrefix + sanitizedPath : '';
   });
 
