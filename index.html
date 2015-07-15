@@ -112,7 +112,9 @@
                 }"></div>
 
                 <div class="col-xs-12" data-bind="visible: !$parent.showingFeedbackForm()">
-                  <div data-bind="visible: $parent.currentPage().showFeedbackForm && $parent.currentPage().showFeedbackForm()"><strong>Thank you for the feedback!</strong></div>
+                  <div data-bind="visible: $parent.currentPage().showFeedbackForm && $parent.currentPage().showFeedbackForm()">
+                    <strong>Thank you for the feedback!</strong>
+                  </div>
                   Let's move on. Go back to the Udacity classroom to continue.
                   <div class="row row-gap-small"></div>
                 </div>
@@ -126,16 +128,19 @@
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <ul class="row nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
-            <li class="subject-list-item" data-bind="if: hasInit(), css: {'completed': completed}">
+            <li class="subject-list-item" data-bind="if: hasInit(), css: {'completed': completed, 'optional': $data.optional}">
               <a class="clearfix" data-bind="attr: {href: url}">
                 <div class="col-xs-2 col-sm-1">
-                  <div class="subject-list-item-number" data-bind="text: $index() + 1"></div>
+                  <div class="subject-list-item-number" data-bind="text: $data.optional ? 'opt' : $data.order || '?'"></div>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-11 col-sm-offset-1">
                   <h3 class="text-left h-slim-top">
                     <!-- <div data-bind="text: rr.utils.stringify($data.hasInit())" style="height: 100px;width: 600px; margin: 0 auto;border-bottom: 1px solid blue;overflow: scroll; padding: 20px;"></div> -->
                     <div class="checkmark" data-bind="click: markArticleAsUnread, clickBubble: false">&#10003; </div>
-                    <div class='subject-list-item-name' data-bind="text: name"></div>
+                    <div class='subject-list-item-name'>
+                      <span data-bind="text: name"></span>
+                      <span class="subject-list-item-optional" data-bind="if: $data.optional">(optional)</span>
+                    </div>
                   </h3>
                   <p class="text-left" data-bind="text: description"></p>
                 </div>
@@ -149,6 +154,9 @@
 
   <script type="text/html" id="feedback-form-template">
     <form action="https://docs.google.com/a/knowlabs.com/forms/d/1Yo9TDhxegOpZIPJkY3ANNe-B4r6xjYbYoZEDSr3xx34/formResponse" method="POST" target="hidden_iframe" onsubmit="rr.vm.feedbackFormSubmitted();" id="feedback-form">
+      <div class="">
+        <input type="text" name="entry.1797651770" value="" class="ss-q-short" id="entry_1797651770" dir="auto" title="" data-bind="value: $parent.currentPage().route()">
+      </div>
       <div class="row" role="radiogroup" aria-label="How would you rate this learning experience?">
         <h4 class="ss-q-title col-xs-12">
           How would you rate this learning experience?

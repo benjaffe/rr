@@ -55,7 +55,8 @@
           "order": 4,
           "description": "Learn how to link the URL (also called the route) of your application with the view being showed.",
           "navigateTo": "http://backbonetutorials.com/what-is-a-router/",
-          "timeEstimate": 10
+          "timeEstimate": 10,
+          "optional": true
         }
       }
     },

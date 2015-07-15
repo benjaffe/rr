@@ -83,6 +83,19 @@ body {
   transform-origin: 80px;
 }
 
+.optional .subject-list-item-number {
+  background-color: #c6a985;
+  font-size: 22px;
+}
+
+.optional.subject-list-item {
+  opacity: 0.8;
+}
+
+.subject-list-item-optional {
+  opacity: 0.5;
+}
+
 .completed {
   opacity: 0.4;
   transform: scale(0.98);
@@ -327,6 +340,7 @@ body {
 
 
 .vertical-slide {
+  max-height: 420px;
   overflow: hidden;
   transition: max-height 0.8s;
 }
