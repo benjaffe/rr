@@ -66,7 +66,7 @@
           "order": 6,
           "description": "This is the second example app of Addy Osmani's Backbone book. In this section, you'll build a non Todo sample application.",
           "instructions": "Build the app along with the book, but try to avoid blindly copying and pasting. This tutorial also walks us through creating a back-end for our application. Although you can choose to skip this section, it's incredibly empowering to build a full app, back-end and all. Give it a try.",
-          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app",
+          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#exercise-2-book-library---your-first-restful-backbone.js-app",
           "timeEstimate": "90+ minutes"
         },
         "annotated-source-code": {
