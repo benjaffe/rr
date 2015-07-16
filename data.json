@@ -8,55 +8,75 @@
       "type": "category",
       "description": "These blog posts will help you get up and running with Backbone.",
       "showFeedbackForm": true,
-      "introVideo": {
-        "name": "Name",
-        "description": "Description",
-        "src": "ee3VY1lfSRg",
-        "runOnce": true
-      },
       "children": {
-        "concepts-in-backbone": {
-          "name": "Concepts in Backbone",
+        "getting-started": {
+          "name": "Getting Started",
           "topic": "",
           "type": "item",
           "order": 1,
-          "description": "Read this first part of the series to get an idea of the pieces of a Backbone application. Most of them will probably be familiar already!",
-          "instructions": "Be sure to take your time reading the article. There are a lot of subtle points you could miss if you rush through it.",
-          "timeEstimate": 20,
-          "navigateTo": "http://www.codeproject.com/Articles/795965/BackBone-Tutorial-Part-Introduction-to-Backbone-Js",
-          "introVideo": {
-            "name": "Name",
-            "description": "Description",
-            "src": "NGhXjCuucLI"
-          }
+          "description": "The \"Getting Started\" section of the Backbone documentation gives a good overview of the different parts of Backbone.",
+          "instructions": "You only need to read the \"Getting Started\" section. You can stop once you get to Events. (If you want to skim through the F.A.Q, it has some interesting stuff, but don't worry if you don't understand everything right away.)",
+          "navigateTo": "http://backbonejs.org/#Getting-started",
+          "timeEstimate": 30
         },
-        "intro-to-writing-code-with-backbone": {
-          "name": "Introduction to Writing Code with Backbone",
-          "topic": "",
+        "building-a-simple-backbone-app": {
+          "name": "Building a Simple Backbone App",
+          "topic": "the Service Chooser app",
           "type": "item",
           "order": 2,
-          "description": "This article provides another high-level overview of Backbone, code examples, and help with how the pieces tie together.",
-          "navigateTo": "http://code.tutsplus.com/tutorials/getting-started-with-backbonejs--net-19751",
-          "timeEstimate": 20
+          "description": "Explore the pieces of a simple app built with Backbone",
+          "instructions": "Try and get this code working on your local machine. If possible, pretend you're building it from the ground up. Add each piece of functionality, and get it working before you add the next.",
+          "navigateTo": "http://tutorialzine.com/2013/04/services-chooser-backbone-js/",
+          "timeEstimate": 75
         },
         "hello-backbone": {
           "name": "Hello Backbone",
-          "topic": "",
+          "topic": "the code examples",
           "type": "item",
           "order": 3,
-          "description": "These heavily commented code examples help you go from building simple apps to more complex ones.",
+          "description": "These five heavily commented code examples help you go from building simple apps to more complex ones.",
+          "instructions": "Get all of these code examples working on your computer. Don't only follow what the examples do. Take time to explore, and add your own features. Make the apps work how you want them to work.",
           "navigateTo": "http://arturadib.com/hello-backbonejs/",
-          "timeEstimate": 10
+          "timeEstimate": 75
         },
-        "routers-in-backbone": {
-          "name": "Routers in Backbone",
+        "addy-backbone-basics": {
+          "name": "Diving Deeper with Backbone",
           "topic": "",
           "type": "item",
           "order": 4,
-          "description": "Learn how to link the URL (also called the route) of your application with the view being showed.",
-          "navigateTo": "http://backbonetutorials.com/what-is-a-router/",
-          "timeEstimate": 10,
-          "optional": true
+          "description": "Addy Osmani's book is one of the best Backbone resources on the web. He'll help us explore Backbone's features and intricacies at a deeper level.",
+          "instructions": "This is an incredible book, but it's also very detailed. This can be overwhelming. Read the entire Backbone Basics section until you get to the Summary (there's a Table of Contents at the top if it helps). You're not expected to memorize everything -- rather, you should notice all the things that Backbone can do, and come back to this resource later as a reference.",
+          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#backbone-basics",
+          "timeEstimate": 60
+        },
+        "addy-todo-app": {
+          "name": "Building a Todo Application from Scratch",
+          "topic": "",
+          "type": "item",
+          "order": 5,
+          "description": "We explore how to build a app of a bit more complexity... and if you took JavaScript Design Patterns, it's an app you might recognize!",
+          "instructions": "Build the app along with the book, but try to avoid blindly copying and pasting. Remember that every line of code does something, so make sure you try and figure out what that is before you type it in.",
+          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app",
+          "timeEstimate": "90+ minutes"
+        },
+        "addy-library-app": {
+          "name": "Building a Book Library App from Scratch",
+          "topic": "",
+          "type": "item",
+          "order": 6,
+          "description": "This is the second example app of Addy Osmani's Backbone book. In this section, you'll build a non Todo sample application.",
+          "instructions": "Build the app along with the book, but try to avoid blindly copying and pasting. This tutorial also walks us through creating a back-end for our application. Although you can choose to skip this section, it's incredibly empowering to build a full app, back-end and all. Give it a try.",
+          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#exercise-1-todos---your-first-backbone.js-app",
+          "timeEstimate": "90+ minutes"
+        },
+        "annotated-source-code": {
+          "name": "Backbone.js Annotated Source Code",
+          "topic": "the Backbone source code",
+          "type": "item",
+          "optional": true,
+          "description": "This optional reading walks through the source code for Backbone itself!",
+          "instructions": "This is a great resource for learning how Backbone <em>actually</em> works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
+          "navigateTo": "http://backbonejs.org/docs/backbone.html"
         }
       }
     },
