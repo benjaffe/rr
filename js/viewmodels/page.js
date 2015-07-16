@@ -26,6 +26,7 @@ var rr = rr || {};
     page.reset = function() {
       page.showArticle();
       page.articleHasBeenOpenedDuringVisit(false);
+      page.forumHasBeenOpenedDuringVisit(false);
 
       if (page.forumData) {
         page.replyingToPost(null);

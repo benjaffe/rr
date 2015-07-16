@@ -191,7 +191,7 @@ var rr = rr || {};
       if (typeof data.name === 'undefined' ||
           typeof data.topic === 'undefined' ||
           typeof data.description === 'undefined' ||
-          typeof data.timeEstimate === 'undefined' ||
+          typeof data.timeEstimate === 'undefined' && !data.optional ||
           typeof data.navigateTo === 'undefined') {
         console.error('an item is missing a key: ', data);
         return null;
