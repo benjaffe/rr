@@ -88,49 +88,48 @@
         "user-input-controls": {
           "name": "User Input Controls",
           "type": "category",
-          "description": "User Interface Controls is just a fancy phrase for things in Android that you can see and interact with. Here you will find resources on how to use things like toggle buttons, radio buttons, spinners( drop downs) and more.",
+          "description": "User Input Controls is just a fancy phrase for things in Android that you can see and interact with. Here you will find resources on how to use things like toggle buttons, radio buttons, spinners( drop downs) and more.",
           "children": {
             "toggle-button": {
-              "name": "How do you use a toggle button in Android?",
+              "name": "How do you use a Toggle button in Android?",
               "topic": "toggle buttons",
               "type": "item",
               "order": 1,
-              "description": "Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
+              "description": "ON/OFF. Those are the two states of a Toggle button. Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
               "navigateTo": "http://www.mkyong.com/android/android-togglebutton-example/",
-              "timeEstimate": 10
+              "timeEstimate": 20
             },
 
             "edit-text": {
-              "name": "Best ways of using an Edit Text in your app",
+              "name": "How do I use Edit Text in an Android app?",
               "topic": "EditText",
               "type": "item",
               "order": 2,
-              "description": "Read this blog and learn how you can use EditText inside your own apps.",
-              "navigateTo": "https://www.google.com",
-              "instructions": "Lorem ipsum dolor sit amet",
-              "timeEstimate": 12
+              "description": "Edit Text is a box that allows a user to type text in your app. Read this blog and learn how to use Edit Text by creating a new app.",
+              "navigateTo": "http://www.tutorialspoint.com/android/android_edittext_control.htm",
+              "timeEstimate": 30
+            },
+
+            "arrays": {
+              "name": "How do I use Arrays (or lists) in Java?",
+              "topic": "Arrays",
+              "type": "item",
+              "order": 3,
+              "description": "Arrays or Lists are used regularly in everyday life. Think of a To-Do list or a Menu at a restaurant. Here we will practice how to use Lists or Arrays in Java.",
+              "navigateTo": "http://code.tutsplus.com/tutorials/learn-java-for-android-development-working-with-arrays--mobile-2894",
+              "instructions": "Create a new HelloWorld app in Android. In the Java file (which is likely to be MainActivity.java, try out the Java code explained in this blog. We will use Arrays in many of the blogs that follow, so this is a great time to learn about them.",
+              "timeEstimate": 25
             },
 
             "autocomplete": {
-              "name": "How does one use Autocomplete in a mobile app?",
+              "name": "How do I use autocomplete in my Android app?",
               "topic": "Autocomplete",
               "type": "item",
-              "order": 3,
-              "description": "In this blog you will find instructions on how autocomplete works in the Android ecosystem. Create a new app and practice how to incorporate Autocomplete within it.",
-              "navigateTo": "https://www.google.com",
-              "instructions": "Lorem ipsum dolor sit amet",
-              "timeEstimate": 8
-            },
-
-            "mvc-in-android": {
-              "name": "Is there an MVC pattern in Android?",
-              "topic": "MVC",
-              "type": "item",
               "order": 4,
-              "description": "Read this Stackoverflow entry to learn more about how MVC is accomplished in Android.",
-              "navigateTo": "https://www.google.com",
-              "instructions": "Lorem ipsum dolor sit amet",
-              "timeEstimate": 8
+              "description": "Have you ever noticed that you start typing in a box, and the app gives you suggestions on the thing you are typing. Here we will learn how to use autocomplete in you Android app.",
+              "navigateTo": "http://sampleprogramz.com/android/autocompletetextview.php",
+              "instructions": "This tutorial uses lists or arrays in Java. If you are not familiar with them, check out the previous link in this series",
+              "timeEstimate": 30
             }
 
 
