@@ -130,6 +130,48 @@
               "navigateTo": "http://sampleprogramz.com/android/autocompletetextview.php",
               "instructions": "This tutorial uses lists or arrays in Java. If you are not familiar with them, check out the previous link in this series",
               "timeEstimate": 30
+            },
+
+            "spinners": {
+              "name": "How do I use spinners (or dropdown lists) in my Android app?",
+              "topic": "Spinners",
+              "type": "item",
+              "order": 5,
+              "description": "With Spinners you can allow users to easily pick a value from a list. Read this tutorial to learn how to use spinners in your app.",
+              "navigateTo": "http://www.learn2crack.com/2013/12/android-spinner-dropdown-example.html",
+              "timeEstimate": 30
+            },
+
+            "radio-button": {
+              "name": "How do I use radio buttons in my Android app?",
+              "topic": "Radio Button",
+              "type": "item",
+              "order": 6,
+              "description": "Follow this tutorial to learn how to use radio buttons in your Android app.",
+              "navigateTo": "http://www.tutorialspoint.com/android/android_radiobutton_control.htm",
+              "timeEstimate": 30
+            },
+
+            "shortcuts": {
+              "name": "How do I use shortcuts to change the orientation of the emulator?",
+              "topic": "Shortcuts",
+              "type": "item",
+              "optional": true,
+              "order": 7,
+              "description": "Portrait and Landscape. Those are the two orientations available on the Android device (and the emulator). Read this stackoverflow page to learn about the different shortcuts available for the Android emulator.",
+              "navigateTo": "http://stackoverflow.com/questions/1991318/how-to-change-screen-orientation-in-android-emulator/17161332#17161332",
+              "timeEstimate": 15
+            },
+
+            "button-click": {
+              "name": "How do I simulate a button click using code in my Android app?",
+              "topic": "Button Click",
+              "type": "item",
+              "optional": true,
+              "order": 8,
+              "description": "So we know how to run a body of code when a user clicks a button in our app. How can we simulate that behavior without the user clicking anything on the app? Read this stackoverflow page to find out.",
+              "navigateTo": "http://stackoverflow.com/questions/4553374/how-to-simulate-a-button-click-through-code-in-android/4877526#4877526",
+              "timeEstimate": 30
             }
 
 
