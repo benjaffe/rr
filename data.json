@@ -75,7 +75,7 @@
           "type": "item",
           "optional": true,
           "description": "This optional reading walks through the source code for Backbone itself!",
-          "instructions": "This is a great resource for learning how Backbone *actually* works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
+          "instructions": "This is a great resource for learning how Backbone actually works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
           "navigateTo": "http://backbonejs.org/docs/backbone.html"
         }
       }
@@ -173,10 +173,47 @@
               "navigateTo": "http://stackoverflow.com/questions/4553374/how-to-simulate-a-button-click-through-code-in-android/4877526#4877526",
               "timeEstimate": 30
             }
+          }
+        },
+        "menus": {
+          "name": "Menus",
+          "type": "category",
+          "description": "A menu is an interface which allows users to choose an item from several options. Here you will find resources on how to use menus like the Options Menu and the Pop-up Menu in Android.",
+          "children": {
+            "add-import-statements": {
+              "name": "How do you automatically add missing import statements in your code?",
+              "topic": "add import statements",
+              "type": "item",
+              "order": 1,
+              "description": "Now you are probably wondering that this article is not about Menus. That is correct. Although you will need the information listed in this article to be successful with the remaining tutorials in this series.",
+              "navigateTo": "http://stackoverflow.com/questions/16615038/what-is-the-shortcut-to-auto-import-all-in-android-studio/16616085#16616085",
+              "instructions": "In this stackoverflow page you will find out about techniques you can use to automatically add missing import statements to your code. We recommend that you open any old Android project, then delete an import statement and run the shortcut listed in this page to automatcially add the missing import statement.",
+              "timeEstimate": 10
+            },
 
+            "options-menu": {
+              "name": "How do I create an options menu in my app?",
+              "topic": "options menu",
+              "type": "item",
+              "order": 2,
+              "description": "An options menu allows a user to access options associated with an activity in Android. We recommend that you practice the instructions listed in this tutorial by creating a new app from scratch. ",
+              "navigateTo": "https://youtu.be/iwE1bnRlZw0",
+              "timeEstimate": 30
+            },
 
+            "popup-menu": {
+              "name": "How do I use a popup menu in Android?",
+              "topic": "popup menu",
+              "type": "item",
+              "order": 3,
+              "description": "Read this article to learn about the popup menu in Android.",
+              "navigateTo": "http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu",
+              "instructions": "Note that while this stackoverflow page is great, it does not contain the code for import statements that are needed to run this code. The first article in this series has information on how to add missing import statements to your code. ",
+              "timeEstimate": 30
+            }
           }
         }
+
       }
     }
   }
