@@ -35,7 +35,7 @@
           "type": "item",
           "order": 3,
           "description": "These five heavily commented code examples help you go from building simple apps to more complex ones.",
-          "instructions": "Get all of these code examples working on your computer. Don't only follow what the examples do. Take time to explore, and add your own features. Make the apps work how you want them to work.",
+          "instructions": "Get all of these code examples working on your computer. Don't only follow what the examples do. Take time to explore, and add your own features. Make the apps work how you want them to work. Note: The libraries that are referenced in the following tutorial use out of date versions. You can either use your own local instance of these libraries or use the following CDN's: underscore: https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js jQuery: https://code.jquery.com/jquery-2.1.4.js Backbone: https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js",
           "navigateTo": "http://arturadib.com/hello-backbonejs/",
           "timeEstimate": 75
         },
@@ -75,7 +75,7 @@
           "type": "item",
           "optional": true,
           "description": "This optional reading walks through the source code for Backbone itself!",
-          "instructions": "This is a great resource for learning how Backbone <em>actually</em> works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
+          "instructions": "This is a great resource for learning how Backbone *actually* works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
           "navigateTo": "http://backbonejs.org/docs/backbone.html"
         }
       }
