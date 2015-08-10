@@ -213,13 +213,49 @@
             },
 
             "menu-docs": {
-              "name": "What does Google have to say about Android Menus",
+              "name": "What does Google have to say about Menus?",
               "topic": "menu docs",
               "type": "item",
               "order": 4,
               "description": "This is the official Google documentation on Menus. Skim this article. Don't worry if all of this does not make sense yet. Scan this page to find one interesting thing about Menus you did not know previously.",
-              "navigateTo": "https://www.google.com/design/spec/components/menus.html#",
+              "navigateTo": "https://www.google.com/design/spec/components/menus.html",
               "timeEstimate": 20
+            }
+          }
+        },
+        "user input events": {
+          "name": "User Input Events",
+          "type": "category",
+          "description": "onClick is an example of a User Input Event. In this section, we will explore several tutorials on the ways a user can interact with an app. onLongClick and Drag and Drop are two such examples.",
+          "children": {
+            "onlongclick-event": {
+              "name": "How do I use onLongClick event in Android?",
+              "topic": "onLongClick event",
+              "type": "item",
+              "order": 1,
+              "description": "onLongClick, as the name suggests, is when a user presses and holds on to a button or item on your app. Create a new app to learn how onLongClick is used in Android.",
+              "navigateTo": "http://androidbite.blogspot.com/2013/03/android-long-press-event-handle-example.html",
+              "timeEstimate": 30
+            },
+
+            "drawable-image": {
+              "name": "How do I display a background image in a TextView?",
+              "topic": "drawable image",
+              "type": "item",
+              "order": 2,
+              "description": "You are correct. This stackoverflow page will not teach you about a new user input event. Although, it will teach you how to display a background image on a view. And we will need this knowledge to fully understand the next tutorial in this series.",
+              "navigateTo": "http://stackoverflow.com/questions/3759545/how-to-display-background-image-in-text-view",
+              "timeEstimate": 15
+            },
+
+            "drag-and-drop": {
+              "name": "How do I use drag and drop in Android?",
+              "topic": "drag and drop",
+              "type": "item",
+              "order": 3,
+              "description": "Read this article to learn how to use drag and drop in Android.",
+              "navigateTo": "http://code.tutsplus.com/tutorials/android-sdk-implementing-drag-and-drop-functionality--mobile-14402",
+              "timeEstimate": 45
             }
           }
         }
