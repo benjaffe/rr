@@ -229,7 +229,7 @@
           "description": "onClick is an example of a User Input Event. In this section, we will explore several tutorials on the ways a user can interact with an app. onLongClick and Drag and Drop are two such examples.",
           "children": {
             "onlongclick-event": {
-              "name": "How do I use onLongClick event in Android?",
+              "name": "How do I use onLongClick in Android?",
               "topic": "onLongClick event",
               "type": "item",
               "order": 1,
@@ -256,6 +256,32 @@
               "description": "Read this article to learn how to use drag and drop in Android.",
               "navigateTo": "http://code.tutsplus.com/tutorials/android-sdk-implementing-drag-and-drop-functionality--mobile-14402",
               "timeEstimate": 45
+            }
+          }
+        },
+        "navigation": {
+          "name": "Navigation",
+          "type": "category",
+          "description": "Navigating around in an Android app is critical to every well designed app. In this section we will discuss several tutorials on this subject.",
+          "children": {
+            "multiple-activities": {
+              "name": "How do I use multiple activityies in my Android app?",
+              "topic": "Multiple Activities",
+              "type": "item",
+              "order": 1,
+              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to user multiple activities in our app.",
+              "navigateTo": "http://www.mkyong.com/android/android-activity-from-one-screen-to-another-screen/",
+              "timeEstimate": 30
+            },
+
+            "tabs": {
+              "name": "How do I use tabs in my Android app? (video)",
+              "topic": "drawable image",
+              "type": "item",
+              "order": 2,
+              "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
+              "navigateTo": "https://www.youtube.com/watch?v=Fl0xMuo10yA",
+              "timeEstimate": 30
             }
           }
         }
