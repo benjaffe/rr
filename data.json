@@ -223,7 +223,7 @@
             }
           }
         },
-        "user input events": {
+        "user-input-events": {
           "name": "User Input Events",
           "type": "category",
           "description": "onClick is an example of a User Input Event. In this section, we will explore several tutorials on the ways a user can interact with an app. onLongClick and Drag and Drop are two such examples.",
