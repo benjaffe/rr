@@ -265,7 +265,7 @@
           "description": "Navigating around in an Android app is critical to every well designed app. In this section we will discuss several tutorials on this subject.",
           "children": {
             "multiple-activities": {
-              "name": "How do I use multiple activityies in my Android app?",
+              "name": "How do I use multiple activities in my Android app?",
               "topic": "Multiple Activities",
               "type": "item",
               "order": 1,
