@@ -91,7 +91,7 @@
           "description": "User Input Controls is just a fancy phrase for things in Android that you can see and interact with. Here you will find resources on how to use things like toggle buttons, radio buttons, spinners( drop downs) and more.",
           "children": {
             "toggle-button": {
-              "name": "How do you use a Toggle button in Android?",
+              "name": "How do I use a Toggle button in Android?",
               "topic": "toggle buttons",
               "type": "item",
               "order": 1,
@@ -117,7 +117,7 @@
               "order": 3,
               "description": "Arrays or Lists are used regularly in everyday life. Think of a To-Do list or a Menu at a restaurant. Here we will practice how to use Lists or Arrays in Java.",
               "navigateTo": "http://code.tutsplus.com/tutorials/learn-java-for-android-development-working-with-arrays--mobile-2894",
-              "instructions": "Create a new HelloWorld app in Android. In the Java file (which is likely to be MainActivity.java, try out the Java code explained in this blog. We will use Arrays in many of the blogs that follow, so this is a great time to learn about them.",
+              "instructions": "Create a new HelloWorld app in Android. In the Java file (which is likely to be MainActivity.java), try out the Java code explained in this blog. We will use Arrays in many of the blogs that follow, so this is a great time to learn about them.",
               "timeEstimate": 25
             },
 
@@ -181,18 +181,18 @@
           "description": "A menu is an interface which allows users to choose an item from several options. Here you will find resources on how to use menus like the Options Menu and the Pop-up Menu in Android.",
           "children": {
             "add-import-statements": {
-              "name": "How do you automatically add missing import statements in your code?",
+              "name": "How do I automatically add missing import statements in your code?",
               "topic": "add import statements",
               "type": "item",
               "order": 1,
               "description": "Now you are probably wondering that this article is not about Menus. That is correct. Although you will need the information listed in this article to be successful with the remaining tutorials in this series.",
               "navigateTo": "http://stackoverflow.com/questions/16615038/what-is-the-shortcut-to-auto-import-all-in-android-studio/16616085#16616085",
-              "instructions": "In this stackoverflow page you will find out about techniques you can use to automatically add missing import statements to your code. We recommend that you open any old Android project, then delete an import statement and run the shortcut listed in this page to automatcially add the missing import statement.",
+              "instructions": "In this stackoverflow page you will discover techniques you can use to automatically add missing import statements to your code. We recommend that you open any old Android project, then delete an import statement and run the shortcut listed in this page to automatcially add the missing import statement.",
               "timeEstimate": 10
             },
 
             "options-menu": {
-              "name": "How do I create an options menu in my app?",
+              "name": "How do I create an options menu in my app? (video)",
               "topic": "options menu",
               "type": "item",
               "order": 2,
@@ -210,6 +210,16 @@
               "navigateTo": "http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu",
               "instructions": "Note that while this stackoverflow page is great, it does not contain the code for import statements that are needed to run this code. The first article in this series has information on how to add missing import statements to your code. ",
               "timeEstimate": 30
+            },
+
+            "menu-docs": {
+              "name": "What does Google have to say about Android Menus",
+              "topic": "menu docs",
+              "type": "item",
+              "order": 4,
+              "description": "This is the official Google documentation on Menus. Skim this article. Don't worry if all of this does not make sense yet. Scan this page to find one interesting thing about Menus you did not know previously.",
+              "navigateTo": "https://www.google.com/design/spec/components/menus.html#",
+              "timeEstimate": 20
             }
           }
         }
