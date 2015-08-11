@@ -284,6 +284,52 @@
               "timeEstimate": 30
             }
           }
+        },
+        "best-practices": {
+          "name": "Best Practices",
+          "type": "category",
+          "description": "Here we have collected a series of blogs that highlight best practices in Android that you should be aware of while making your apps.",
+          "children": {
+            "accessibility": {
+              "name": "How do I make my apps more accessible?",
+              "topic": "Accessibility",
+              "type": "item",
+              "order": 1,
+              "description": "Adding Content Descriptors, which is a fancy word for labels, is one way to make your app more accessible to visually impaired users. Read through this article to learn about the things you can do to make your app more accessible.",
+              "navigateTo": "http://developer.android.com/training/accessibility/accessible-app.html#contentdesc",
+              "timeEstimate": 30
+            },
+
+            "color-schemes": {
+              "name": "Which color schemes are best to use in an Android app?",
+              "topic": "Color Schemes",
+              "type": "item",
+              "order": 2,
+              "description": "Colors are important. But you already knew that. Bookmark this tutorial to use a range of colors that look really good in an Android app.",
+              "navigateTo": "https://www.google.com/design/spec/style/color.html",
+              "timeEstimate": 20
+            },
+
+            "more-color-schemes": {
+              "name": "How do I find out more about color schemes?",
+              "topic": "More Color Schemes",
+              "type": "item",
+              "order": 3,
+              "description": "Had enough colors? We didn't think so. This tool will let you pick a few colors and show you what your app will look like before you even begin coding.",
+              "navigateTo": "http://www.materialpalette.com/",
+              "timeEstimate": 20
+            },
+
+            "lint": {
+              "name": "How do I detect common coding problems in my Android app?",
+              "topic": "Lint",
+              "type": "item",
+              "order": 3,
+              "description": "Other than the disgusting material in your naval, Lint is a tool in Android that helps you identify common problems in your code. Be sure to watch the two videos embedded in this blog to learn about the hierarchy of your views and the pixels on your screen.",
+              "navigateTo": "http://developer.android.com/tools/debugging/debugging-ui.html",
+              "timeEstimate": 60
+            }
+          }
         }
 
       }
