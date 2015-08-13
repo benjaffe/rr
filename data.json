@@ -352,6 +352,43 @@
               "timeEstimate": 60
             }
           }
+        },
+
+        "miscellaneous": {
+          "name": "Miscellaneous",
+          "type": "category",
+          "description": "All important Android topics that could not find a home elsewhere are listed here.",
+          "children": {
+            "play-sound": {
+              "name": "How do I play a sound in my Android app? (video)",
+              "topic": "Play Sound",
+              "type": "item",
+              "order": 1,
+              "description": "This video will walk you through the process of playing a sound through your app. In 30 minutes your app will look (and sound) much more amazing.",
+              "navigateTo": "https://www.youtube.com/watch?v=V1ocJmXeQ28",
+              "timeEstimate": 30
+            },
+
+            "map": {
+              "name": "How do I add a map to my app?",
+              "topic": "Map",
+              "type": "item",
+              "order": 2,
+              "description": "Maps are cool. This is Google's official, updated documentation on how to use maps. It is a little tricky to understand, so ready carefully. Using a physical device (a phone) may make it easier to go through this tutorial.",
+              "navigateTo": "https://developers.google.com/maps/documentation/android/start",
+              "timeEstimate": 60
+            },
+
+            "share": {
+              "name": "How do I add the share button to my app so I can share things on facebook, twitter etc.?",
+              "topic": "Share",
+              "type": "item",
+              "order": 3,
+              "description": "This video will walk you through how to share text from inside your app to other apps like facebook, twitter etc.",
+              "navigateTo": "https://www.youtube.com/watch?v=qVW9yfTQ-sg",
+              "timeEstimate": 20
+            }
+          }
         }
 
       }
