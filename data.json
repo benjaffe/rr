@@ -238,21 +238,32 @@
               "timeEstimate": 30
             },
 
+            "drag-and-drop-simplified": {
+              "name": "How do I use drag and drop in Android?",
+              "topic": "drag and drop simplified",
+              "type": "item",
+              "order": 2,
+              "description": "This tutorial will give you a gentle introduction on how to implement the drag and drop feature in your Android app.",
+              "navigateTo": "http://javapapers.com/android/android-drag-and-drop/",
+              "instructions": "Now you might notice that @string/dragtext in the activity_main.xml file is undefined in this blog. Make sure to define it in the strings.xml",
+              "timeEstimate": 30
+            },
+
             "drawable-image": {
               "name": "How do I display a background image in a TextView?",
               "topic": "drawable image",
               "type": "item",
-              "order": 2,
+              "order": 3,
               "description": "You are correct. This stackoverflow page will not teach you about a new user input event. Although, it will teach you how to display a background image on a view. And we will need this knowledge to fully understand the next tutorial in this series.",
               "navigateTo": "http://stackoverflow.com/questions/3759545/how-to-display-background-image-in-text-view",
               "timeEstimate": 15
             },
 
             "drag-and-drop": {
-              "name": "How do I use drag and drop in Android?",
+              "name": "How do I use drag and drop in Android (with extra strength drag and drop)?",
               "topic": "drag and drop",
               "type": "item",
-              "order": 3,
+              "order": 4,
               "description": "Read this article to learn how to use drag and drop in Android.",
               "navigateTo": "http://code.tutsplus.com/tutorials/android-sdk-implementing-drag-and-drop-functionality--mobile-14402",
               "timeEstimate": 45
