@@ -260,7 +260,7 @@
             },
 
             "drag-and-drop": {
-              "name": "How do I use drag and drop in Android (with extra strength drag and drop)?",
+              "name": "How do I use drag and drop in Android (with extra strength drag and <drop></drop>)?",
               "topic": "drag and drop",
               "type": "item",
               "order": 4,
@@ -275,21 +275,31 @@
           "type": "category",
           "description": "Navigating around in an Android app is critical to every well designed app. In this section we will discuss several tutorials on this subject.",
           "children": {
-            "multiple-activities": {
-              "name": "How do I use multiple activities in my Android app?",
-              "topic": "Multiple Activities",
+            "multiple-activities-part1": {
+              "name": "How do I use multiple activities in my Android app? (Part 1 of 2)",
+              "topic": "Multiple Activities Part 1",
               "type": "item",
               "order": 1,
-              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to user multiple activities in our app.",
-              "navigateTo": "http://www.mkyong.com/android/android-activity-from-one-screen-to-another-screen/",
-              "timeEstimate": 30
+              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to user multiple activities in our app. Actually, in Part 1 of this tutorial, we will learn how to make the first of the two screens.",
+              "navigateTo": "http://developer.android.com/training/basics/firstapp/building-ui.html#LinearLayout",
+              "timeEstimate": 20
+            },
+
+            "multiple-activities-part2": {
+              "name": "How do I use multiple activities in my Android app? (Part 2 of 2)",
+              "topic": "Multiple Activities Part 2",
+              "type": "item",
+              "order": 2,
+              "description": "In this tutorial, we will learn how to make the second of the two screens, and will learn have to navigate from the first screen to the second.",
+              "navigateTo": "http://developer.android.com/training/basics/firstapp/starting-activity.html",
+              "timeEstimate": 40
             },
 
             "tabs": {
               "name": "How do I use tabs in my Android app? (video)",
               "topic": "drawable image",
               "type": "item",
-              "order": 2,
+              "order": 3,
               "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
               "navigateTo": "https://www.youtube.com/watch?v=Fl0xMuo10yA",
               "timeEstimate": 30
