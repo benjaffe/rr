@@ -348,7 +348,7 @@
               "optional": true,
               "order": 4,
               "description": "This blog will highlight important topics like managing multiple screen sizes, menu buttons and more. Spend some uninterrupted time reading through them and don't worry too much in case you don't understand everything listed here.",
-              "navigateTo": "http://developer.android.com/tools/debugging/debugging-ui.html",
+              "navigateTo": "http://developer.android.com/guide/practices/index.html",
               "timeEstimate": 60
             }
           }
