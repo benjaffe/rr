@@ -280,7 +280,7 @@
               "topic": "Multiple Activities Part 1",
               "type": "item",
               "order": 1,
-              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to user multiple activities in our app. Actually, in Part 1 of this tutorial, we will learn how to make the first of the two screens.",
+              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to use multiple activities in our app. Actually, in Part 1 of this tutorial, we will learn how to make the first of the two screens.",
               "navigateTo": "http://developer.android.com/training/basics/firstapp/building-ui.html#LinearLayout",
               "timeEstimate": 20
             },
@@ -290,7 +290,7 @@
               "topic": "Multiple Activities Part 2",
               "type": "item",
               "order": 2,
-              "description": "In this tutorial, we will learn how to make the second of the two screens, and will learn have to navigate from the first screen to the second.",
+              "description": "In this tutorial, we will learn how to make the second of the two screens, and will learn how to navigate from the first screen to the second.",
               "navigateTo": "http://developer.android.com/training/basics/firstapp/starting-activity.html",
               "timeEstimate": 40
             },
@@ -341,12 +341,13 @@
               "timeEstimate": 20
             },
 
-            "lint": {
-              "name": "How do I detect common coding problems in my Android app?",
-              "topic": "Lint",
+            "best-practices-from-google": {
+              "name": "What are some of the best practices I should think about while making my Android app?",
+              "topic": "Best Practices from Google",
               "type": "item",
-              "order": 3,
-              "description": "Other than the disgusting material in your naval, Lint is a tool in Android that helps you identify common problems in your code. Be sure to watch the two videos embedded in this blog to learn about the hierarchy of your views and the pixels on your screen.",
+              "optional": true,
+              "order": 4,
+              "description": "This blog will highlight important topics like managing multiple screen sizes, menu buttons and more. Spend some uninterrupted time reading through them and don't worry too much in case you don't understand everything listed here.",
               "navigateTo": "http://developer.android.com/tools/debugging/debugging-ui.html",
               "timeEstimate": 60
             }
