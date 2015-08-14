@@ -85,12 +85,12 @@
       "type": "category",
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque praesentium, temporibus officia sapiente totam, in molestiae, fugit corrupti suscipit aut architecto beatae vel et. Sed sint debitis voluptatibus error odit.",
       "children": {
-        "user-input-controls": {
+        "Input-Controls": {
           "name": "User Input Controls",
           "type": "category",
           "description": "User Input Controls is just a fancy phrase for things in Android that you can see and interact with. Here you will find resources on how to use things like toggle buttons, radio buttons, spinners( drop downs) and more.",
           "children": {
-            "toggle-button": {
+            "Toggle-Button": {
               "name": "How do I use a Toggle button in Android?",
               "topic": "toggle buttons",
               "type": "item",
