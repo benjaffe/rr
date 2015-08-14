@@ -25,7 +25,7 @@
           "type": "item",
           "order": 2,
           "description": "Explore the pieces of a simple app built with Backbone",
-          "instructions": "Try and get this code working on your local machine. If possible, pretend you're building it from the ground up. Add each piece of functionality, and get it working before you add the next.",
+          "instructions": "Try and get this code working on your local machine. If possible, pretend you're building it from the ground up. Add each piece of functionality, and get it working before you add the next. Heads up! This example will try to run a PHP file if you click the Order button. It's not required for this functionality to work, so you can safely ignore any errors or oddities you see if you submit the form on the page.",
           "navigateTo": "http://tutorialzine.com/2013/04/services-chooser-backbone-js/",
           "timeEstimate": 75
         },
@@ -60,14 +60,14 @@
           "timeEstimate": "90+ minutes"
         },
         "addy-library-app": {
-          "name": "Building a Book Library App from Scratch",
+          "name": "Realtime Data with Firebase",
           "topic": "",
           "type": "item",
           "order": 6,
-          "description": "This is the second example app of Addy Osmani's Backbone book. In this section, you'll build a non Todo sample application.",
-          "instructions": "Build the app along with the book, but try to avoid blindly copying and pasting. This tutorial also walks us through creating a back-end for our application. Although you can choose to skip this section, it's incredibly empowering to build a full app, back-end and all. Give it a try.",
-          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#exercise-2-book-library---your-first-restful-backbone.js-app",
-          "timeEstimate": "90+ minutes"
+          "description": "In this tutorial, the team at Firebase walks you through how to setup Firebase within a Backbone application to use as a persistent data store with realtime data-binding support!",
+          "instructions": "Follow along with this tutorial to create a to-do list application that, instead of using localStorage, uses Firebase as a persistent data store.",
+          "navigateTo": "https://www.firebase.com/docs/web/libraries/backbone/quickstart.html",
+          "timeEstimate": "60 minutes"
         },
         "annotated-source-code": {
           "name": "Backbone.js Annotated Source Code",
