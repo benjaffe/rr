@@ -260,7 +260,7 @@
             },
 
             "drag-and-drop": {
-              "name": "How do I use drag and drop in Android (with extra strength drag and <drop></drop>)?",
+              "name": "How do I use drag and drop in Android (with extra strength drag and drop)?",
               "topic": "drag and drop",
               "type": "item",
               "order": 4,
@@ -353,7 +353,6 @@
             }
           }
         },
-
         "miscellaneous": {
           "name": "Miscellaneous",
           "type": "category",
@@ -380,11 +379,11 @@
             },
 
             "share": {
-              "name": "How do I add the share button to my app so I can share things on facebook, twitter etc.?",
+              "name": "How do I add the share button to my app? (video)",
               "topic": "Share",
               "type": "item",
               "order": 3,
-              "description": "This video will walk you through how to share text from inside your app to other apps like facebook, twitter etc.",
+              "description": "This video will walk you through how to share text from inside your app to other apps on your phone or emulator.",
               "navigateTo": "https://www.youtube.com/watch?v=qVW9yfTQ-sg",
               "timeEstimate": 20
             }
