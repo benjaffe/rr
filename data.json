@@ -100,7 +100,7 @@
               "timeEstimate": 20
             },
 
-            "edit-text": {
+            "Edit-Text": {
               "name": "How do I use Edit Text in an Android app?",
               "topic": "EditText",
               "type": "item",
@@ -110,7 +110,7 @@
               "timeEstimate": 30
             },
 
-            "arrays": {
+            "Arrays": {
               "name": "How do I use Arrays (or lists) in Java?",
               "topic": "Arrays",
               "type": "item",
@@ -121,7 +121,7 @@
               "timeEstimate": 25
             },
 
-            "autocomplete": {
+            "Autocomplete": {
               "name": "How do I use autocomplete in my Android app?",
               "topic": "Autocomplete",
               "type": "item",
@@ -132,7 +132,7 @@
               "timeEstimate": 30
             },
 
-            "spinners": {
+            "Spinners": {
               "name": "How do I use spinners (or dropdown lists) in my Android app?",
               "topic": "Spinners",
               "type": "item",
@@ -142,7 +142,7 @@
               "timeEstimate": 30
             },
 
-            "radio-button": {
+            "Radio-Button": {
               "name": "How do I use radio buttons in my Android app?",
               "topic": "Radio Button",
               "type": "item",
@@ -152,7 +152,7 @@
               "timeEstimate": 30
             },
 
-            "shortcuts": {
+            "Shortcuts": {
               "name": "How do I use shortcuts to change the orientation of the emulator?",
               "topic": "Shortcuts",
               "type": "item",
@@ -163,7 +163,7 @@
               "timeEstimate": 15
             },
 
-            "button-click": {
+            "Button-Click": {
               "name": "How do I simulate a button click using code in my Android app?",
               "topic": "Button Click",
               "type": "item",
