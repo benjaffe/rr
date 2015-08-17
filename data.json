@@ -175,12 +175,12 @@
             }
           }
         },
-        "menus": {
+        "Menus": {
           "name": "Menus",
           "type": "category",
           "description": "A menu is an interface which allows users to choose an item from several options. Here you will find resources on how to use menus like the Options Menu and the Pop-up Menu in Android.",
           "children": {
-            "add-import-statements": {
+            "Add-Import-Statements": {
               "name": "How do I automatically add missing import statements in your code?",
               "topic": "add import statements",
               "type": "item",
@@ -191,7 +191,7 @@
               "timeEstimate": 10
             },
 
-            "options-menu": {
+            "Options-Menu": {
               "name": "How do I create an options menu in my app? (video)",
               "topic": "options menu",
               "type": "item",
@@ -201,7 +201,7 @@
               "timeEstimate": 30
             },
 
-            "popup-menu": {
+            "Popup-Menu": {
               "name": "How do I use a popup menu in Android?",
               "topic": "popup menu",
               "type": "item",
@@ -212,7 +212,7 @@
               "timeEstimate": 30
             },
 
-            "menu-docs": {
+            "Menu-Docs": {
               "name": "What does Google have to say about Menus?",
               "topic": "menu docs",
               "type": "item",
