@@ -149,7 +149,7 @@
               "order": 6,
               "description": "Follow this tutorial to learn how to use radio buttons in your Android app.",
               "navigateTo": "http://www.tutorialspoint.com/android/android_radiobutton_control.htm",
-              "instructions": "Look out: You will notice that there is an error in this tutorial. Don't worry (too much). You will notice that even though the radioGroup is being accessed inside the Java code, it is not defined in the RadioGroup tag in the activity_main.xml. Add that and you should be good. If you have questions about this, ask us on the forums.",
+              "instructions": "Look out: You will find that there is an error in this tutorial. Don't worry (too much). Even though radioGroup is being accessed using the findViewById function inside the Java code, its ID is not defined in the RadioGroup tag in the activity_main.xml. Add that and you should be good. If you have questions about this, ask us on the forums.",
               "timeEstimate": 30
             },
 
