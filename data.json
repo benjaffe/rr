@@ -116,7 +116,7 @@
               "type": "item",
               "order": 3,
               "description": "Arrays or Lists are used regularly in everyday life. Think of a To-Do list or a Menu at a restaurant. Here we will practice how to use Lists or Arrays in Java.",
-              "navigateTo": "http://code.tutsplus.com/tutorials/learn-java-for-android-development-working-with-arrays--mobile-2894",
+              "navigateTo": "http://mazzarolomatteo.com/blog/",
               "instructions": "Create a new HelloWorld app in Android. In the Java file (which is likely to be MainActivity.java), try out the Java code explained in this blog. We will use Arrays in many of the blogs that follow, so this is a great time to learn about them.",
               "timeEstimate": 25
             },
@@ -148,8 +148,8 @@
               "type": "item",
               "order": 6,
               "description": "Follow this tutorial to learn how to use radio buttons in your Android app.",
-              "navigateTo": "http://www.tutorialspoint.com/android/android_radiobutton_control.htm",
-              "instructions": "Look out: You will find that there is an error in this tutorial. Don't worry (too much). Even though radioGroup is being accessed using the findViewById function inside the Java code, its ID is not defined in the RadioGroup tag in the activity_main.xml. Add that and you should be good. If you have questions about this, ask us on the forums.",
+              "navigateTo": "http://javatechig.com/android/android-radio-button-example",
+              "instructions": "Note that this tutorial will ask you to make a new Java class called RadioButtonSampleActivity.java. If you created a new Android project for this tutorial, then you can simply used the MainActivity.java class that was created for you by default. ",
               "timeEstimate": 30
             },
 
@@ -276,31 +276,21 @@
           "type": "category",
           "description": "Navigating around in an Android app is critical to every well designed app. In this section we will discuss several tutorials on this subject.",
           "children": {
-            "multiple-activities-part1": {
-              "name": "How do I use multiple activities in my Android app? (Part 1 of 2)",
-              "topic": "Multiple Activities Part 1",
+            "multiple-activities": {
+              "name": "How do I use multiple activities in my Android app?",
+              "topic": "Multiple Activities",
               "type": "item",
               "order": 1,
-              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to use multiple activities in our app. Actually, in Part 1 of this tutorial, we will learn how to make the first of the two screens.",
-              "navigateTo": "http://developer.android.com/training/basics/firstapp/building-ui.html#LinearLayout",
+              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to use multiple activities in our app.",
+              "navigateTo": "http://kiory.com/blog/multiple-activities-on-android-app",
               "timeEstimate": 20
-            },
-
-            "multiple-activities-part2": {
-              "name": "How do I use multiple activities in my Android app? (Part 2 of 2)",
-              "topic": "Multiple Activities Part 2",
-              "type": "item",
-              "order": 2,
-              "description": "In this tutorial, we will learn how to make the second of the two screens, and will learn how to navigate from the first screen to the second.",
-              "navigateTo": "http://developer.android.com/training/basics/firstapp/starting-activity.html",
-              "timeEstimate": 40
             },
 
             "tabs": {
               "name": "How do I use tabs in my Android app? (video)",
               "topic": "drawable image",
               "type": "item",
-              "order": 3,
+              "order": 2,
               "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
               "navigateTo": "https://www.youtube.com/watch?v=Fl0xMuo10yA",
               "timeEstimate": 30
