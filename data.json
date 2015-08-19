@@ -300,15 +300,16 @@
         "layouts": {
           "name": "Layouts",
           "type": "category",
-          "description": "Placing different views on the screen is critical to making any good app. ListView and GridView are two typical views that you will encounter in a lot fo different apps. Here we will learn about them.",
+          "description": "Placing different views on the screen is critical to making any good app. ListView and GridView are two typical views that you will encounter in a lot of different apps. Here, we will learn about them.",
           "children": {
             "listview": {
-              "name": "How do I create a simple list (like a To Do List) while using ListView in my Android app?",
+              "name": "How do I create a simple list (like a To Do List) while using ListView?",
               "topic": "ListView",
               "type": "item",
               "order": 1,
               "description": "ListView is an incredibly popular layout. Many apps that want to lay things out like a list use this View. Let's learn more about it.",
               "navigateTo": "http://theopentutorials.com/tutorials/android/listview/android-creating-and-populating-listview-items-in-xml/",
+              "instructions": "Ok, three things to watch out for while using this tutorial. (I) When copying quotes from string.xml, you will find that the opening quotes throughout that file will not get copied correctly. You will have to remove and renter all opening quotes. (II) Inside string.xml, make sure that you keep the definition for action_settings. (III) IN the Java code, refer to your layout name correctly i.e. R.layout.<insert your activity name> ",
               "timeEstimate": 20
             }
           }
