@@ -297,6 +297,22 @@
             }
           }
         },
+        "layouts": {
+          "name": "Layouts",
+          "type": "category",
+          "description": "Placing different views on the screen is critical to making any good app. ListView and GridView are two typical views that you will encounter in a lot fo different apps. Here we will learn about them.",
+          "children": {
+            "listview": {
+              "name": "How do I create a simple list (like a To Do List) while using ListView in my Android app?",
+              "topic": "ListView",
+              "type": "item",
+              "order": 1,
+              "description": "ListView is an incredibly popular layout. Many apps that want to lay things out like a list use this View. Let's learn more about it.",
+              "navigateTo": "http://theopentutorials.com/tutorials/android/listview/android-creating-and-populating-listview-items-in-xml/",
+              "timeEstimate": 20
+            }
+          }
+        },
         "best-practices": {
           "name": "Best Practices",
           "type": "category",
