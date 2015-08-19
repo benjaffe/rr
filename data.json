@@ -309,7 +309,7 @@
               "order": 1,
               "description": "ListView is an incredibly popular layout. Many apps that want to lay things out like a list use this View. Let's learn more about it.",
               "navigateTo": "http://theopentutorials.com/tutorials/android/listview/android-creating-and-populating-listview-items-in-xml/",
-              "instructions": "Ok, three things to watch out for while using this tutorial. (I) When copying quotes from string.xml, you will find that the opening quotes throughout that file will not get copied correctly. You will have to remove and renter all opening quotes. (II) Inside string.xml, make sure that you keep the definition for action_settings. (III) IN the Java code, refer to your layout name correctly i.e. R.layout.<insert your activity name> ",
+              "instructions": "Ok, three things to watch out for while using this tutorial. (I) When copying code from string.xml, you will find that the opening quotes throughout that file will not get copied correctly. You will have to remove and re-enter all opening quotes. (II) Inside string.xml, make sure that you keep the definition for action_settings. (III) In the Java code, refer to your layout name correctly i.e. R.layout.<insert your activity name> ",
               "timeEstimate": 20
             }
           }
