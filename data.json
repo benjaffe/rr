@@ -318,7 +318,7 @@
               "topic": "GridView",
               "type": "item",
               "order": 2,
-              "description": "Many photo sharing apps use GridView to display pictures. In this tutorial, we will learn how to use GraidView in an app that we will make from scratch.",
+              "description": "Many photo sharing apps use GridView to display pictures. In this tutorial, we will learn how to use GridView in an app that we will make from scratch.",
               "navigateTo": "http://developer.android.com/guide/topics/ui/layout/gridview.html",
               "timeEstimate": 30
             }
