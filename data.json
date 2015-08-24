@@ -116,7 +116,7 @@
               "type": "item",
               "order": 3,
               "description": "Arrays or Lists are used regularly in everyday life. Think of a To-Do list or a Menu at a restaurant. Here we will practice how to use Lists or Arrays in Java.",
-              "navigateTo": "http://mazzarolomatteo.com/blog/",
+              "navigateTo": "http://mazzarolomatteo.com/blog/2015/08/18/introduction-to-arrasy-in-android/",
               "instructions": "Create a new HelloWorld app in Android. In the Java file (which is likely to be MainActivity.java), try out the Java code explained in this blog. We will use Arrays in many of the blogs that follow, so this is a great time to learn about them.",
               "timeEstimate": 25
             },
