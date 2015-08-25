@@ -25,7 +25,7 @@
           "type": "item",
           "order": 2,
           "description": "Explore the pieces of a simple app built with Backbone",
-          "instructions": "Try and get this code working on your local machine. If possible, pretend you're building it from the ground up. Add each piece of functionality, and get it working before you add the next.",
+          "instructions": "Try and get this code working on your local machine. If possible, pretend you're building it from the ground up. Add each piece of functionality, and get it working before you add the next. Heads up! This example will try to run a PHP file if you click the Order button. It's not required for this functionality to work, so you can safely ignore any errors or oddities you see if you submit the form on the page.",
           "navigateTo": "http://tutorialzine.com/2013/04/services-chooser-backbone-js/",
           "timeEstimate": 75
         },
@@ -35,7 +35,7 @@
           "type": "item",
           "order": 3,
           "description": "These five heavily commented code examples help you go from building simple apps to more complex ones.",
-          "instructions": "Get all of these code examples working on your computer. Don't only follow what the examples do. Take time to explore, and add your own features. Make the apps work how you want them to work.",
+          "instructions": "Get all of these code examples working on your computer. Don't only follow what the examples do. Take time to explore, and add your own features. Make the apps work how you want them to work. Note: The libraries that are referenced in the following tutorial use out of date versions. You can either use your own local instance of these libraries or use the following CDN's: underscore: https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js jQuery: https://code.jquery.com/jquery-2.1.4.js Backbone: https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.1/backbone-min.js",
           "navigateTo": "http://arturadib.com/hello-backbonejs/",
           "timeEstimate": 75
         },
@@ -60,14 +60,14 @@
           "timeEstimate": "90+ minutes"
         },
         "addy-library-app": {
-          "name": "Building a Book Library App from Scratch",
+          "name": "Realtime Data with Firebase",
           "topic": "",
           "type": "item",
           "order": 6,
-          "description": "This is the second example app of Addy Osmani's Backbone book. In this section, you'll build a non Todo sample application.",
-          "instructions": "Build the app along with the book, but try to avoid blindly copying and pasting. This tutorial also walks us through creating a back-end for our application. Although you can choose to skip this section, it's incredibly empowering to build a full app, back-end and all. Give it a try.",
-          "navigateTo": "http://addyosmani.github.io/backbone-fundamentals/#exercise-2-book-library---your-first-restful-backbone.js-app",
-          "timeEstimate": "90+ minutes"
+          "description": "In this tutorial, the team at Firebase walks you through how to setup Firebase within a Backbone application to use as a persistent data store with realtime data-binding support!",
+          "instructions": "Follow along with this tutorial to create a to-do list application that, instead of using localStorage, uses Firebase as a persistent data store.",
+          "navigateTo": "https://www.firebase.com/docs/web/libraries/backbone/quickstart.html",
+          "timeEstimate": "60 minutes"
         },
         "annotated-source-code": {
           "name": "Backbone.js Annotated Source Code",
@@ -75,67 +75,339 @@
           "type": "item",
           "optional": true,
           "description": "This optional reading walks through the source code for Backbone itself!",
-          "instructions": "This is a great resource for learning how Backbone <em>actually</em> works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
+          "instructions": "This is a great resource for learning how Backbone actually works. Remember that even organizational libraries and frameworks are written in plain and understandable JavaScript.",
           "navigateTo": "http://backbonejs.org/docs/backbone.html"
         }
       }
     },
-    "android": {
+    "Android": {
       "name": "Android",
       "type": "category",
       "description": "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque praesentium, temporibus officia sapiente totam, in molestiae, fugit corrupti suscipit aut architecto beatae vel et. Sed sint debitis voluptatibus error odit.",
       "children": {
-        "user-input-controls": {
+        "Input-Controls": {
           "name": "User Input Controls",
           "type": "category",
-          "description": "User Interface Controls is just a fancy phrase for things in Android that you can see and interact with. Here you will find resources on how to use things like toggle buttons, radio buttons, spinners( drop downs) and more.",
+          "description": "User Input Controls is just a fancy phrase for things in Android that you can see and interact with. Here you will find resources on how to use things like toggle buttons, radio buttons, spinners( drop downs) and more.",
           "children": {
-            "toggle-button": {
-              "name": "How do you use a toggle button in Android?",
+            "Toggle-Button": {
+              "name": "How do I use a Toggle button in Android?",
               "topic": "toggle buttons",
               "type": "item",
               "order": 1,
-              "description": "Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
+              "description": "ON/OFF. Those are the two states of a Toggle button. Follow the instructions in this blog to learn how to use a toggle button by creating a new android app from scratch",
               "navigateTo": "http://www.mkyong.com/android/android-togglebutton-example/",
-              "timeEstimate": 10
+              "timeEstimate": 20
             },
 
-            "edit-text": {
-              "name": "Best ways of using an Edit Text in your app",
+            "Edit-Text": {
+              "name": "How do I use Edit Text in an Android app?",
               "topic": "EditText",
               "type": "item",
               "order": 2,
-              "description": "Read this blog and learn how you can use EditText inside your own apps.",
-              "navigateTo": "https://www.google.com",
-              "instructions": "Lorem ipsum dolor sit amet",
-              "timeEstimate": 12
+              "description": "Edit Text is a box that allows a user to type text in your app. Read this blog and learn how to use Edit Text by creating a new app.",
+              "navigateTo": "http://www.tutorialspoint.com/android/android_edittext_control.htm",
+              "timeEstimate": 30
             },
 
-            "autocomplete": {
-              "name": "How does one use Autocomplete in a mobile app?",
-              "topic": "Autocomplete",
+            "Arrays": {
+              "name": "How do I use Arrays (or lists) in Java?",
+              "topic": "Arrays",
               "type": "item",
               "order": 3,
-              "description": "In this blog you will find instructions on how autocomplete works in the Android ecosystem. Create a new app and practice how to incorporate Autocomplete within it.",
-              "navigateTo": "https://www.google.com",
-              "instructions": "Lorem ipsum dolor sit amet",
-              "timeEstimate": 8
+              "description": "Arrays or Lists are used regularly in everyday life. Think of a To-Do list or a Menu at a restaurant. Here we will practice how to use Lists or Arrays in Java.",
+              "navigateTo": "http://mazzarolomatteo.com/blog/2015/08/18/introduction-to-arrasy-in-android/",
+              "instructions": "Create a new HelloWorld app in Android. In the Java file (which is likely to be MainActivity.java), try out the Java code explained in this blog. We will use Arrays in many of the blogs that follow, so this is a great time to learn about them.",
+              "timeEstimate": 25
             },
 
-            "mvc-in-android": {
-              "name": "Is there an MVC pattern in Android?",
-              "topic": "MVC",
+            "Autocomplete": {
+              "name": "How do I use autocomplete in my Android app?",
+              "topic": "Autocomplete",
               "type": "item",
               "order": 4,
-              "description": "Read this Stackoverflow entry to learn more about how MVC is accomplished in Android.",
-              "navigateTo": "https://www.google.com",
-              "instructions": "Lorem ipsum dolor sit amet",
-              "timeEstimate": 8
+              "description": "Have you ever noticed that you start typing in a box, and the app gives you suggestions on the thing you are typing. Here we will learn how to use autocomplete in you Android app.",
+              "navigateTo": "http://sampleprogramz.com/android/autocompletetextview.php",
+              "instructions": "This tutorial uses lists or arrays in Java. If you are not familiar with them, check out the previous link in this series",
+              "timeEstimate": 30
+            },
+
+            "Spinners": {
+              "name": "How do I use spinners (or dropdown lists) in my Android app?",
+              "topic": "Spinners",
+              "type": "item",
+              "order": 5,
+              "description": "With Spinners you can allow users to easily pick a value from a list. Read this tutorial to learn how to use spinners in your app.",
+              "navigateTo": "http://www.learn2crack.com/2013/12/android-spinner-dropdown-example.html",
+              "timeEstimate": 30
+            },
+
+            "Radio-Button": {
+              "name": "How do I use radio buttons in my Android app?",
+              "topic": "Radio Button",
+              "type": "item",
+              "order": 6,
+              "description": "Follow this tutorial to learn how to use radio buttons in your Android app.",
+              "navigateTo": "http://javatechig.com/android/android-radio-button-example",
+              "instructions": "Note that this tutorial will ask you to make a new Java class called RadioButtonSampleActivity.java. If you created a new Android project for this tutorial, then you can simply used the MainActivity.java class that was created for you by default. ",
+              "timeEstimate": 30
+            },
+
+            "Shortcuts": {
+              "name": "How do I use shortcuts to change the orientation of the emulator?",
+              "topic": "Shortcuts",
+              "type": "item",
+              "optional": true,
+              "order": 7,
+              "description": "Portrait and Landscape. Those are the two orientations available on the Android device (and the emulator). Read this stackoverflow page to learn about the different shortcuts available for the Android emulator.",
+              "navigateTo": "http://stackoverflow.com/questions/1991318/how-to-change-screen-orientation-in-android-emulator/17161332#17161332",
+              "timeEstimate": 15
+            },
+
+            "Button-Click": {
+              "name": "How do I simulate a button click using code in my Android app?",
+              "topic": "Button Click",
+              "type": "item",
+              "optional": true,
+              "order": 8,
+              "description": "So we know how to run a body of code when a user clicks a button in our app. How can we simulate that behavior without the user clicking anything on the app? Read this stackoverflow page to find out.",
+              "navigateTo": "http://stackoverflow.com/questions/4553374/how-to-simulate-a-button-click-through-code-in-android/4877526#4877526",
+              "timeEstimate": 30
             }
+          }
+        },
+        "Menus": {
+          "name": "Menus",
+          "type": "category",
+          "description": "A menu is an interface which allows users to choose an item from several options. Here you will find resources on how to use menus like the Options Menu and the Pop-up Menu in Android.",
+          "children": {
+            "Add-Import-Statements": {
+              "name": "How do I automatically add missing import statements in your code?",
+              "topic": "add import statements",
+              "type": "item",
+              "order": 1,
+              "description": "Now you are probably wondering that this article is not about Menus. That is correct. Although you will need the information listed in this article to be successful with the remaining tutorials in this series.",
+              "navigateTo": "http://stackoverflow.com/questions/16615038/what-is-the-shortcut-to-auto-import-all-in-android-studio/16616085#16616085",
+              "instructions": "In this stackoverflow page you will discover techniques you can use to automatically add missing import statements to your code. We recommend that you open any old Android project, then delete an import statement and run the shortcut listed in this page to automatcially add the missing import statement.",
+              "timeEstimate": 10
+            },
 
+            "Options-Menu": {
+              "name": "How do I create an options menu in my app? (video)",
+              "topic": "options menu",
+              "type": "item",
+              "order": 2,
+              "description": "An options menu allows a user to access options associated with an activity in Android. We recommend that you practice the instructions listed in this tutorial by creating a new app from scratch. ",
+              "navigateTo": "https://youtu.be/iwE1bnRlZw0",
+              "timeEstimate": 30
+            },
 
+            "Popup-Menu": {
+              "name": "How do I use a popup menu in Android?",
+              "topic": "popup menu",
+              "type": "item",
+              "order": 3,
+              "description": "Read this article to learn about the popup menu in Android.",
+              "navigateTo": "http://stackoverflow.com/questions/21329132/android-custom-dropdown-popup-menu",
+              "instructions": "Note that while this stackoverflow page is great, it does not contain the code for import statements that are needed to run this code. The first article in this series has information on how to add missing import statements to your code. ",
+              "timeEstimate": 30
+            },
+
+            "Menu-Docs": {
+              "name": "What does Google have to say about Menus?",
+              "topic": "menu docs",
+              "type": "item",
+              "order": 4,
+              "description": "This is the official Google documentation on Menus. Skim this article. Don't worry if all of this does not make sense yet. Scan this page to find one interesting thing about Menus you did not know previously.",
+              "navigateTo": "https://www.google.com/design/spec/components/menus.html",
+              "timeEstimate": 20
+            }
+          }
+        },
+        "user-input-events": {
+          "name": "User Input Events",
+          "type": "category",
+          "description": "onClick is an example of a User Input Event. In this section, we will explore several tutorials on the ways a user can interact with an app. onLongClick and Drag and Drop are two such examples.",
+          "children": {
+            "onlongclick-event": {
+              "name": "How do I use onLongClick in Android?",
+              "topic": "onLongClick event",
+              "type": "item",
+              "order": 1,
+              "description": "onLongClick, as the name suggests, is when a user presses and holds on to a button or item on your app. Create a new app to learn how onLongClick is used in Android.",
+              "navigateTo": "http://androidbite.blogspot.com/2013/03/android-long-press-event-handle-example.html",
+              "timeEstimate": 30
+            },
+
+            "drag-and-drop-simplified": {
+              "name": "How do I use drag and drop in Android?",
+              "topic": "drag and drop simplified",
+              "type": "item",
+              "order": 2,
+              "description": "This tutorial will give you a gentle introduction on how to implement the drag and drop feature in your Android app.",
+              "navigateTo": "http://javapapers.com/android/android-drag-and-drop/",
+              "instructions": "Now you might notice that @string/dragtext in the activity_main.xml file is undefined in this blog. Make sure to define it in the strings.xml",
+              "timeEstimate": 30
+            },
+
+            "drawable-image": {
+              "name": "How do I display a background image in a TextView?",
+              "topic": "drawable image",
+              "type": "item",
+              "order": 3,
+              "description": "You are correct. This stackoverflow page will not teach you about a new user input event. Although, it will teach you how to display a background image on a view. And we will need this knowledge to fully understand the next tutorial in this series.",
+              "navigateTo": "http://stackoverflow.com/questions/3759545/how-to-display-background-image-in-text-view",
+              "timeEstimate": 15
+            },
+
+            "drag-and-drop": {
+              "name": "How do I use drag and drop in Android (with extra strength drag and drop)?",
+              "topic": "drag and drop",
+              "type": "item",
+              "order": 4,
+              "description": "Read this article to learn how to use drag and drop in Android.",
+              "navigateTo": "http://code.tutsplus.com/tutorials/android-sdk-implementing-drag-and-drop-functionality--mobile-14402",
+              "timeEstimate": 45
+            }
+          }
+        },
+        "navigation": {
+          "name": "Navigation",
+          "type": "category",
+          "description": "Navigating around in an Android app is critical to every well designed app. In this section we will discuss several tutorials on this subject.",
+          "children": {
+            "multiple-activities": {
+              "name": "How do I use multiple activities in my Android app?",
+              "topic": "Multiple Activities",
+              "type": "item",
+              "order": 1,
+              "description": "All of our apps thus far have contained only one activity (or screen). In this tutorial, we will learn how to use multiple activities in our app.",
+              "navigateTo": "http://kiory.com/blog/multiple-activities-on-android-app",
+              "timeEstimate": 20
+            },
+
+            "tabs": {
+              "name": "How do I use tabs in my Android app? (video)",
+              "topic": "drawable image",
+              "type": "item",
+              "order": 2,
+              "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
+              "navigateTo": "https://www.youtube.com/watch?v=Fl0xMuo10yA",
+              "timeEstimate": 30
+            }
+          }
+        },
+        "layouts": {
+          "name": "Layouts",
+          "type": "category",
+          "description": "Placing different views on the screen is critical to making any good app. ListView and GridView are two typical views that you will encounter in a lot of different apps. Here, we will learn about them.",
+          "children": {
+            "listview": {
+              "name": "How do I create a simple list (like a To Do List) while using ListView?",
+              "topic": "ListView",
+              "type": "item",
+              "order": 1,
+              "description": "ListView is an incredibly popular layout. Many apps that want to lay things out like a list use this View. Let's learn more about it.",
+              "navigateTo": "http://theopentutorials.com/tutorials/android/listview/android-creating-and-populating-listview-items-in-xml/",
+              "instructions": "Ok, three things to watch out for while using this tutorial. (I) When copying code from string.xml, you will find that the opening quotes throughout that file will not get copied correctly. You will have to remove and re-enter all opening quotes. (II) Inside string.xml, make sure that you keep the definition for action_settings. (III) In the Java code, refer to your layout name correctly i.e. R.layout.<insert your activity name> ",
+              "timeEstimate": 20
+            },
+
+            "gridview": {
+              "name": "How do I create a grid-like interface in my Android app?",
+              "topic": "GridView",
+              "type": "item",
+              "order": 2,
+              "description": "Many photo sharing apps use GridView to display pictures. In this tutorial, we will learn how to use GridView in an app that we will make from scratch.",
+              "navigateTo": "http://developer.android.com/guide/topics/ui/layout/gridview.html",
+              "timeEstimate": 30
+            }
+          }
+        },
+        "best-practices": {
+          "name": "Best Practices",
+          "type": "category",
+          "description": "Here we have collected a series of blogs that highlight best practices in Android that you should be aware of while making your apps.",
+          "children": {
+            "accessibility": {
+              "name": "How do I make my apps more accessible?",
+              "topic": "Accessibility",
+              "type": "item",
+              "order": 1,
+              "description": "Adding Content Descriptors, which is a fancy word for labels, is one way to make your app more accessible to visually impaired users. Read through this article to learn about the things you can do to make your app more accessible.",
+              "navigateTo": "http://developer.android.com/training/accessibility/accessible-app.html#contentdesc",
+              "timeEstimate": 30
+            },
+
+            "color-schemes": {
+              "name": "Which color schemes are best to use in an Android app?",
+              "topic": "Color Schemes",
+              "type": "item",
+              "order": 2,
+              "description": "Colors are important. But you already knew that. Bookmark this tutorial to use a range of colors that look really good in an Android app.",
+              "navigateTo": "https://www.google.com/design/spec/style/color.html",
+              "timeEstimate": 20
+            },
+
+            "more-color-schemes": {
+              "name": "How do I find out more about color schemes?",
+              "topic": "More Color Schemes",
+              "type": "item",
+              "order": 3,
+              "description": "Had enough colors? We didn't think so. This tool will let you pick a few colors and show you what your app will look like before you even begin coding.",
+              "navigateTo": "http://www.materialpalette.com/",
+              "timeEstimate": 20
+            },
+
+            "best-practices-from-google": {
+              "name": "What are some of the best practices I should think about while making my Android app?",
+              "topic": "Best Practices from Google",
+              "type": "item",
+              "optional": true,
+              "order": 4,
+              "description": "This blog will highlight important topics like managing multiple screen sizes, menu buttons and more. Spend some uninterrupted time reading through them and don't worry too much in case you don't understand everything listed here.",
+              "navigateTo": "http://developer.android.com/guide/practices/index.html",
+              "timeEstimate": 60
+            }
+          }
+        },
+        "miscellaneous": {
+          "name": "Miscellaneous",
+          "type": "category",
+          "description": "All important Android topics that could not find a home elsewhere are listed here.",
+          "children": {
+            "play-sound": {
+              "name": "How do I play a sound in my Android app? (video)",
+              "topic": "Play Sound",
+              "type": "item",
+              "order": 1,
+              "description": "This video will walk you through the process of playing a sound through your app. In 30 minutes your app will look (and sound) much more amazing.",
+              "navigateTo": "https://www.youtube.com/watch?v=V1ocJmXeQ28",
+              "timeEstimate": 30
+            },
+
+            "map": {
+              "name": "How do I add a map to my app?",
+              "topic": "Map",
+              "type": "item",
+              "order": 2,
+              "description": "Maps are cool. This is Google's official, updated documentation on how to use maps. It is a little tricky to understand, so ready carefully. Using a physical device (a phone) may make it easier to go through this tutorial.",
+              "navigateTo": "https://developers.google.com/maps/documentation/android/start",
+              "timeEstimate": 60
+            },
+
+            "share": {
+              "name": "How do I add the share button to my app? (video)",
+              "topic": "Share",
+              "type": "item",
+              "order": 3,
+              "description": "This video will walk you through how to share text from inside your app to other apps on your phone or emulator.",
+              "navigateTo": "https://www.youtube.com/watch?v=qVW9yfTQ-sg",
+              "timeEstimate": 20
+            }
           }
         }
+
       }
     }
   }
