@@ -142,7 +142,7 @@
                       <span class="subject-list-item-optional" data-bind="if: $data.optional">(optional)</span>
                     </div>
                   </h3>
-                  <p class="text-left" data-bind="text: description"></p>
+                  <p class="text-left" data-bind="html: description"></p>
                 </div>
               </a>
             </li>
@@ -268,12 +268,12 @@
           </div>
           <div class="row">
             <div class="col-xs-12">
-              <p data-bind="text: description"></p>
+              <p data-bind="html: description"></p>
               <div data-bind="if: $data.instructions">
                 <div class="row bg-info instructions">
                   <div class="col-xs-12">
                     <h4 class="h-slim-top">Instructions:</h4>
-                    <p data-bind="text: instructions"></p>
+                    <p data-bind="html: instructions"></p>
                   </div>
                 </div>
               </div>
