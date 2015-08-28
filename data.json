@@ -287,12 +287,12 @@
             },
 
             "tabs": {
-              "name": "How do I use tabs in my Android app? (video)",
+              "name": "How do I use tabs in my Android app?",
               "topic": "drawable image",
               "type": "item",
               "order": 2,
               "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
-              "navigateTo": "https://www.youtube.com/watch?v=Fl0xMuo10yA",
+              "navigateTo": "http://kiory.com/blog/creating-an-android-app-using-tabs-with-swipe-views",
               "timeEstimate": 30
             }
           }
