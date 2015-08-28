@@ -293,7 +293,7 @@
               "order": 2,
               "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
               "navigateTo": "http://kiory.com/blog/creating-an-android-app-using-tabs-with-swipe-views",
-              "timeEstimate": 30
+              "timeEstimate": 60
             }
           }
         },
