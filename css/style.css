@@ -41,6 +41,10 @@ body {
   color: #666;
 }
 
+.modal {
+  display: none;
+}
+
 .form-note {
   opacity: 0.5;
 }
