@@ -287,13 +287,13 @@
             },
 
             "tabs": {
-              "name": "How do I use tabs in my Android app? (video)",
+              "name": "How do I use tabs in my Android app?",
               "topic": "drawable image",
               "type": "item",
               "order": 2,
               "description": "Tabs are an important navigation tool in Android. Well, let's learn how to use them in this tutorial.",
-              "navigateTo": "https://www.youtube.com/watch?v=Fl0xMuo10yA",
-              "timeEstimate": 30
+              "navigateTo": "http://kiory.com/blog/creating-an-android-app-using-tabs-with-swipe-views",
+              "timeEstimate": 60
             }
           }
         },
@@ -313,11 +313,21 @@
               "timeEstimate": 20
             },
 
+            "array-adapter": {
+              "name": "How do I use a basic ArrayAdapter with ListView?",
+              "topic": "ArrayAdapter",
+              "type": "item",
+              "order": 2,
+              "description": "Here is another way of using ListView. This time, however, we will use something called an ArrayAdapter to map our data (i.e. the list) to what the users sees on the screen.",
+              "navigateTo": "http://www.somedevtips.com/2015/08/25/implementing-a-basic-arrayadapter-with-listview/",
+              "timeEstimate": 30
+            },
+
             "gridview": {
               "name": "How do I create a grid-like interface in my Android app?",
               "topic": "GridView",
               "type": "item",
-              "order": 2,
+              "order": 3,
               "description": "Many photo sharing apps use GridView to display pictures. In this tutorial, we will learn how to use GridView in an app that we will make from scratch.",
               "navigateTo": "http://developer.android.com/guide/topics/ui/layout/gridview.html",
               "timeEstimate": 30
