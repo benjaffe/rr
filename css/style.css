@@ -45,6 +45,11 @@ body {
   display: none;
 }
 
+.ss-choice-label {
+  margin-left: -20px;
+  margin-right: -20px;
+}
+
 .form-note {
   opacity: 0.5;
 }

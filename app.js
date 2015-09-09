@@ -128,7 +128,7 @@ var rr = rr || {};
   function showFeedbackForm() {
     setTimeout(function() {
       $('#feedback-modal').modal('show');
-    }, 1400);
+    }, 500);
   }
 
   vm.hasCompletedFeedback = ko.observable(
