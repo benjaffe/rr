@@ -86,7 +86,9 @@ var rr = rr || {};
     };
 
     // === Forum Page === //
-    addForumStuff(page);
+    if (page.type() === 'item') {
+      addForumStuff(page);
+    }
 
     // Our page has now initialized
     page.hasInit(true);
