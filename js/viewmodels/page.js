@@ -68,6 +68,11 @@ var rr = rr || {};
       }
     };
 
+    page.doneReflecting = function() {
+      app.vm.nodeVisitCount((JSON.parse(app.vm.nodeVisitCount())) + 1);
+      page.gotoParent();
+    }
+
     page.gotoParent = function() {
       if (!page.parent) {
         return false; // we're at the top

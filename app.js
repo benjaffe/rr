@@ -106,19 +106,48 @@ var rr = rr || {};
     return '';
   });
 
-  vm.hasCompletedFeedback = ko.observable(false);
-  vm.showingFeedbackForm = ko.computed(function() {
-    return vm.currentPage().showFeedbackForm &&
-           vm.currentPage().showFeedbackForm() &&
-           !vm.hasCompletedFeedback();
+  // if we don't remember visiting any nodes, set that tracking up
+  if (!localStorage.nodeVisitCount) {
+    localStorage.nodeVisitCount = 0;
+  }
+
+  // track the visit counts as the user uses the app
+  vm.nodeVisitCount = ko.observable(JSON.parse(localStorage.nodeVisitCount));
+
+  vm.nodeVisitCount.subscribe(function(val) {
+    // when the visit count changes:
+    // update our persistent storage
+    localStorage.nodeVisitCount = JSON.stringify(val);
+
+    // show the feedback form if they've visited 2 nodes
+    if (val === 2) {
+      showFeedbackForm();
+    }
   });
 
+  function showFeedbackForm() {
+    setTimeout(function() {
+      $('#feedback-modal').modal('show');
+    }, 1400);
+  }
+
+  vm.hasCompletedFeedback = ko.observable(
+    localStorage.hasCompletedFeedback ? true : false);
+
   vm.feedbackFormSubmitted = function() {
-    console.log('woot');
-    setTimeout(function(){
+    feedbackFormCompleted();
+  };
+
+  vm.feedbackFormSkipped = function() {
+    feedbackFormCompleted();
+  };
+
+  function feedbackFormCompleted() {
+    $('#feedback-modal').modal('hide');
+    setTimeout(function() {
       vm.hasCompletedFeedback(true);
     });
-  };
+  }
 
   // -------- //
 
