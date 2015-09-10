@@ -6,6 +6,7 @@
   <title>R&amp;R - Udacity</title>
   <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link rel="stylesheet" href="https://www.udacity.com/media/css/udacity/udacity.min.css">
+  <link rel="stylesheet" href="lib/lib.css">
   <link rel="stylesheet" href="css/style.css">
 
   <meta property="og:type" content="website">
@@ -19,7 +20,7 @@
   <link rel="shortcut icon" href="/favicon.ico?1b568b3a5b0b2c4a7162c29aeed70961" />
   <link rel="apple-touch-icon" href="//lh4.ggpht.com/dR8q0uh3GoH-kU00KnQ1elSkqBeWi-ZOQ1_14uDxWRACmhrIDQFOfItKdAf7hngoResshnbb9hmVpPuwkjI=s0#w=152&h=152">
 </head>
-<body>
+<body data-bind="css: tourTime() && 'speech-bubble-state-' + tourState()">
 
   <div class="main">
     <!-- PAGE HEADER -->
@@ -105,6 +106,7 @@
 
   <script type="text/html" id="category-template">
     <div class="section container">
+      <!-- Congratulations -->
       <div class="row vertical-slide" data-bind="css: {'hiding': !completed()}">
         <div class="col-md-8 col-md-offset-2">
           <div>
@@ -120,6 +122,8 @@
           <div class="row row-gap-medium"></div>
         </div>
       </div>
+
+      <!-- Lists of Items -->
       <div class="row">
         <div class="col-md-8 col-md-offset-2">
           <ul class="row nav nav-pills nav-stacked subject-list" data-bind="foreach: childrenArr">
@@ -144,6 +148,16 @@
           </ul>
         </div>
       </div>
+
+      <!-- Guided Tour -->
+      <div class="popover speech-bubble speech-bubble-0 bottom"
+        style="top: 280px; left: 50%; margin-left: -150px">
+
+        <div class="arrow"></div>
+        <div class="popover-title">Welcome to Read and Reflect</div>
+        <div class="popover-content">Start by choosing the first article from the list.</div>
+      </div>
+
     </div>
   </script>
 
@@ -304,6 +318,16 @@
               </p>
             </div>
           </div>
+
+          <!-- Guided Tour -->
+          <div class="popover speech-bubble speech-bubble-0 bottom"
+            style="left: 50%; margin-left: -150px">
+
+            <div class="arrow"></div>
+            <div class="popover-title">Reading Time</div>
+            <div class="popover-content">Click the button and take some time to go through the resource. If you're asked to play with some code, go for it. After you're done, come back to this page.</div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -311,6 +335,16 @@
   </script>
 
   <script type="text/html" id="navigate-template-footer">
+
+    <!-- Guided Tour -->
+    <div class="popover speech-bubble speech-bubble-1 top"
+      style="bottom: 100px; left: 50%; margin-left: -150px">
+
+      <div class="arrow"></div>
+      <div class="popover-title">Reflection Time</div>
+      <div class="popover-content">Now that you're done reading, click the button below to reflect on the material, and to see what other students have to say about it.</div>
+    </div>
+
     <div class="container">
       <div class="row">
         <div class="col-xs-12 text-center">
@@ -413,6 +447,16 @@
               }">
             Done Reflecting
           </button>
+
+          <!-- Guided Tour -->
+          <div class="popover speech-bubble speech-bubble-2 top"
+            style="bottom: 80px; left: 50%; margin-left: -150px">
+
+            <div class="arrow"></div>
+            <div class="popover-title">Back Home</div>
+            <div class="popover-content">Now that you've read and reflected, let's do it again. Let's keep learning!</div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -475,7 +519,7 @@
       <div class="col-sm-9">
         <p>Visit the forum, share your thoughts, and see what your fellow students have to say</p>
       </div>
-      <div class="col-sm-3">
+      <div class="col-xs-3 pull-right">
         <p class="clearfix">
           <button
               type="button"
@@ -488,6 +532,16 @@
             Open Forum
           </button>
         </p>
+
+        <!-- Guided Tour -->
+        <div class="popover speech-bubble speech-bubble-1 bottom"
+          style="top: 75px; left: 50%; margin-left: -150px">
+
+          <div class="arrow"></div>
+          <div class="popover-title">Reflection Time</div>
+          <div class="popover-content">You can see what other students have to say, and share your own thoughts too, in Udacity's forums.</div>
+        </div>
+
       </div>
     </div>
   </script>

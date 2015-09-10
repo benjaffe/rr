@@ -35,13 +35,14 @@ var rr = rr || {};
 
     page.openArticle = function(page) {
       page.articleHasBeenOpenedDuringVisit(true);
+      vm.advanceTour(1);
       window.open(page.navigateTo(), '_blank');
     };
 
     page.openForum = function(page) {
-      console.log('boom');
       page.forumHasBeenOpenedDuringVisit(true);
       window.open(vm.currentPageForumUrl(), '_blank');
+      vm.advanceTour(2);
     }
 
     page.markArticleAsRead = function() {
@@ -65,11 +66,13 @@ var rr = rr || {};
       if (page.type() === 'item') {
         page.showingArticle(false);
         page.showingForum(true);
+        vm.advanceTour(1);
       }
     };
 
     page.doneReflecting = function() {
-      app.vm.nodeVisitCount((JSON.parse(app.vm.nodeVisitCount())) + 1);
+      vm.nodeVisitCount((JSON.parse(vm.nodeVisitCount())) + 1);
+      vm.endTour();
       page.gotoParent();
     }
 
@@ -246,8 +249,6 @@ var rr = rr || {};
         page.loadForumData(options);
       });
     };
-
-    // app.vm.currentPage().pageState.set({linkVisited: true});
   }
 
 })(rr);

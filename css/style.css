@@ -363,3 +363,21 @@ body {
 .vertical-slide.hiding {
   max-height: 0px;
 }
+
+/* speech bubbles */
+.speech-bubble {
+  color: black;
+  top: auto;
+}
+
+.speech-bubble h4 {
+  text-transform: none;
+  font-size: 20px;
+  color: #333;
+}
+
+.speech-bubble-state-0 .speech-bubble-0,
+.speech-bubble-state-1 .speech-bubble-1,
+.speech-bubble-state-2 .speech-bubble-2 {
+  display: block;
+}

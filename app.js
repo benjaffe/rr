@@ -149,6 +149,36 @@ var rr = rr || {};
     });
   }
 
+  // Guided Tour //
+
+  vm.tourState = ko.observable(0);
+  vm.tourTime = ko.observable(false);
+
+  vm.startTour = function() {
+    vm.tourTime(true);
+  };
+
+  vm.advanceTour = function(num) {
+    if (!vm.tourTime()) {
+      return;
+    }
+    // go to the state provided -- if no state is provided, go forward one.
+    num = (num !== undefined ? num : vm.tourState() + 1);
+    vm.tourState(num);
+  };
+
+  vm.endTour = function() {
+    if (vm.tourTime()) {
+      vm.tourTime(false);
+    }
+  };
+
+  // start the tour!
+  if (vm.nodeVisitCount() === 0) {
+    console.log('starting!');
+    vm.startTour();
+  }
+
   // -------- //
 
   function init() {
