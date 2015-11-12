@@ -215,9 +215,10 @@ var rr = rr || {};
     var authUrl = 'https://www.udacity.com/account/sso/discourse';
     page.forumUrl(topicUrl);
 
-    page.loadForumData({
-      topicUrl: topicUrl
-    });
+    // disabling the forum experience since it can't currently be deployed
+    // page.loadForumData({
+    //   topicUrl: topicUrl
+    // });
 
     page.createTopic = function(options) {
       var self = this;
