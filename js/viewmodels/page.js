@@ -106,6 +106,9 @@ var rr = rr || {};
     page.forumUrl = ko.observable();
     page.forumDataRaw = ko.observable();
 
+    // this sets the data as null, which bypasses the integrated forum experience
+    page.forumDataRaw(null);
+
     page.forumData = ko.computed(function() {
       if (!page.forumDataRaw()) {
         return {
@@ -195,18 +198,18 @@ var rr = rr || {};
     var discussionForumUrl = 'https://discussions.udacity.com';
 
     // get a fresh csrf so we can post (and let's only do it once)
-    if (!app.csrf) {
-      $.ajax({
-        url: discussionForumUrl + '/session/csrf.json',
-        xhrFields: {
-          withCredentials: true
-        }
-      }).success(function(data) {
-        app.csrf = data.csrf;
-        console.log('csrf acquired: ' + app.csrf);
-        localStorage.csrf = app.csrf;
-      });
-    }
+    // if (!app.csrf) {
+    //   $.ajax({
+    //     url: discussionForumUrl + '/session/csrf.json',
+    //     xhrFields: {
+    //       withCredentials: true
+    //     }
+    //   }).success(function(data) {
+    //     app.csrf = data.csrf;
+    //     console.log('csrf acquired: ' + app.csrf);
+    //     localStorage.csrf = app.csrf;
+    //   });
+    // }
 
     app.csrf = localStorage.csrf || '';
 
