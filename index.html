@@ -133,6 +133,11 @@
                   <div class="subject-list-item-number" data-bind="text: $data.optional ? 'opt' : $data.order || ''"></div>
                 </div>
                 <div class="col-xs-10 col-xs-offset-2 col-sm-11 col-sm-offset-1">
+                  <!-- image will be hidden on small screens -->
+                  <div class="hidden-xs" data-bind="if: $data.imgSrc">
+                    <img class="subject-list-item-image pull-right" alt="" data-bind="attr: {src: $data.imgSrc}" />
+                  </div>
+
                   <h3 class="text-left h-slim-top">
                     <!-- <div data-bind="text: rr.utils.stringify($data.hasInit())" style="height: 100px;width: 600px; margin: 0 auto;border-bottom: 1px solid blue;overflow: scroll; padding: 20px;"></div> -->
                     <div class="checkmark" data-bind="click: markArticleAsUnread, clickBubble: false">&#10003; </div>

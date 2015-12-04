@@ -17,7 +17,8 @@
           "description": "The \"Getting Started\" section of the Backbone documentation gives a good overview of the different parts of Backbone.",
           "instructions": "You only need to read the \"Getting Started\" section. You can stop once you get to Events. (If you want to skim through the F.A.Q, it has some interesting stuff, but don't worry if you don't understand everything right away.)",
           "navigateTo": "http://backbonejs.org/#Getting-started",
-          "timeEstimate": 30
+          "timeEstimate": 30,
+          "imgSrc": "https://placeholdit.imgix.net/~text?txtsize=14&txt=placeholder&w=100&h=100"
         },
         "building-a-simple-backbone-app": {
           "name": "Building a Simple Backbone App",

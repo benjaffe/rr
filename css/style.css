@@ -96,6 +96,11 @@ body {
   transform-origin: 80px;
 }
 
+.subject-list-item-image {
+  margin-right: -37px;
+  margin-left: 5px;
+}
+
 .optional .subject-list-item-number {
   background-color: #c6a985;
   font-size: 22px;
